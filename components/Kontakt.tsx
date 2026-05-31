@@ -1,0 +1,174 @@
+"use client";
+
+import { useRef, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "@/lib/gsap";
+import SectionHeader from "./SectionHeader";
+import { ArrowRight, Mail } from "lucide-react";
+
+export default function Kontakt() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [sent, setSent] = useState(false);
+
+  useGSAP(
+    () => {
+      gsap.from('[data-card]', {
+        scrollTrigger: {
+          trigger: '[data-card]',
+          start: "top 80%",
+          once: true,
+        },
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+      });
+      gsap.from('[data-field]', {
+        scrollTrigger: {
+          trigger: '[data-card]',
+          start: "top 75%",
+          once: true,
+        },
+        y: 20,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.07,
+        ease: "power3.out",
+        delay: 0.2,
+      });
+    },
+    { scope: ref }
+  );
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const subject = encodeURIComponent(
+      `Anfrage von ${data.get("name") ?? "Website"}`
+    );
+    const body = encodeURIComponent(
+      `Name: ${data.get("name")}\nE-Mail: ${data.get("email")}\nUnternehmen: ${data.get("company")}\n\n${data.get("message")}`
+    );
+    window.location.href = `mailto:hallo@vektorflowz.de?subject=${subject}&body=${body}`;
+    setSent(true);
+  }
+
+  return (
+    <section id="kontakt" ref={ref} className="section">
+      <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <SectionHeader
+          label="Kontakt"
+          title="Lass uns sprechen."
+          intro="Erzählen Sie kurz von Ihrem Anliegen — Antwort innerhalb von 24 Stunden."
+        />
+
+        <div className="mt-16 md:mt-20 grid lg:grid-cols-12 gap-6 max-w-5xl mx-auto">
+          <aside className="lg:col-span-4 space-y-4">
+            <div data-field className="card p-6">
+              <p className="text-sm uppercase tracking-[0.2em] text-muted">
+                Direkt
+              </p>
+              <a
+                href="mailto:hallo@vektorflowz.de"
+                className="mt-3 inline-flex items-center gap-2 text-lg font-medium hover:text-accent transition-colors"
+              >
+                <Mail size={18} /> hallo@vektorflowz.de
+              </a>
+            </div>
+            <div data-field className="card p-6">
+              <p className="text-sm uppercase tracking-[0.2em] text-muted">
+                Antwortzeit
+              </p>
+              <p className="mt-3 text-lg font-medium">
+                Werktags innerhalb von 24 h
+              </p>
+            </div>
+            <div data-field className="card p-6">
+              <p className="text-sm uppercase tracking-[0.2em] text-muted">
+                Erstgespräch
+              </p>
+              <p className="mt-3 text-lg font-medium">
+                30 Minuten · unverbindlich · kostenfrei
+              </p>
+            </div>
+          </aside>
+
+          <form
+            data-card
+            onSubmit={handleSubmit}
+            className="lg:col-span-8 card shadow-card p-6 md:p-8 space-y-5"
+          >
+            <div className="grid sm:grid-cols-2 gap-5">
+              <Field data-field name="name" label="Name" required />
+              <Field
+                data-field
+                name="email"
+                label="E-Mail"
+                type="email"
+                required
+              />
+            </div>
+            <Field data-field name="company" label="Unternehmen (optional)" />
+
+            <div data-field>
+              <label className="block text-sm uppercase tracking-[0.18em] text-muted mb-2">
+                Ihr Anliegen
+              </label>
+              <textarea
+                name="message"
+                required
+                rows={5}
+                placeholder="Welche Prozesse möchten Sie automatisieren?"
+                className="w-full rounded-xl bg-bg border border-line px-4 py-3 text-base md:text-lg text-fg placeholder:text-muted/60 focus:outline-none focus:border-accent transition resize-none"
+              />
+            </div>
+
+            <button
+              data-field
+              type="submit"
+              className="group w-full inline-flex items-center justify-center gap-2.5 pl-7 pr-2.5 py-2.5 rounded-full bg-accent text-bg text-base font-medium hover:bg-accent/90"
+            >
+              {sent ? "E-Mail-Programm geöffnet" : "Anfrage senden"}
+              <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-bg/15 group-hover:translate-x-0.5 transition-transform">
+                <ArrowRight size={16} />
+              </span>
+            </button>
+
+            <p data-field className="text-sm text-muted text-center">
+              Mit dem Absenden öffnet sich Ihr E-Mail-Programm. Es werden keine
+              Daten an meinen Server übertragen.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Field({
+  name,
+  label,
+  type = "text",
+  required,
+  ...rest
+}: {
+  name: string;
+  label: string;
+  type?: string;
+  required?: boolean;
+  [key: string]: any;
+}) {
+  return (
+    <div {...rest}>
+      <label className="block text-xs uppercase tracking-[0.18em] text-muted mb-2">
+        {label}
+      </label>
+      <input
+        name={name}
+        type={type}
+        required={required}
+        className="w-full rounded-xl bg-bg border border-line px-4 py-3 text-base md:text-lg text-fg placeholder:text-muted/60 focus:outline-none focus:border-accent transition"
+      />
+    </div>
+  );
+}

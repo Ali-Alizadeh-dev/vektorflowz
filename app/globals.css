@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0a0c;
+  --surface: #131318;
+  --fg: #ededee;
+  --muted: #8a8a92;
+  --line: rgba(255, 255, 255, 0.09);
+  --accent: #4deeea;
+  --accent-soft: rgba(77, 238, 234, 0.12);
+  color-scheme: dark;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  letter-spacing: -0.011em;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* GSAP word-mask helpers */
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+  line-height: 1;
+}
+.word-inner {
+  display: inline-block;
+  will-change: transform;
+}
+
+.hairline {
+  height: 1px;
+  width: 100%;
+  background: var(--line);
+  transform-origin: left center;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  display: inline-block;
+}
+
+.section {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+/* Subtle texture */
+.bg-paper {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.04) 1px,
+    transparent 0
+  );
+  background-size: 24px 24px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
