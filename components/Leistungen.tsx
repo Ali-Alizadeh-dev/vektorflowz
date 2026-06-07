@@ -76,19 +76,7 @@ const services = [
       "Automatische Qualifizierung",
       "Strukturierte Übergabe an den Vertrieb",
     ],
-  },
-  {
-    id: "reporting",
-    icon: FileSpreadsheet,
-    title: "Reporting & Insights",
-    short: "Relevante Zahlen auf einen Blick.",
-    long: "Daten werden automatisch ausgewertet und verständlich aufbereitet.",
-    points: [
-      "Zentrale Auswertungen",
-      "Automatische Berichte",
-      "Bessere Entscheidungsgrundlagen",
-    ],
-  },
+  }
 ];
 
 export default function Leistungen() {
