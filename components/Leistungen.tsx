@@ -204,7 +204,7 @@ export default function Leistungen() {
                   <button
                     onClick={() => setActiveIdx(i)}
                     aria-pressed={isActive}
-                    className={`relative w-full text-left rounded-2xl border pl-5 pr-7 py-4 flex items-center gap-4 transition-all duration-300 overflow-hidden ${
+                    className={`relative w-full text-left rounded-2xl  pl-5 pr-7 py-4 flex items-center gap-4 transition-all duration-300 overflow-hidden ${
                       isActive
                         ? "bg-accent text-bg border-accent shadow-accent-glow"
                         : "bg-surface border-line hover:border-fg/20 hover:bg-fg/[0.03]"
@@ -294,7 +294,7 @@ export default function Leistungen() {
 
               <div
                 data-panel-anim
-                className="mt-auto pt-8 border-t border-line flex items-center justify-end"
+                className="mt-auto pt-8 border-none flex items-center justify-end"
               >
                 <a
                   href="#kontakt"
