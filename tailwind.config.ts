@@ -26,7 +26,7 @@ const config: Config = {
         card: "0 1px 2px rgba(16,19,22,0.04), 0 8px 24px -10px rgba(16,19,22,0.1)",
         "card-lg":
           "0 1px 2px rgba(16,19,22,0.04), 0 24px 48px -16px rgba(16,19,22,0.16)",
-        "accent-glow": "0 8px 30px -6px rgba(13,148,136,0.45)",
+        "accent-glow": "0 8px 30px -6px rgba(217,119,87,0.45)",
       },
     },
   },

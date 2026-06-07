@@ -3,14 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --bg: #fbfbf9;
+  /* Claude brand palette */
+  --bg: #faf9f5; /* Claude cream */
   --surface: #ffffff;
-  --fg: #101316;
-  --muted: #565a62;
-  --line: rgba(16, 19, 22, 0.1);
-  --accent: #0d9488; /* readable teal for text/icons on light bg */
-  --accent-soft: rgba(13, 148, 136, 0.1);
-  --accent-bright: #4deeea; /* brand cyan — used for the hero glow */
+  --fg: #1f1e1d; /* Claude near-black ink */
+  --muted: #6b6a66; /* warm grey */
+  --line: rgba(31, 30, 29, 0.1);
+  --accent: #d97757; /* Claude coral/clay */
+  --accent-soft: rgba(217, 119, 87, 0.1);
+  --accent-bright: #d97757; /* coral — also used for the hero glow */
   color-scheme: light;
 }
 

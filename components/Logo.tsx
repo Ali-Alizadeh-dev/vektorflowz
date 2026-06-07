@@ -21,8 +21,8 @@ export function LogoMark({ className = "w-7 h-7" }: { className?: string }) {
     >
       <defs>
         <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#4deeea" />
-          <stop offset="1" stopColor="#2bb6b3" />
+          <stop offset="0" stopColor="#D97757" />
+          <stop offset="1" stopColor="#C15F3C" />
         </linearGradient>
       </defs>
       <path
@@ -31,7 +31,7 @@ export function LogoMark({ className = "w-7 h-7" }: { className?: string }) {
       />
       <path
         d="M16 22 H40 L60 78 L80 22 H104"
-        stroke="#bafffd"
+        stroke="#f6d3c4"
         strokeWidth="1.2"
         opacity=".5"
         fill="none"
@@ -83,15 +83,15 @@ export function LogoFlow({ className = "w-24 h-24" }: { className?: string }) {
     >
       <defs>
         <linearGradient id="vfUp" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#4deeea" />
-          <stop offset="1" stopColor="#2bb6b3" />
+          <stop offset="0" stopColor="#D97757" />
+          <stop offset="1" stopColor="#C15F3C" />
         </linearGradient>
       </defs>
 
       {/* Animated flow streams behind the V */}
       <g
-        style={{ mixBlendMode: "screen" }}
-        stroke="#4deeea"
+        style={{ mixBlendMode: "multiply" }}
+        stroke="#D97757"
         fill="none"
         strokeLinecap="round"
       >
@@ -134,7 +134,7 @@ export function LogoFlow({ className = "w-24 h-24" }: { className?: string }) {
       />
       <path
         d="M36 42 H60 L80 98 L100 42 H124"
-        stroke="#bafffd"
+        stroke="#f6d3c4"
         strokeWidth="1.2"
         opacity="0.5"
         fill="none"

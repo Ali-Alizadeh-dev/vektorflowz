@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import SplitWords from "./SplitWords";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 
 export default function Hero() {
   const root = useRef<HTMLDivElement>(null);
@@ -15,16 +15,11 @@ export default function Hero() {
     () => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      tl.from('[data-hero="badge"]', {
-        y: 14,
-        opacity: 0,
-        duration: 0.7,
+      tl.from('[data-hero="title"] .word-inner', {
+        yPercent: 110,
+        duration: 1.1,
+        stagger: 0.06,
       })
-        .from(
-          '[data-hero="title"] .word-inner',
-          { yPercent: 110, duration: 1.1, stagger: 0.06 },
-          "-=0.3"
-        )
         .from(
           '[data-hero="sub"] .word-inner',
           { yPercent: 110, duration: 0.8, stagger: 0.015 },
@@ -75,7 +70,7 @@ export default function Hero() {
         className="absolute -top-32 left-[42%] -translate-x-1/2 w-[680px] h-[680px] rounded-full pointer-events-none will-change-transform"
         style={{
           background:
-            "radial-gradient(circle, rgba(77,238,234,0.55) 0%, rgba(77,238,234,0.12) 40%, transparent 70%)",
+            "radial-gradient(circle, rgba(217,119,87,0.45) 0%, rgba(217,119,87,0.1) 40%, transparent 70%)",
           filter: "blur(36px)",
         }}
       />
@@ -85,25 +80,15 @@ export default function Hero() {
         className="absolute top-10 left-[60%] -translate-x-1/2 w-[560px] h-[560px] rounded-full pointer-events-none will-change-transform"
         style={{
           background:
-            "radial-gradient(circle, rgba(99,102,241,0.32) 0%, rgba(99,102,241,0.08) 42%, transparent 70%)",
+            "radial-gradient(circle, rgba(224,162,118,0.3) 0%, rgba(224,162,118,0.08) 42%, transparent 70%)",
           filter: "blur(40px)",
         }}
       />
 
       <div className="relative mx-auto w-full max-w-5xl px-5 md:px-8 text-center">
-        <span
-          data-hero="badge"
-          className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/80 backdrop-blur-sm pl-2.5 pr-3.5 py-1.5 text-sm font-medium text-muted shadow-card"
-        >
-          <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-accent-soft text-accent">
-            <Sparkles size={12} />
-          </span>
-          KI-Automatisierung für Unternehmen
-        </span>
-
         <h1
           data-hero="title"
-          className="mt-7 text-[10vw] sm:text-[7.5vw] md:text-[5.5vw] lg:text-[4.7vw] leading-[0.95] font-medium tracking-tightest"
+          className="text-[10vw] sm:text-[7.5vw] md:text-[5.5vw] lg:text-[4.7vw] leading-[0.95] font-medium tracking-tightest"
         >
           <SplitWords text="Weniger Aufwand." />
           <br />
