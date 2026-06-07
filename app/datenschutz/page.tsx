@@ -21,7 +21,7 @@ export default function DatenschutzPage() {
         <br />
         [PLZ Ort]
         <br />
-        E-Mail: hallo@vektorflowz.de
+        E-Mail: ali.alizadeh@vektorflowz.de
       </p>
 
       <h2>2. Allgemeine Hinweise</h2>

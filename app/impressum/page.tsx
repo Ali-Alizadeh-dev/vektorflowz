@@ -24,7 +24,7 @@ export default function ImpressumPage() {
       <p>
         Telefon: [+49 ...]
         <br />
-        E-Mail: hallo@vektorflowz.de
+        E-Mail: ali.alizadeh@vektorflowz.de
       </p>
 
       <h2>Umsatzsteuer-ID</h2>

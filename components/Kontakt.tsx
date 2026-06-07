@@ -72,7 +72,7 @@ export default function Kontakt() {
                 href="mailto:hallo@vektorflowz.de"
                 className="mt-3 inline-flex items-center gap-2 text-lg font-medium hover:text-accent transition-colors"
               >
-                <Mail size={18} /> hallo@vektorflowz.de
+                <Mail size={18} /> ali.alizadeh@vektorflowz.de
               </a>
             </div>
             <div data-field className="card p-6">
@@ -88,7 +88,7 @@ export default function Kontakt() {
                 Erstgespräch
               </p>
               <p className="mt-3 text-lg font-medium">
-                30 Minuten · unverbindlich · kostenfrei
+                 Unverbindlich und kostenfrei
               </p>
             </div>
           </aside>
