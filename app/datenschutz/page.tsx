@@ -15,13 +15,20 @@ export default function DatenschutzPage() {
         anderer nationaler Datenschutzgesetze ist:
         <br />
         <br />
-        [Vor- und Nachname / Firmenname]
+        Ali Alizadeh · Vektorflowz
         <br />
-        [Straße und Hausnummer]
+        Waschingtonallee 35
         <br />
-        [PLZ Ort]
+        22111 Hamburg
         <br />
         E-Mail: ali.alizadeh@vektorflowz.de
+        <br />
+        Telefon: 0179 4392400
+      </p>
+      <p className="text-sm text-muted">
+        Hinweis: Die Gewerbeanmeldung und Gewerbenummer befinden sich derzeit
+        in Bearbeitung. Die Angaben werden nach Abschluss des Verfahrens
+        ergänzt.
       </p>
 
       <h2>2. Allgemeine Hinweise</h2>
