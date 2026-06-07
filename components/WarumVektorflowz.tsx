@@ -51,7 +51,7 @@ export default function WarumVektorflowz() {
   );
 
   return (
-    <section ref={ref} className="section">
+    <section id="warum" ref={ref} className="section">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeader
           label="Warum Vektorflowz"

@@ -3,14 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --bg: #0a0a0c;
-  --surface: #131318;
-  --fg: #ededee;
-  --muted: #8a8a92;
-  --line: rgba(255, 255, 255, 0.09);
-  --accent: #4deeea;
-  --accent-soft: rgba(77, 238, 234, 0.12);
-  color-scheme: dark;
+  --bg: #fbfbf9;
+  --surface: #ffffff;
+  --fg: #101316;
+  --muted: #565a62;
+  --line: rgba(16, 19, 22, 0.1);
+  --accent: #0d9488; /* readable teal for text/icons on light bg */
+  --accent-soft: rgba(13, 148, 136, 0.1);
+  --accent-bright: #4deeea; /* brand cyan — used for the hero glow */
+  color-scheme: light;
 }
 
 * {
@@ -81,7 +82,7 @@ body {
 .bg-paper {
   background-image: radial-gradient(
     circle at 1px 1px,
-    rgba(255, 255, 255, 0.04) 1px,
+    rgba(16, 19, 22, 0.05) 1px,
     transparent 0
   );
   background-size: 24px 24px;

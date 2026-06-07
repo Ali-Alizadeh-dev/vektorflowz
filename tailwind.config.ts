@@ -23,10 +23,10 @@ const config: Config = {
         tightest: "-0.04em",
       },
       boxShadow: {
-        card: "0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -8px rgba(0,0,0,0.4)",
+        card: "0 1px 2px rgba(16,19,22,0.04), 0 8px 24px -10px rgba(16,19,22,0.1)",
         "card-lg":
-          "0 1px 2px rgba(0,0,0,0.3), 0 24px 48px -16px rgba(0,0,0,0.5)",
-        "accent-glow": "0 0 40px -8px rgba(77,238,234,0.5)",
+          "0 1px 2px rgba(16,19,22,0.04), 0 24px 48px -16px rgba(16,19,22,0.16)",
+        "accent-glow": "0 8px 30px -6px rgba(13,148,136,0.45)",
       },
     },
   },
