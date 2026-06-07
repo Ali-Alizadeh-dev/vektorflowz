@@ -4,18 +4,23 @@ import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import { LogoMark } from "./Logo";
+import { X } from "lucide-react";
 
 const links = [
   { href: "#home", label: "Home" },
   { href: "#leistungen", label: "Leistungen" },
   { href: "#ablauf", label: "Ablauf" },
   { href: "#ueber-mich", label: "Über uns" },
+  { href: "#kontakt", label: "Kontakt" },
 ];
 
 export default function Navbar() {
   const ref = useRef<HTMLElement>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
+  // Entrance animation
   useGSAP(
     () => {
       gsap.from(ref.current, {
@@ -28,6 +33,7 @@ export default function Navbar() {
     { scope: ref }
   );
 
+  // Scroll border
   useEffect(() => {
     const onScroll = () => {
       const el = ref.current;
@@ -39,76 +45,157 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // GSAP slide-in / slide-out for the drawer
+  useEffect(() => {
+    const drawer = drawerRef.current;
+    const backdrop = backdropRef.current;
+    if (!drawer || !backdrop) return;
+
+    if (open) {
+      // prevent page scroll while drawer is open
+      document.body.style.overflow = "hidden";
+      gsap.fromTo(
+        backdrop,
+        { opacity: 0, pointerEvents: "none" },
+        { opacity: 1, pointerEvents: "auto", duration: 0.3, ease: "power2.out" }
+      );
+      gsap.fromTo(
+        drawer,
+        { x: "100%" },
+        { x: "0%", duration: 0.45, ease: "power3.out" }
+      );
+      // stagger links in
+      gsap.fromTo(
+        drawer.querySelectorAll("[data-nav-link]"),
+        { x: 30, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.4, stagger: 0.06, ease: "power3.out", delay: 0.2 }
+      );
+    } else {
+      document.body.style.overflow = "";
+      gsap.to(backdrop, { opacity: 0, pointerEvents: "none", duration: 0.25, ease: "power2.in" });
+      gsap.to(drawer, { x: "100%", duration: 0.35, ease: "power3.in" });
+    }
+  }, [open]);
+
+  // Close on Escape
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   return (
-    <header
-      ref={ref}
-      data-scrolled="false"
-      className="fixed top-0 inset-x-0 z-50 transition-all duration-300 data-[scrolled=true]:bg-bg/75 data-[scrolled=true]:backdrop-blur-md data-[scrolled=true]:border-b data-[scrolled=true]:border-line"
-    >
-      <nav className="mx-auto max-w-7xl px-5 md:px-8 h-16 flex items-center justify-between">
-        <a
-          href="#home"
-          className="text-base font-medium tracking-tight inline-flex items-center gap-2.5"
-        >
-          <LogoMark className="w-7 h-7" />
-          Vektorflowz
-        </a>
-
-        <ul className="hidden md:flex items-center gap-8 text-base text-muted">
-          {links.map((l) => (
-            <li key={l.href}>
-              <a href={l.href} className="hover:text-fg transition-colors">
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex items-center gap-2">
+    <>
+      <header
+        ref={ref}
+        data-scrolled="false"
+        className="fixed top-0 inset-x-0 z-50 transition-all duration-300 data-[scrolled=true]:bg-bg/75 data-[scrolled=true]:backdrop-blur-md data-[scrolled=true]:border-b data-[scrolled=true]:border-line"
+      >
+        <nav className="mx-auto max-w-7xl px-5 md:px-8 h-16 flex items-center justify-between">
           <a
-            href="#kontakt"
-            className="hidden sm:inline-flex items-center gap-2 pl-5 pr-3 py-2 rounded-full bg-accent text-bg text-base font-medium hover:bg-accent/90"
+            href="#home"
+            className="text-base font-medium tracking-tight inline-flex items-center gap-2.5"
           >
-            Kontakt
-            <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-bg/15">
-              →
-            </span>
+            <LogoMark className="w-7 h-7" />
+            Vektorflowz
           </a>
+
+          <ul className="hidden md:flex items-center gap-8 text-base text-muted">
+            {links.slice(0, -1).map((l) => (
+              <li key={l.href}>
+                <a href={l.href} className="hover:text-fg transition-colors">
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex items-center gap-2">
+            <a
+              href="#kontakt"
+              className="hidden md:inline-flex items-center gap-2 pl-5 pr-3 py-2 rounded-full bg-accent text-bg text-base font-medium hover:bg-accent/90"
+            >
+              Kontakt
+              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-bg/15">
+                →
+              </span>
+            </a>
+
+            {/* Burger — mobile only */}
+            <button
+              aria-label="Menü öffnen"
+              aria-expanded={open}
+              onClick={() => setOpen(true)}
+              className="md:hidden flex flex-col gap-[5px] w-10 h-10 items-center justify-center rounded-full border border-line"
+            >
+              <span className="block w-4 h-px bg-fg" />
+              <span className="block w-4 h-px bg-fg" />
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Backdrop */}
+      <div
+        ref={backdropRef}
+        onClick={() => setOpen(false)}
+        className="md:hidden fixed inset-0 z-[60] bg-bg/60 backdrop-blur-sm opacity-0 pointer-events-none"
+        aria-hidden="true"
+      />
+
+      {/* Slide-in drawer */}
+      <div
+        ref={drawerRef}
+        className="md:hidden fixed top-0 right-0 bottom-0 z-[70] w-[78vw] max-w-[320px] bg-surface border-l border-line flex flex-col translate-x-full"
+        style={{ willChange: "transform" }}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation"
+      >
+        {/* Drawer header */}
+        <div className="flex items-center justify-between px-6 h-16 border-b border-line shrink-0">
+          <span className="inline-flex items-center gap-2 text-base font-medium">
+            <LogoMark className="w-6 h-6" />
+            Vektorflowz
+          </span>
           <button
-            aria-label="Menü"
-            aria-expanded={open}
-            onClick={() => setOpen((s) => !s)}
-            className="md:hidden flex flex-col gap-1.5 w-9 h-9 items-center justify-center rounded-full border border-line"
+            aria-label="Menü schließen"
+            onClick={() => setOpen(false)}
+            className="w-9 h-9 flex items-center justify-center rounded-full border border-line hover:bg-fg/[0.05] transition-colors"
           >
-            <span
-              className={`block w-4 h-px bg-fg transition-transform ${open ? "translate-y-[3px] rotate-45" : ""}`}
-            />
-            <span
-              className={`block w-4 h-px bg-fg transition-transform ${open ? "-translate-y-[3px] -rotate-45" : ""}`}
-            />
+            <X size={16} />
           </button>
         </div>
-      </nav>
 
-      <div
-        className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-500 ease-out ${
-          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <ul className="px-5 pb-6 pt-2 flex flex-col gap-3 text-base">
-          {[...links, { href: "#kontakt", label: "Kontakt" }].map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="block py-1.5 text-muted hover:text-fg"
-              >
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        {/* Links */}
+        <nav className="flex-1 overflow-y-auto px-6 py-8">
+          <ul className="flex flex-col gap-1">
+            {links.map((l) => (
+              <li key={l.href} data-nav-link>
+                <a
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-3 py-3.5 text-xl font-medium text-fg/80 hover:text-fg border-b border-line/50 transition-colors"
+                >
+                  <span className="text-accent text-sm font-normal">→</span>
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* CTA at bottom */}
+        <div className="px-6 py-6 border-t border-line shrink-0">
+          <a
+            href="#kontakt"
+            onClick={() => setOpen(false)}
+            className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-accent text-bg text-base font-medium hover:bg-accent/90"
+          >
+            Unverbindlich austauschen →
+          </a>
+        </div>
       </div>
-    </header>
+    </>
   );
 }
