@@ -3,12 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
+import { LogoMark } from "./Logo";
 
 const links = [
   { href: "#home", label: "Home" },
   { href: "#leistungen", label: "Leistungen" },
   { href: "#ablauf", label: "Ablauf" },
-  { href: "#ueber-mich", label: "Über mich" },
+  { href: "#ueber-mich", label: "Über uns" },
 ];
 
 export default function Navbar() {
@@ -49,12 +50,7 @@ export default function Navbar() {
           href="#home"
           className="text-base font-medium tracking-tight inline-flex items-center gap-2.5"
         >
-          <span className="relative inline-block w-7 h-7">
-            <span className="absolute inset-0 rounded-lg bg-accent" />
-            <span className="absolute inset-0 flex items-center justify-center text-[12px] font-bold text-bg">
-              V
-            </span>
-          </span>
+          <LogoMark className="w-7 h-7" />
           Vektorflowz
         </a>
 

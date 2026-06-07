@@ -58,8 +58,8 @@ export default function Kontakt() {
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeader
           label="Kontakt"
-          title="Lass uns sprechen."
-          intro="Erzählen Sie kurz von Ihrem Anliegen — Antwort innerhalb von 24 Stunden."
+          title="Lassen Sie uns über Ihre Prozesse sprechen."
+          intro="Schildern Sie kurz Ihr Anliegen. Sie erhalten innerhalb von 24 Stunden eine persönliche Rückmeldung."
         />
 
         <div className="mt-16 md:mt-20 grid lg:grid-cols-12 gap-6 max-w-5xl mx-auto">
@@ -80,7 +80,7 @@ export default function Kontakt() {
                 Antwortzeit
               </p>
               <p className="mt-3 text-lg font-medium">
-                Werktags innerhalb von 24 h
+                Werktags innerhalb von 24 Stunden
               </p>
             </div>
             <div data-field className="card p-6">
@@ -118,7 +118,7 @@ export default function Kontakt() {
                 name="message"
                 required
                 rows={5}
-                placeholder="Welche Prozesse möchten Sie automatisieren?"
+                placeholder="Welche Prozesse kosten aktuell besonders viel Zeit oder Aufwand?"
                 className="w-full rounded-xl bg-bg border border-line px-4 py-3 text-base md:text-lg text-fg placeholder:text-muted/60 focus:outline-none focus:border-accent transition resize-none"
               />
             </div>
@@ -128,15 +128,14 @@ export default function Kontakt() {
               type="submit"
               className="group w-full inline-flex items-center justify-center gap-2.5 pl-7 pr-2.5 py-2.5 rounded-full bg-accent text-bg text-base font-medium hover:bg-accent/90"
             >
-              {sent ? "E-Mail-Programm geöffnet" : "Anfrage senden"}
+              {sent ? "E-Mail-Programm geöffnet" : "Nachricht senden"}
               <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-bg/15 group-hover:translate-x-0.5 transition-transform">
                 <ArrowRight size={16} />
               </span>
             </button>
 
             <p data-field className="text-sm text-muted text-center">
-              Mit dem Absenden öffnet sich Ihr E-Mail-Programm. Es werden keine
-              Daten an meinen Server übertragen.
+              Mit dem Absenden öffnet sich Ihr E-Mail-Programm. Es werden keine Daten gespeichert oder an Server übertragen.
             </p>
           </form>
         </div>

@@ -16,37 +16,37 @@ const steps = [
   {
     n: "01",
     icon: MessageCircle,
-    title: "Erstgespräch",
-    text: "Sie schildern mir Ihre Situation, ich höre zu und stelle die richtigen Fragen — entspannt, ohne Sales-Pitch.",
-    tag: "30 Min · kostenfrei",
+    title: "Kennenlernen",
+    text: "Wir besprechen Ihre aktuellen Herausforderungen und identifizieren erste Potenziale.",
+    tag: "30 Minuten · unverbindlich",
   },
   {
     n: "02",
     icon: Search,
     title: "Analyse",
-    text: "Ich schaue mir Ihre Abläufe an und finde die Prozesse, bei denen Automatisierung den größten Hebel hat.",
-    tag: "1 Woche · klares Bild",
+    text: "Bestehende Prozesse werden analysiert und Optimierungsmöglichkeiten identifiziert.",
+    tag: "Potenziale sichtbar machen",
   },
   {
     n: "03",
     icon: Lightbulb,
     title: "Konzept",
-    text: "Sie erhalten von mir einen Lösungsvorschlag, der zu Ihrem Budget und Ihren Anforderungen passt — inklusive Fixpreis.",
-    tag: "Output · Roadmap",
+    text: "Sie erhalten einen konkreten Lösungsvorschlag inklusive Aufwand, Zeitrahmen und transparenter Kostenübersicht.",
+    tag: "Klare Roadmap",
   },
   {
     n: "04",
     icon: Wrench,
     title: "Umsetzung",
-    text: "Schritt für Schritt baue ich Ihre Lösung — transparent, mit regelmäßigen Abstimmungen, in echten Sprints.",
-    tag: "Iterativ · transparent",
+    text: "Die Lösung wird transparent entwickelt und regelmäßig abgestimmt.",
+    tag: "Schrittweise Entwicklung",
   },
   {
     n: "05",
     icon: Rocket,
     title: "Go-Live & Support",
-    text: "Ich gehe mit Ihnen live, schule Ihr Team und bin im laufenden Betrieb an Ihrer Seite.",
-    tag: "Wartung · Skalierung",
+    text: "Nach der Einführung unterstützen wir Sie bei Fragen, Optimierungen und Erweiterungen.",
+    tag: "Langfristige Begleitung",
   },
 ];
 
@@ -119,8 +119,8 @@ export default function Ablauf() {
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeader
           label="Ablauf"
-          title="So läuft es ab."
-          intro="Klarer Ablauf, klare Schritte. Sie wissen jederzeit, wo das Projekt steht."
+          title="So läuft die Zusammenarbeit ab."
+          intro="Transparent, strukturiert und nachvollziehbar – vom ersten Gespräch bis zur fertigen Lösung."
         />
 
         <div data-step-track className="mt-20 md:mt-28 relative">

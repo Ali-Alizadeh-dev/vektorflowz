@@ -20,6 +20,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* Responsive base size — every rem-based text/padding scales with this.
+     ~15% smaller than browser default; keeps elements compact on desktop. */
+  font-size: clamp(13.5px, 0.82rem + 0.12vw, 14.5px);
 }
 
 body {

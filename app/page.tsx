@@ -1,6 +1,7 @@
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import WarumVektorflowz from "@/components/WarumVektorflowz";
 import Leistungen from "@/components/Leistungen";
 import Ablauf from "@/components/Ablauf";
 import UeberMich from "@/components/UeberMich";
@@ -13,6 +14,7 @@ export default function Page() {
       <SmoothScroll />
       <Navbar />
       <Hero />
+      <WarumVektorflowz />
       <Leistungen />
       <Ablauf />
       <UeberMich />

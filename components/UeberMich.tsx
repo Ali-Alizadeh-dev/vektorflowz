@@ -9,15 +9,15 @@ import { Check } from "lucide-react";
 const pillars = [
   {
     title: "Persönlich",
-    text: "Sie sprechen direkt mit dem Umsetzer — keine Account-Manager-Schichten, keine Telefonwarteschleifen.",
+    text: "Direkte Kommunikation, kurze Wege und eine enge Zusammenarbeit während des gesamten Projekts.",
   },
   {
-    title: "Pragmatisch",
-    text: "Lösungen statt überdimensionierter Tool-Stacks. Das einfachste System, das den Job zuverlässig erledigt.",
+    title: "Praxisnah",
+    text: "Keine unnötige Komplexität. Wir entwickeln Lösungen, die zuverlässig funktionieren und echten Nutzen bringen.",
   },
   {
     title: "Messbar",
-    text: "Fokus auf Zeit, Qualität, Umsatz. Ich definiere Erfolg mit Ihnen vorher — und prüfe ihn nachher.",
+    text: "Erfolg wird nicht an Funktionen gemessen, sondern an Ergebnissen – mehr Effizienz, weniger Aufwand und optimierte Prozesse.",
   },
 ];
 
@@ -57,9 +57,9 @@ export default function UeberMich() {
     <section id="ueber-mich" ref={ref} className="section">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeader
-          label="Über mich"
-          title="Handgemacht, nicht von der Stange."
-          intro="Hinter Vektorflowz steht eine klare Idee — KI dort einsetzen, wo sie wirklich Wirkung zeigt."
+          label="Über uns"
+          title="Technologie sollte Arbeit erleichtern."
+          intro="Vektorflowz unterstützt Unternehmen dabei, Prozesse intelligenter zu gestalten und wiederkehrende Aufgaben zu automatisieren. Unser Fokus liegt auf Lösungen, die sich nahtlos in bestehende Abläufe integrieren und einen spürbaren Mehrwert im Arbeitsalltag schaffen."
         />
 
         <div className="mt-16 md:mt-24 grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -100,10 +100,9 @@ export default function UeberMich() {
               </div>
             </div>
 
-            <blockquote className="mt-8 text-2xl md:text-3xl italic leading-snug text-fg">
+            <blockquote className="mt-8 text-2xl md:text-3xl leading-snug text-fg">
               <span className="text-accent">„</span>
-              Die beste Automatisierung ist die, die niemand mehr bemerkt — weil
-              sie einfach funktioniert.
+              Die besten Prozesse sind die, die zuverlässig im Hintergrund funktionieren und Menschen den Rücken freihalten.
               <span className="text-accent">"</span>
             </blockquote>
 
@@ -111,7 +110,7 @@ export default function UeberMich() {
               href="#kontakt"
               className="group mt-10 inline-flex items-center gap-2 text-base font-medium"
             >
-              Schreiben Sie mir
+              Projekt besprechen
               <span className="inline-block group-hover:translate-x-1 transition-transform">
                 →
               </span>

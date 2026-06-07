@@ -21,72 +21,72 @@ const services = [
     id: "assistants",
     icon: Bot,
     title: "KI-Assistenten",
-    short: "Dialog statt Drop-Down",
-    long: "Maßgeschneiderte Chat- und Sprachassistenten, die Kundenanfragen beantworten, Wissen erschließen oder Mitarbeitende im Alltag entlasten — auf Ihre Inhalte trainiert, mit klarer Persönlichkeit.",
+    short: "Schnelle Antworten. Rund um die Uhr.",
+    long: "Digitale Assistenten unterstützen Kunden, Mitarbeitende und Interessenten bei wiederkehrenden Fragen und Aufgaben.",
     points: [
-      "24/7-Verfügbarkeit für Erstkontakt & Support",
-      "Trainiert auf Ihre Dokumente und Prozesse",
-      "Übergabe an Menschen, wo Empathie gefragt ist",
+      "Entlastung von Support und Service",
+      "Zugriff auf Unternehmenswissen in Sekunden",
+      "Individuell auf Ihre Anforderungen abgestimmt",
     ],
   },
   {
     id: "process",
     icon: Workflow,
     title: "Prozess-Automatisierung",
-    short: "Routine läuft, Sie nicht",
-    long: "Wiederkehrende Abläufe in Vertrieb, Buchhaltung oder HR werden automatisiert — von der Rechnungsfreigabe bis zum Onboarding. Saubere Trigger, klare Logik, dokumentierte Schritte.",
+    short: "Routine läuft automatisch.",
+    long: "Wiederkehrende Aufgaben werden automatisiert und standardisiert, damit Prozesse schneller und zuverlässiger ablaufen.",
     points: [
-      "Automatische Trigger über Mail, Forms oder Systeme",
-      "Fehlerfreie Weitergabe zwischen Tools",
-      "Audit-Trail für jede Aktion",
+      "Weniger manuelle Arbeit",
+      "Schnellere Bearbeitungszeiten",
+      "Höhere Prozesssicherheit",
     ],
   },
   {
     id: "data",
     icon: Database,
     title: "Daten-Integration",
-    short: "Ein System spricht mit allen",
-    long: "CRM, ERP, Tabellen, E-Mails: Ich verbinde Ihre Systeme so, dass Informationen automatisch fließen statt manuell kopiert zu werden — mit klaren Schnittstellen und sauberer Datenhaltung.",
+    short: "Verbundene Systeme statt Datensilos.",
+    long: "Bestehende Anwendungen werden intelligent miteinander verknüpft, damit Informationen dort ankommen, wo sie benötigt werden.",
     points: [
-      "Schnittstellen zu HubSpot, DATEV, Notion, Google & Co.",
-      "Datenbereinigung & Deduplication inklusive",
-      "Echtzeit- oder geplante Synchronisierung",
+      "Automatischer Datenaustausch",
+      "Weniger doppelte Eingaben",
+      "Einheitliche Datenbasis",
     ],
   },
   {
     id: "content",
     icon: Sparkles,
     title: "Content & Kommunikation",
-    short: "Inhalte in Ihrer Tonalität",
-    long: "Angebote, E-Mails, Berichte oder Social-Posts werden automatisch erstellt — auf Ihren Stil und Ihre Marke trainiert. Sie behalten die Freigabe, der Output ist sofort verwendbar.",
+    short: "Professionelle Inhalte mit weniger Aufwand.",
+    long: "E-Mails, Angebote, Berichte oder interne Kommunikation werden automatisiert vorbereitet und in Ihrer Tonalität erstellt.",
     points: [
-      "Tonalität & Vokabular werden gelernt",
-      "Vorlagen-System mit Variablen & Logik",
-      "Mehrsprachig, falls gewünscht",
+      "Konsistente Kommunikation",
+      "Individuelle Vorlagen",
+      "Mehrsprachige Inhalte möglich",
     ],
   },
   {
     id: "leads",
     icon: Mail,
     title: "Lead-Bearbeitung",
-    short: "Keine Anfrage geht unter",
-    long: "Eingehende Anfragen werden qualifiziert, beantwortet, kategorisiert und im richtigen Tool dokumentiert — inklusive Erinnerungen, Follow-ups und Übergabe an Vertrieb.",
+    short: "Keine Anfrage bleibt liegen.",
+    long: "Anfragen werden automatisch erfasst, qualifiziert und an die richtige Stelle weitergeleitet.",
     points: [
-      "Automatische Qualifizierung & Routing",
-      "Sofort-Antworten mit echtem Mehrwert",
-      "Saubere Übergabe an Sales-Pipeline",
+      "Schnellere Reaktionszeiten",
+      "Automatische Qualifizierung",
+      "Strukturierte Übergabe an den Vertrieb",
     ],
   },
   {
     id: "reporting",
     icon: FileSpreadsheet,
     title: "Reporting & Insights",
-    short: "Zahlen ohne Excel-Frust",
-    long: "Aussagekräftige Auswertungen entstehen automatisch — aus Ihren Daten, in Ihrer Sprache, mit den Kennzahlen, die wirklich relevant sind. Wöchentlich, monatlich oder on demand.",
+    short: "Relevante Zahlen auf einen Blick.",
+    long: "Daten werden automatisch ausgewertet und verständlich aufbereitet.",
     points: [
-      "Automatische Aggregation aus mehreren Quellen",
-      "Klare Visualisierung & Klartext-Zusammenfassung",
-      "Versand per Mail, Slack oder als PDF",
+      "Zentrale Auswertungen",
+      "Automatische Berichte",
+      "Bessere Entscheidungsgrundlagen",
     ],
   },
 ];
@@ -186,8 +186,8 @@ export default function Leistungen() {
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeader
           label="Leistungen"
-          title="Was ich für Sie baue."
-          intro="Sechs konkrete Bausteine — einzeln einsetzbar oder als kombinierter Workflow. Jeder zielt auf ein messbares Ergebnis."
+          title="Automatisierungen, die echten Mehrwert schaffen."
+          intro="Jedes Unternehmen hat Prozesse, die Zeit kosten, Ressourcen binden oder vermeidbare Fehler verursachen. Wir entwickeln intelligente Lösungen, die Abläufe vereinfachen und Teams nachhaltig entlasten."
         />
 
         <div
