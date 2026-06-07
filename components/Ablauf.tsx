@@ -18,7 +18,7 @@ const steps = [
     icon: MessageCircle,
     title: "Kennenlernen",
     text: "Wir besprechen Ihre aktuellen Herausforderungen und identifizieren erste Potenziale.",
-    tag: "30 Minuten · unverbindlich",
+    tag: "Ganz unverbindlich",
   },
   {
     n: "02",

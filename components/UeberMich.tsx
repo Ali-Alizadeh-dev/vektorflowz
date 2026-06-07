@@ -95,7 +95,7 @@ export default function UeberMich() {
                 V
               </div>
               <div>
-                <p className="text-lg font-medium">Ihr Ansprechpartner</p>
+                <p className="text-lg font-medium">Ali Alizadeh</p>
                 <p className="text-base text-muted">Gründer · Vektorflowz</p>
               </div>
             </div>
