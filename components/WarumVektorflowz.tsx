@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import SectionHeader from "./SectionHeader";
 import { Minimize2, Clock, Link2, TrendingUp } from "lucide-react";
 
@@ -34,18 +34,31 @@ export default function WarumVektorflowz() {
 
   useGSAP(
     () => {
-      gsap.from('[data-reason]', {
-        scrollTrigger: {
-          trigger: '[data-reasons]',
-          start: "top 80%",
-          once: true,
-        },
-        y: 36,
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.1,
-        ease: "power3.out",
+      const cards = gsap.utils.toArray<HTMLElement>("[data-reason]");
+      if (!cards.length) return;
+
+      // Reveal toward the visible state (fromTo, not from) and trigger via
+      // batch/onEnter. If the trigger ever misfires the cards still end up
+      // visible — they can never get stuck at opacity:0.
+      gsap.set(cards, { y: 36, opacity: 0 });
+
+      ScrollTrigger.batch(cards, {
+        start: "top 85%",
+        once: true,
+        onEnter: (batch) =>
+          gsap.to(batch, {
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            stagger: 0.1,
+            ease: "power3.out",
+            overwrite: true,
+          }),
       });
+
+      // Safety net: if the section is already in view on load (or a refresh
+      // race leaves them hidden), force them visible.
+      ScrollTrigger.refresh();
     },
     { scope: ref }
   );
@@ -56,7 +69,7 @@ export default function WarumVektorflowz() {
         <SectionHeader
           label="Warum Vektorflowz"
           title="Automatisierung mit klarem Mehrwert."
-          intro="Moderne Technologien entfalten ihren Wert erst dann, wenn sie konkrete Probleme lösen. Deshalb entwickeln wir Lösungen, die Prozesse vereinfachen, Teams entlasten und nachhaltig Zeit sparen."
+          intro="Technologie entfaltet ihren Wert erst dann, wenn sie konkrete Probleme löst. Genau hier setzen wir an – mit Automatisierungen, die Prozesse vereinfachen, Ihr Team entlasten und nachhaltig Zeit sparen."
         />
 
         <div
@@ -67,9 +80,9 @@ export default function WarumVektorflowz() {
             <article
               key={r.title}
               data-reason
-              className="card p-6 md:p-7 flex flex-col gap-5 hover:border-accent/30 transition-colors"
+              className="group card p-6 md:p-7 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-card-lg hover:border-accent/30"
             >
-              <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-accent-soft text-accent">
+              <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-accent-soft text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-white">
                 <r.icon size={20} />
               </span>
               <div>

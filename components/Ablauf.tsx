@@ -17,7 +17,7 @@ const steps = [
     n: "01",
     icon: MessageCircle,
     title: "Kennenlernen",
-    text: "Wir besprechen Ihre aktuellen Herausforderungen und identifizieren erste Potenziale.",
+    text: "Wir lernen uns kennen: Sie schildern Ihre aktuellen Herausforderungen, wir hören zu und loten erste Potenziale aus.",
     tag: "Ganz unverbindlich",
   },
   {
@@ -102,7 +102,9 @@ export default function Ablauf() {
               trigger: "[data-step-track]",
               start: "top 70%",
               end: "bottom 80%",
-              scrub: true,
+              // numeric scrub adds inertia so the line tween isn't recomputed
+              // on every single scroll event — smoother on mobile
+              scrub: 0.5,
             },
           }
         );

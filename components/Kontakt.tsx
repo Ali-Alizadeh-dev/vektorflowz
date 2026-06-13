@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import SectionHeader from "./SectionHeader";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Mail, Phone } from "lucide-react";
 
 export default function Kontakt() {
   const ref = useRef<HTMLDivElement>(null);
@@ -49,7 +49,7 @@ export default function Kontakt() {
     const body = encodeURIComponent(
       `Name: ${data.get("name")}\nE-Mail: ${data.get("email")}\nUnternehmen: ${data.get("company")}\n\n${data.get("message")}`
     );
-    window.location.href = `mailto:hallo@vektorflowz.de?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:ali.alizadeh@vektorflowz.de?subject=${subject}&body=${body}`;
     setSent(true);
   }
 
@@ -66,29 +66,36 @@ export default function Kontakt() {
           <aside className="lg:col-span-4 space-y-4">
             <div data-field className="card p-6">
               <p className="text-sm uppercase tracking-[0.2em] text-muted">
-                Direkt
+                E-Mail
               </p>
               <a
-                href="mailto:hallo@vektorflowz.de"
-                className="mt-3 inline-flex items-center gap-2 text-lg font-medium hover:text-accent transition-colors"
+                href="mailto:ali.alizadeh@vektorflowz.de"
+                className="mt-3 inline-flex items-center gap-2 text-lg font-medium hover:text-accent transition-colors break-all"
               >
-                <Mail size={18} /> ali.alizadeh@vektorflowz.de
+                <Mail size={18} className="shrink-0" />{" "}
+                ali.alizadeh@vektorflowz.de
               </a>
             </div>
             <div data-field className="card p-6">
               <p className="text-sm uppercase tracking-[0.2em] text-muted">
-                Antwortzeit
+                Telefon
               </p>
-              <p className="mt-3 text-lg font-medium">
-                Werktags innerhalb von 24 Stunden
-              </p>
+              <a
+                href="tel:+491794392400"
+                className="mt-3 inline-flex items-center gap-2 text-lg font-medium hover:text-accent transition-colors"
+              >
+                <Phone size={18} className="shrink-0" /> 0179 4392400
+              </a>
             </div>
             <div data-field className="card p-6">
               <p className="text-sm uppercase tracking-[0.2em] text-muted">
                 Erstgespräch
               </p>
               <p className="mt-3 text-lg font-medium">
-                 Unverbindlich und kostenfrei
+                Unverbindlich &amp; kostenfrei
+              </p>
+              <p className="mt-1 text-sm text-muted">
+                Antwort werktags innerhalb von 24 Stunden.
               </p>
             </div>
           </aside>

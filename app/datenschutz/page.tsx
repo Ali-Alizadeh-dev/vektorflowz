@@ -130,7 +130,10 @@ export default function DatenschutzPage() {
       </ul>
       <p>
         Zur Ausübung Ihrer Rechte genügt eine formlose Nachricht an{" "}
-        <a href="mailto:hallo@vektorflowz.de">hallo@vektorflowz.de</a>.
+        <a href="mailto:ali.alizadeh@vektorflowz.de">
+          ali.alizadeh@vektorflowz.de
+        </a>
+        .
       </p>
 
       <h2>9. Beschwerderecht bei der Aufsichtsbehörde</h2>

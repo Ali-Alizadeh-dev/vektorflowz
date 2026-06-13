@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import SectionHeader from "./SectionHeader";
 import {
   Bot,
@@ -85,9 +85,13 @@ export default function Leistungen() {
   const tweenRef = useRef<gsap.core.Tween | null>(null);
   const [activeIdx, setActiveIdx] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [inView, setInView] = useState(false);
   const active = services[activeIdx];
 
-  // Initial scroll-in animation
+  // Initial scroll-in animation + viewport visibility tracking.
+  // The auto-rotate loop only runs while the section is on screen, so we
+  // don't trigger React re-renders + panel animations every 6s in the
+  // background — a meaningful battery/CPU saver on mobile.
   useGSAP(
     () => {
       gsap.from('[data-svc-item]', {
@@ -113,6 +117,13 @@ export default function Leistungen() {
         duration: 1,
         ease: "power3.out",
       });
+
+      ScrollTrigger.create({
+        trigger: ref.current,
+        start: "top bottom",
+        end: "bottom top",
+        onToggle: (self) => setInView(self.isActive),
+      });
     },
     { scope: ref }
   );
@@ -123,6 +134,9 @@ export default function Leistungen() {
       tweenRef.current?.kill();
       // Reset all bars
       gsap.set('[data-bar-fill]', { scaleY: 0 });
+
+      // Don't run the loop while the section is off screen.
+      if (!inView) return;
 
       const bar = document.querySelector(
         `[data-bar-fill="${activeIdx}"]`
@@ -145,7 +159,7 @@ export default function Leistungen() {
 
       if (paused) tweenRef.current.pause();
     },
-    { dependencies: [activeIdx, paused] }
+    { dependencies: [activeIdx, paused, inView] }
   );
 
   // Re-animate panel content on tab change
@@ -175,7 +189,7 @@ export default function Leistungen() {
         <SectionHeader
           label="Leistungen"
           title="Automatisierungen, die echten Mehrwert schaffen."
-          intro="Jedes Unternehmen hat Prozesse, die Zeit kosten, Ressourcen binden oder vermeidbare Fehler verursachen. Wir entwickeln intelligente Lösungen, die Abläufe vereinfachen und Teams nachhaltig entlasten."
+          intro="Jedes Unternehmen hat Prozesse, die Zeit kosten, Ressourcen binden oder vermeidbare Fehler verursachen. Wir entwickeln intelligente Lösungen, die Abläufe vereinfachen und Ihr Team nachhaltig entlasten."
         />
 
         <div

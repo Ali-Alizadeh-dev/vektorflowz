@@ -9,15 +9,15 @@ import { Check } from "lucide-react";
 const pillars = [
   {
     title: "Persönlich",
-    text: "Direkte Kommunikation, kurze Wege und eine enge Zusammenarbeit während des gesamten Projekts.",
+    text: "Direkte Kommunikation, feste Ansprechpartner und kurze Wege während des gesamten Projekts.",
   },
   {
     title: "Praxisnah",
-    text: "Keine unnötige Komplexität. Wir entwickeln Lösungen, die zuverlässig funktionieren und echten Nutzen bringen.",
+    text: "Keine unnötige Komplexität. Wir entwickeln Lösungen, die zuverlässig funktionieren und echten Nutzen im Alltag bringen.",
   },
   {
     title: "Messbar",
-    text: "Erfolg wird nicht an Funktionen gemessen, sondern an Ergebnissen – mehr Effizienz, weniger Aufwand und optimierte Prozesse.",
+    text: "Erfolg messen wir nicht an Funktionen, sondern an Ergebnissen – mehr Effizienz, weniger Aufwand, klar definierte Ziele.",
   },
 ];
 
@@ -59,7 +59,7 @@ export default function UeberMich() {
         <SectionHeader
           label="Über uns"
           title="Technologie sollte Arbeit erleichtern."
-          intro="Vektorflowz unterstützt Unternehmen dabei, Prozesse intelligenter zu gestalten und wiederkehrende Aufgaben zu automatisieren. Unser Fokus liegt auf Lösungen, die sich nahtlos in bestehende Abläufe integrieren und einen spürbaren Mehrwert im Arbeitsalltag schaffen."
+          intro="Mit Vektorflowz helfen wir Unternehmen, Prozesse intelligenter zu gestalten und wiederkehrende Aufgaben zu automatisieren – mit Lösungen, die sich nahtlos in bestehende Abläufe einfügen und im Arbeitsalltag spürbar entlasten."
         />
 
         <div className="mt-16 md:mt-24 grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -91,8 +91,8 @@ export default function UeberMich() {
             className="lg:col-span-5 card shadow-card-lg p-8 md:p-10 lg:sticky lg:top-24"
           >
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-fg text-bg flex items-center justify-center text-lg font-medium">
-                V
+              <div className="w-12 h-12 rounded-2xl bg-accent text-white flex items-center justify-center text-lg font-medium">
+                AA
               </div>
               <div>
                 <p className="text-lg font-medium">Ali Alizadeh</p>

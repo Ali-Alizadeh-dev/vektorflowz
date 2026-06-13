@@ -13,9 +13,18 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://vektorflowz.de"),
   title: "Vektorflowz — KI-Automatisierungen für Unternehmen",
   description:
-    "Vektorflowz baut KI-Automatisierungen, die Zeit und Geld sparen. Klare Prozesse, messbarer Mehrwert, schnelle Umsetzung.",
+    "Ich automatisiere wiederkehrende Aufgaben mit KI – damit Ihr Unternehmen Zeit spart, Fehler vermeidet und sich aufs Wesentliche konzentriert. Persönlich, praxisnah, DSGVO-konform. Aus Hamburg, deutschlandweit.",
+  keywords: [
+    "KI-Automatisierung",
+    "Prozessautomatisierung",
+    "KI-Assistenten",
+    "Vektorflowz",
+    "Hamburg",
+  ],
+  authors: [{ name: "Ali Alizadeh" }],
   icons: {
     icon: [
       { url: "/logo/vektorflowz-favicon.svg", type: "image/svg+xml" },
@@ -24,10 +33,11 @@ export const metadata: Metadata = {
     apple: { url: "/logo/png/vektorflowz-favicon-180.png", sizes: "180x180" },
   },
   openGraph: {
-    title: "Vektorflowz — KI-Automatisierungen",
+    title: "Vektorflowz — KI-Automatisierungen für Unternehmen",
     description:
-      "KI-Automatisierungen, die Zeit und Geld sparen. Klare Prozesse, messbarer Mehrwert.",
+      "Ich automatisiere wiederkehrende Aufgaben mit KI – damit Ihr Unternehmen Zeit spart und sich aufs Wesentliche konzentriert. Persönlich, praxisnah, DSGVO-konform.",
     images: ["/logo/png/vektorflowz-mark-512.png"],
+    locale: "de_DE",
     type: "website",
   },
 };
