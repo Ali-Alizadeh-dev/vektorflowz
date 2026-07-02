@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 :root {
-  /* Claude brand palette */
-  --bg: #faf9f5; /* Claude cream */
+  /* solvomind brand palette */
+  --bg: #f5f7fa; /* cool light */
   --surface: #ffffff;
-  --fg: #1f1e1d; /* Claude near-black ink */
-  --muted: #6b6a66; /* warm grey */
-  --line: rgba(31, 30, 29, 0.1);
-  --accent: #d97757; /* Claude coral/clay */
-  --accent-soft: rgba(217, 119, 87, 0.1);
-  --accent-bright: #d97757; /* coral — also used for the hero glow */
+  --fg: #0b1220; /* near-black navy ink */
+  --muted: #5b6472; /* cool grey */
+  --line: rgba(11, 18, 32, 0.1);
+  --accent: #003df0; /* solvomind blue */
+  --accent-soft: rgba(0, 61, 240, 0.08);
+  --accent-bright: #003df0; /* blue — also used for the hero glow */
   color-scheme: light;
 }
 
@@ -73,7 +73,6 @@ body {
 }
 .word-inner {
   display: inline-block;
-  will-change: transform;
 }
 
 .hairline {

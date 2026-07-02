@@ -22,6 +22,10 @@ export default function SectionHeader({
 
   useGSAP(
     () => {
+      const isDesktop = window.matchMedia(
+        "(min-width: 768px) and (prefers-reduced-motion: no-preference)"
+      ).matches;
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ref.current,
@@ -31,17 +35,31 @@ export default function SectionHeader({
         defaults: { ease: "power3.out" },
       });
 
-      tl.from('[data-sec="pill"]', { y: 12, opacity: 0, duration: 0.7 })
-        .from(
-          '[data-sec="title"] .word-inner',
-          { yPercent: 110, duration: 1, stagger: 0.05 },
-          "-=0.4"
-        )
-        .from(
-          '[data-sec="intro"] .word-inner',
-          { yPercent: 110, duration: 0.7, stagger: 0.012 },
-          "-=0.6"
+      if (isDesktop) {
+        tl.from('[data-sec="pill"]', { y: 12, opacity: 0, duration: 0.7 })
+          .from(
+            '[data-sec="title"] .word-inner',
+            { yPercent: 110, duration: 1, stagger: 0.05 },
+            "-=0.4"
+          )
+          .from(
+            '[data-sec="intro"] .word-inner',
+            { yPercent: 110, duration: 0.7, stagger: 0.012 },
+            "-=0.6"
+          );
+      } else {
+        // Mobile: light block fade instead of per-word masks
+        tl.from(
+          ['[data-sec="pill"]', '[data-sec="title"]', '[data-sec="intro"]'],
+          {
+            y: 16,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            clearProps: "transform,opacity",
+          }
         );
+      }
     },
     { scope: ref }
   );

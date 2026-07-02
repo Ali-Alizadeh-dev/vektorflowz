@@ -13,43 +13,59 @@ export default function Hero() {
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-      tl.from('[data-hero="title"] .word-inner', {
-        yPercent: 110,
-        duration: 1.1,
-        stagger: 0.06,
-      })
-        .from(
-          '[data-hero="sub"] .word-inner',
-          { yPercent: 110, duration: 0.8, stagger: 0.015 },
-          "-=0.7"
-        )
-        .from(
-          '[data-hero="cta"]',
-          { y: 18, opacity: 0, duration: 0.8, stagger: 0.08, clearProps: "transform,opacity" },
-          "-=0.5"
-        )
-        .from(
-          '[data-hero="trust"] > *',
-          { y: 12, opacity: 0, duration: 0.6, stagger: 0.08 },
-          "-=0.3"
-        )
-        .from(
-          '[data-hero="scroll"]',
-          { opacity: 0, duration: 0.6 },
-          "-=0.2"
-        );
-
-      // Continuously animating a large blur() layer is the single most
-      // expensive effect on mobile GPUs — it re-rasterizes every frame.
-      // So we only drift the blobs on larger screens with motion enabled;
-      // on phones (and for reduced-motion users) they stay static.
-      const allowDrift = window.matchMedia(
+      const isDesktop = window.matchMedia(
         "(min-width: 768px) and (prefers-reduced-motion: no-preference)"
       ).matches;
 
-      if (allowDrift) {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      if (isDesktop) {
+        // Rich word-by-word reveal — only on desktop where it's cheap.
+        tl.from('[data-hero="title"] .word-inner', {
+          yPercent: 110,
+          duration: 1.1,
+          stagger: 0.06,
+        })
+          .from(
+            '[data-hero="sub"] .word-inner',
+            { yPercent: 110, duration: 0.8, stagger: 0.015 },
+            "-=0.7"
+          )
+          .from(
+            '[data-hero="cta"]',
+            { y: 18, opacity: 0, duration: 0.8, stagger: 0.08, clearProps: "transform,opacity" },
+            "-=0.5"
+          )
+          .from(
+            '[data-hero="trust"] > *',
+            { y: 12, opacity: 0, duration: 0.6, stagger: 0.08 },
+            "-=0.3"
+          )
+          .from('[data-hero="scroll"]', { opacity: 0, duration: 0.6 }, "-=0.2");
+      } else {
+        // Mobile: one lightweight fade per block instead of dozens of
+        // simultaneously-animating word spans — much smoother first paint.
+        tl.from(
+          [
+            '[data-hero="title"]',
+            '[data-hero="sub"]',
+            '[data-hero="cta"]',
+            '[data-hero="trust"]',
+            '[data-hero="scroll"]',
+          ],
+          {
+            y: 16,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.12,
+            clearProps: "transform,opacity",
+          }
+        );
+      }
+
+      // Drifting blobs only on desktop (continuous transform of a large soft
+      // layer is the kind of thing that stutters on phones).
+      if (isDesktop) {
         const drift = (
           el: HTMLElement | null,
           x: number,
@@ -76,15 +92,17 @@ export default function Hero() {
       ref={root}
       className="relative min-h-[100svh] flex items-center justify-center pt-32 pb-24 bg-paper overflow-hidden"
     >
-      {/* Eye-catcher: two gradient blobs (static on mobile, drifting on desktop) */}
+      {/* Eye-catcher: two gradient blobs (static on mobile, drifting on desktop).
+          The soft edge comes from the radial-gradient itself (transparent stop),
+          NOT a blur() filter — blur is very expensive to rasterize on the first
+          paint on mobile GPUs and was a key cause of the initial-load jank. */}
       <div
         ref={glowA}
         aria-hidden
         className="absolute -top-32 left-[42%] -translate-x-1/2 w-[480px] h-[480px] md:w-[680px] md:h-[680px] rounded-full pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, rgba(217,119,87,0.45) 0%, rgba(217,119,87,0.1) 40%, transparent 70%)",
-          filter: "blur(36px)",
+            "radial-gradient(circle, rgba(0,61,240,0.28) 0%, rgba(0,61,240,0.08) 38%, transparent 68%)",
         }}
       />
       <div
@@ -93,8 +111,7 @@ export default function Hero() {
         className="absolute top-10 left-[60%] -translate-x-1/2 w-[400px] h-[400px] md:w-[560px] md:h-[560px] rounded-full pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, rgba(224,162,118,0.3) 0%, rgba(224,162,118,0.08) 42%, transparent 70%)",
-          filter: "blur(40px)",
+            "radial-gradient(circle, rgba(56,120,255,0.2) 0%, rgba(56,120,255,0.06) 42%, transparent 70%)",
         }}
       />
 

@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import SectionHeader from "./SectionHeader";
 import { ArrowRight, Mail, Phone } from "lucide-react";
 
@@ -12,30 +12,32 @@ export default function Kontakt() {
 
   useGSAP(
     () => {
-      gsap.from('[data-card]', {
-        scrollTrigger: {
-          trigger: '[data-card]',
-          start: "top 80%",
-          once: true,
-        },
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
+      // Animate the aside rows + the form as whole blocks (not every single
+      // form field) — cheaper on phones and, because we tween toward the
+      // visible state via batch/onEnter, nothing can get stuck hidden.
+      const items = [
+        ...gsap.utils.toArray<HTMLElement>("aside [data-field]"),
+        ...gsap.utils.toArray<HTMLElement>("[data-card]"),
+      ];
+      if (!items.length) return;
+
+      gsap.set(items, { y: 24, opacity: 0 });
+
+      ScrollTrigger.batch(items, {
+        start: "top 88%",
+        once: true,
+        onEnter: (batch) =>
+          gsap.to(batch, {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            stagger: 0.08,
+            ease: "power3.out",
+            overwrite: true,
+          }),
       });
-      gsap.from('[data-field]', {
-        scrollTrigger: {
-          trigger: '[data-card]',
-          start: "top 75%",
-          once: true,
-        },
-        y: 20,
-        opacity: 0,
-        duration: 0.7,
-        stagger: 0.07,
-        ease: "power3.out",
-        delay: 0.2,
-      });
+
+      ScrollTrigger.refresh();
     },
     { scope: ref }
   );
@@ -49,7 +51,7 @@ export default function Kontakt() {
     const body = encodeURIComponent(
       `Name: ${data.get("name")}\nE-Mail: ${data.get("email")}\nUnternehmen: ${data.get("company")}\n\n${data.get("message")}`
     );
-    window.location.href = `mailto:ali.alizadeh@vektorflowz.de?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:ali.alizadeh@solvomind.de?subject=${subject}&body=${body}`;
     setSent(true);
   }
 
@@ -63,20 +65,22 @@ export default function Kontakt() {
         />
 
         <div className="mt-16 md:mt-20 grid lg:grid-cols-12 gap-6 max-w-5xl mx-auto">
-          <aside className="lg:col-span-4 space-y-4">
-            <div data-field className="card p-6">
+          {/* Plain divider list instead of three stacked cards — the form
+              stays the single card in this section */}
+          <aside className="lg:col-span-4">
+            <div data-field className="pb-6 border-b border-line">
               <p className="text-sm uppercase tracking-[0.2em] text-muted">
                 E-Mail
               </p>
               <a
-                href="mailto:ali.alizadeh@vektorflowz.de"
+                href="mailto:ali.alizadeh@solvomind.de"
                 className="mt-3 inline-flex items-center gap-2 text-lg font-medium hover:text-accent transition-colors break-all"
               >
-                <Mail size={18} className="shrink-0" />{" "}
-                ali.alizadeh@vektorflowz.de
+                <Mail size={18} className="shrink-0 text-accent" />{" "}
+                ali.alizadeh@solvomind.de
               </a>
             </div>
-            <div data-field className="card p-6">
+            <div data-field className="py-6 border-b border-line">
               <p className="text-sm uppercase tracking-[0.2em] text-muted">
                 Telefon
               </p>
@@ -84,10 +88,10 @@ export default function Kontakt() {
                 href="tel:+491794392400"
                 className="mt-3 inline-flex items-center gap-2 text-lg font-medium hover:text-accent transition-colors"
               >
-                <Phone size={18} className="shrink-0" /> 0179 4392400
+                <Phone size={18} className="shrink-0 text-accent" /> 0179 4392400
               </a>
             </div>
-            <div data-field className="card p-6">
+            <div data-field className="pt-6">
               <p className="text-sm uppercase tracking-[0.2em] text-muted">
                 Erstgespräch
               </p>

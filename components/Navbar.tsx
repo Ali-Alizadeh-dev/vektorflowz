@@ -3,16 +3,26 @@
 import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
-import { LogoMark } from "./Logo";
 import { X } from "lucide-react";
+import { LogoMark } from "./Logo";
 
 const links = [
   { href: "#home", label: "Home" },
   { href: "#leistungen", label: "Leistungen" },
   { href: "#ablauf", label: "Ablauf" },
+  { href: "#faq", label: "FAQ" },
   { href: "#ueber-mich", label: "Über uns" },
   { href: "#kontakt", label: "Kontakt" },
 ];
+
+const Wordmark = ({ className = "" }: { className?: string }) => (
+  <span className="inline-flex items-center gap-2.5">
+    <LogoMark className="w-7 h-7" />
+    <span className={`font-semibold tracking-tight ${className}`}>
+      solvomind<span className="text-accent">.</span>
+    </span>
+  </span>
+);
 
 export default function Navbar() {
   const ref = useRef<HTMLElement>(null);
@@ -92,12 +102,8 @@ export default function Navbar() {
         className="fixed top-0 inset-x-0 z-50 transition-all duration-300 data-[scrolled=true]:bg-bg/75 data-[scrolled=true]:backdrop-blur-md data-[scrolled=true]:border-b data-[scrolled=true]:border-line"
       >
         <nav className="mx-auto max-w-7xl px-5 md:px-8 h-16 flex items-center justify-between">
-          <a
-            href="#home"
-            className="text-base font-medium tracking-tight inline-flex items-center gap-2.5"
-          >
-            <LogoMark className="w-7 h-7" />
-            Vektorflowz
+          <a href="#home" className="text-lg inline-flex items-center">
+            <Wordmark />
           </a>
 
           <ul className="hidden md:flex items-center gap-8 text-base text-muted">
@@ -154,10 +160,7 @@ export default function Navbar() {
       >
         {/* Drawer header */}
         <div className="flex items-center justify-between px-6 h-16 border-b border-line shrink-0">
-          <span className="inline-flex items-center gap-2 text-base font-medium">
-            <LogoMark className="w-6 h-6" />
-            Vektorflowz
-          </span>
+          <Wordmark className="text-base" />
           <button
             aria-label="Menü schließen"
             onClick={() => setOpen(false)}

@@ -4,7 +4,8 @@ import { LogoMark } from "./Logo";
 const nav = [
   { href: "#leistungen", label: "Leistungen" },
   { href: "#ablauf", label: "Ablauf" },
-  { href: "#ueber-mich", label: "Über mich" },
+  { href: "#faq", label: "FAQ" },
+  { href: "#ueber-mich", label: "Über uns" },
   { href: "#kontakt", label: "Kontakt" },
 ];
 
@@ -17,10 +18,12 @@ export default function Footer() {
           <div className="md:col-span-5">
             <Link
               href="#home"
-              className="inline-flex items-center gap-2.5 text-base font-medium"
+              className="inline-flex items-center gap-2.5 text-lg"
             >
               <LogoMark className="w-7 h-7" />
-              Vektorflowz
+              <span className="font-semibold tracking-tight">
+                solvomind<span className="text-accent">.</span>
+              </span>
             </Link>
             <p className="mt-4 max-w-sm text-base text-muted leading-relaxed">
               KI-Automatisierungen, die wiederkehrende Aufgaben übernehmen –
@@ -55,10 +58,10 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5 text-base">
               <li>
                 <a
-                  href="mailto:ali.alizadeh@vektorflowz.de"
+                  href="mailto:ali.alizadeh@solvomind.de"
                   className="text-fg/80 hover:text-accent transition-colors break-all"
                 >
-                  ali.alizadeh@vektorflowz.de
+                  ali.alizadeh@solvomind.de
                 </a>
               </li>
               <li>
@@ -76,7 +79,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-line flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-sm text-muted">
-          <span>© {new Date().getFullYear()} Ali Alizadeh · Vektorflowz</span>
+          <span>© {new Date().getFullYear()} Ali Alizadeh · solvomind</span>
           <nav className="flex items-center gap-6">
             <Link href="/impressum" className="hover:text-fg transition-colors">
               Impressum

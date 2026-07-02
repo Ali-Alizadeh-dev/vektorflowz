@@ -94,29 +94,50 @@ export default function Leistungen() {
   // background — a meaningful battery/CPU saver on mobile.
   useGSAP(
     () => {
-      gsap.from('[data-svc-item]', {
-        scrollTrigger: {
-          trigger: '[data-svc-list]',
-          start: "top 80%",
-          once: true,
-        },
-        x: -40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.08,
-        ease: "power3.out",
+      const isDesktop = window.matchMedia(
+        "(min-width: 768px) and (prefers-reduced-motion: no-preference)"
+      ).matches;
+
+      const tabs = gsap.utils.toArray<HTMLElement>("[data-svc-item]");
+      const panel = panelRef.current;
+
+      // Tween toward visible via onEnter so nothing can get stuck hidden;
+      // side-slides only on desktop, light fade-up on phones.
+      gsap.set(tabs, isDesktop ? { x: -40, opacity: 0 } : { y: 16, opacity: 0 });
+      if (panel)
+        gsap.set(panel, isDesktop ? { x: 40, opacity: 0 } : { y: 16, opacity: 0 });
+
+      ScrollTrigger.create({
+        trigger: '[data-svc-list]',
+        start: "top 85%",
+        once: true,
+        onEnter: () =>
+          gsap.to(tabs, {
+            x: 0,
+            y: 0,
+            opacity: 1,
+            duration: isDesktop ? 0.8 : 0.55,
+            stagger: 0.07,
+            ease: "power3.out",
+            overwrite: true,
+          }),
       });
-      gsap.from(panelRef.current, {
-        scrollTrigger: {
-          trigger: panelRef.current,
-          start: "top 80%",
+      if (panel) {
+        ScrollTrigger.create({
+          trigger: panel,
+          start: "top 85%",
           once: true,
-        },
-        x: 40,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-      });
+          onEnter: () =>
+            gsap.to(panel, {
+              x: 0,
+              y: 0,
+              opacity: 1,
+              duration: isDesktop ? 1 : 0.55,
+              ease: "power3.out",
+              overwrite: true,
+            }),
+        });
+      }
 
       ScrollTrigger.create({
         trigger: ref.current,
@@ -124,6 +145,8 @@ export default function Leistungen() {
         end: "bottom top",
         onToggle: (self) => setInView(self.isActive),
       });
+
+      ScrollTrigger.refresh();
     },
     { scope: ref }
   );

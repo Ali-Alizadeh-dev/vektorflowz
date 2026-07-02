@@ -13,30 +13,26 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vektorflowz.de"),
-  title: "Vektorflowz — KI-Automatisierungen für Unternehmen",
+  metadataBase: new URL("https://solvomind.de"),
+  title: "solvomind — KI-Automatisierungen für Unternehmen",
   description:
-    "Ich automatisiere wiederkehrende Aufgaben mit KI – damit Ihr Unternehmen Zeit spart, Fehler vermeidet und sich aufs Wesentliche konzentriert. Persönlich, praxisnah, DSGVO-konform. Aus Hamburg, deutschlandweit.",
+    "Wir automatisieren wiederkehrende Aufgaben mit KI – damit Ihr Unternehmen Zeit spart, Fehler vermeidet und sich aufs Wesentliche konzentriert. Persönlich, praxisnah, DSGVO-konform. Aus Hamburg, deutschlandweit.",
   keywords: [
     "KI-Automatisierung",
     "Prozessautomatisierung",
     "KI-Assistenten",
-    "Vektorflowz",
+    "solvomind",
     "Hamburg",
   ],
   authors: [{ name: "Ali Alizadeh" }],
   icons: {
-    icon: [
-      { url: "/logo/vektorflowz-favicon.svg", type: "image/svg+xml" },
-      { url: "/logo/png/vektorflowz-favicon-32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: { url: "/logo/png/vektorflowz-favicon-180.png", sizes: "180x180" },
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/icon.svg" }],
   },
   openGraph: {
-    title: "Vektorflowz — KI-Automatisierungen für Unternehmen",
+    title: "solvomind — KI-Automatisierungen für Unternehmen",
     description:
-      "Ich automatisiere wiederkehrende Aufgaben mit KI – damit Ihr Unternehmen Zeit spart und sich aufs Wesentliche konzentriert. Persönlich, praxisnah, DSGVO-konform.",
-    images: ["/logo/png/vektorflowz-mark-512.png"],
+      "Wir automatisieren wiederkehrende Aufgaben mit KI – damit Ihr Unternehmen Zeit spart und sich aufs Wesentliche konzentriert. Persönlich, praxisnah, DSGVO-konform.",
     locale: "de_DE",
     type: "website",
   },

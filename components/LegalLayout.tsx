@@ -18,9 +18,8 @@ export default function LegalLayout({
           >
             <span aria-hidden>←</span> Zurück
           </Link>
-          <span className="inline-flex items-center gap-2 font-medium">
-            <span className="dot" />
-            Vektorflowz
+          <span className="font-semibold tracking-tight">
+            solvomind<span className="text-accent">.</span>
           </span>
         </div>
       </header>

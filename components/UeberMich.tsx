@@ -2,22 +2,21 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import SectionHeader from "./SectionHeader";
-import { Check } from "lucide-react";
 
 const pillars = [
   {
     title: "Persönlich",
-    text: "Direkte Kommunikation, feste Ansprechpartner und kurze Wege während des gesamten Projekts.",
+    text: "Sie haben feste Ansprechpartner, die Ihr Projekt von Anfang bis Ende begleiten – keine Ticketsysteme, keine Warteschleifen.",
   },
   {
     title: "Praxisnah",
-    text: "Keine unnötige Komplexität. Wir entwickeln Lösungen, die zuverlässig funktionieren und echten Nutzen im Alltag bringen.",
+    text: "Wir setzen auf Ihre vorhandenen Tools auf, statt alles neu aufzubauen. Das einfachste System, das den Job zuverlässig erledigt.",
   },
   {
     title: "Messbar",
-    text: "Erfolg messen wir nicht an Funktionen, sondern an Ergebnissen – mehr Effizienz, weniger Aufwand, klar definierte Ziele.",
+    text: "Vor dem Start definieren wir gemeinsam, woran sich der Erfolg messen lässt – und prüfen es nach dem Go-live gemeinsam nach.",
   },
 ];
 
@@ -26,29 +25,31 @@ export default function UeberMich() {
 
   useGSAP(
     () => {
-      gsap.from('[data-pillar]', {
-        scrollTrigger: {
-          trigger: '[data-pillars]',
-          start: "top 80%",
-          once: true,
-        },
-        x: -30,
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.1,
-        ease: "power3.out",
+      const items = [
+        ...gsap.utils.toArray<HTMLElement>("[data-pillar]"),
+        ...gsap.utils.toArray<HTMLElement>("[data-quote-card]"),
+      ];
+      if (!items.length) return;
+
+      // fromTo toward the visible state via batch/onEnter — can't get stuck
+      // hidden, and cheap enough for phones (single transform per element).
+      gsap.set(items, { y: 24, opacity: 0 });
+
+      ScrollTrigger.batch(items, {
+        start: "top 88%",
+        once: true,
+        onEnter: (batch) =>
+          gsap.to(batch, {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            stagger: 0.09,
+            ease: "power3.out",
+            overwrite: true,
+          }),
       });
-      gsap.from('[data-quote-card]', {
-        scrollTrigger: {
-          trigger: '[data-quote-card]',
-          start: "top 80%",
-          once: true,
-        },
-        x: 30,
-        opacity: 0,
-        duration: 1.1,
-        ease: "power3.out",
-      });
+
+      ScrollTrigger.refresh();
     },
     { scope: ref }
   );
@@ -59,22 +60,24 @@ export default function UeberMich() {
         <SectionHeader
           label="Über uns"
           title="Technologie sollte Arbeit erleichtern."
-          intro="Mit Vektorflowz helfen wir Unternehmen, Prozesse intelligenter zu gestalten und wiederkehrende Aufgaben zu automatisieren – mit Lösungen, die sich nahtlos in bestehende Abläufe einfügen und im Arbeitsalltag spürbar entlasten."
+          intro="Mit solvomind helfen wir Unternehmen, Prozesse intelligenter zu gestalten und wiederkehrende Aufgaben zu automatisieren – mit Lösungen, die sich nahtlos in bestehende Abläufe einfügen."
         />
 
-        <div className="mt-16 md:mt-24 grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          <ul data-pillars className="lg:col-span-7 space-y-4">
+        <div className="mt-16 md:mt-24 grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          {/* Values as a divider list — no cards */}
+          <ul className="lg:col-span-7">
             {pillars.map((p, i) => (
-              <li key={p.title} data-pillar>
-                <div className="card shadow-card p-6 md:p-7 flex gap-5">
-                  <span className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-xl bg-accent-soft text-accent">
-                    <Check size={18} />
+              <li
+                key={p.title}
+                data-pillar
+                className="py-7 border-t border-line last:border-b"
+              >
+                <div className="flex items-baseline gap-4">
+                  <span className="text-sm font-mono text-accent">
+                    0{i + 1}
                   </span>
                   <div>
-                    <h3 className="text-xl md:text-2xl font-medium tracking-tight flex items-baseline gap-3">
-                      <span className="text-sm text-muted font-mono tracking-normal">
-                        0{i + 1}
-                      </span>
+                    <h3 className="text-xl md:text-2xl font-medium tracking-tight">
                       {p.title}
                     </h3>
                     <p className="mt-2 text-base md:text-lg text-muted leading-relaxed">
@@ -86,9 +89,10 @@ export default function UeberMich() {
             ))}
           </ul>
 
+          {/* The one card in this section: founder quote */}
           <aside
             data-quote-card
-            className="lg:col-span-5 card shadow-card-lg p-8 md:p-10 lg:sticky lg:top-24"
+            className="lg:col-span-5 card shadow-card-lg p-8 md:p-10 lg:sticky lg:top-28"
           >
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-2xl bg-accent text-white flex items-center justify-center text-lg font-medium">
@@ -96,19 +100,20 @@ export default function UeberMich() {
               </div>
               <div>
                 <p className="text-lg font-medium">Ali Alizadeh</p>
-                <p className="text-base text-muted">Gründer · Vektorflowz</p>
+                <p className="text-base text-muted">Gründer · solvomind</p>
               </div>
             </div>
 
             <blockquote className="mt-8 text-2xl md:text-3xl leading-snug text-fg">
               <span className="text-accent">„</span>
-              Die besten Prozesse sind die, die zuverlässig im Hintergrund funktionieren und Menschen den Rücken freihalten.
+              Die besten Prozesse sind die, die zuverlässig im Hintergrund
+              funktionieren und Menschen den Rücken freihalten.
               <span className="text-accent">"</span>
             </blockquote>
 
             <a
               href="#kontakt"
-              className="group mt-10 inline-flex items-center gap-2 text-base font-medium"
+              className="group mt-10 inline-flex items-center gap-2 text-base font-medium hover:text-accent transition-colors"
             >
               Projekt besprechen
               <span className="inline-block group-hover:translate-x-1 transition-transform">

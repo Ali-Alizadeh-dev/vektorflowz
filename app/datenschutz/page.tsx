@@ -1,6 +1,6 @@
 import LegalLayout from "@/components/LegalLayout";
 
-export const metadata = { title: "Datenschutzerklärung — Vektorflowz" };
+export const metadata = { title: "Datenschutzerklärung — solvomind" };
 
 export default function DatenschutzPage() {
   return (
@@ -15,13 +15,13 @@ export default function DatenschutzPage() {
         anderer nationaler Datenschutzgesetze ist:
         <br />
         <br />
-        Ali Alizadeh · Vektorflowz
+        Ali Alizadeh · solvomind
         <br />
         Waschingtonallee 35
         <br />
         22111 Hamburg
         <br />
-        E-Mail: ali.alizadeh@vektorflowz.de
+        E-Mail: ali.alizadeh@solvomind.de
         <br />
         Telefon: 0179 4392400
       </p>
@@ -130,8 +130,8 @@ export default function DatenschutzPage() {
       </ul>
       <p>
         Zur Ausübung Ihrer Rechte genügt eine formlose Nachricht an{" "}
-        <a href="mailto:ali.alizadeh@vektorflowz.de">
-          ali.alizadeh@vektorflowz.de
+        <a href="mailto:ali.alizadeh@solvomind.de">
+          ali.alizadeh@solvomind.de
         </a>
         .
       </p>

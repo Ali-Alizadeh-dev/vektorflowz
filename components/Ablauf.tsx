@@ -24,7 +24,7 @@ const steps = [
     n: "02",
     icon: Search,
     title: "Analyse",
-    text: "Bestehende Prozesse werden analysiert und Optimierungsmöglichkeiten identifiziert.",
+    text: "Wir schauen uns Ihre Abläufe im Detail an und finden die Stellen, an denen Automatisierung den größten Hebel hat.",
     tag: "Potenziale sichtbar machen",
   },
   {
@@ -38,7 +38,7 @@ const steps = [
     n: "04",
     icon: Wrench,
     title: "Umsetzung",
-    text: "Die Lösung wird transparent entwickelt und regelmäßig abgestimmt.",
+    text: "Wir bauen die Lösung Schritt für Schritt – mit regelmäßigen Abstimmungen, damit Sie jederzeit wissen, wo das Projekt steht.",
     tag: "Schrittweise Entwicklung",
   },
   {
@@ -55,36 +55,49 @@ export default function Ablauf() {
 
   useGSAP(
     () => {
-      // Each item: card slides in from its side, orb scales in
+      const isDesktop = window.matchMedia(
+        "(min-width: 768px) and (prefers-reduced-motion: no-preference)"
+      ).matches;
+
+      // Each item: card slides in from its side (desktop) or fades up
+      // lightly (mobile). We tween toward the visible state so a missed
+      // trigger can never leave a card stuck invisible.
       const items = gsap.utils.toArray<HTMLElement>("[data-step-item]");
       items.forEach((item) => {
         const side = item.dataset.side; // 'left' | 'right'
         const card = item.querySelector("[data-step-card]");
         const orb = item.querySelector("[data-step-orb]");
+        if (!card || !orb) return;
 
-        gsap.from(card, {
-          scrollTrigger: {
-            trigger: item,
-            start: "top 80%",
-            once: true,
-          },
-          x: side === "left" ? -60 : 60,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
-        });
+        const cardFrom = isDesktop
+          ? { x: side === "left" ? -60 : 60, opacity: 0 }
+          : { y: 20, opacity: 0 };
 
-        gsap.from(orb, {
-          scrollTrigger: {
-            trigger: item,
-            start: "top 80%",
-            once: true,
+        gsap.set(card, cardFrom);
+        gsap.set(orb, isDesktop ? { scale: 0, opacity: 0 } : { opacity: 0 });
+
+        ScrollTrigger.create({
+          trigger: item,
+          start: "top 85%",
+          once: true,
+          onEnter: () => {
+            gsap.to(card, {
+              x: 0,
+              y: 0,
+              opacity: 1,
+              duration: isDesktop ? 1 : 0.6,
+              ease: "power3.out",
+              overwrite: true,
+            });
+            gsap.to(orb, {
+              scale: 1,
+              opacity: 1,
+              duration: isDesktop ? 0.8 : 0.5,
+              ease: isDesktop ? "back.out(2)" : "power2.out",
+              delay: 0.1,
+              overwrite: true,
+            });
           },
-          scale: 0,
-          opacity: 0,
-          duration: 0.8,
-          ease: "back.out(2)",
-          delay: 0.15,
         });
       });
 

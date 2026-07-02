@@ -1,6 +1,6 @@
 import LegalLayout from "@/components/LegalLayout";
 
-export const metadata = { title: "Impressum — Vektorflowz" };
+export const metadata = { title: "Impressum — solvomind" };
 
 export default function ImpressumPage() {
   return (
@@ -13,7 +13,7 @@ export default function ImpressumPage() {
       <p>
         Ali Alizadeh
         <br />
-        Vektorflowz
+        solvomind
         <br />
         Waschingtonallee 35
         <br />
@@ -26,7 +26,7 @@ export default function ImpressumPage() {
       <p>
         Telefon: 0179 4392400
         <br />
-        E-Mail: ali.alizadeh@vektorflowz.de
+        E-Mail: ali.alizadeh@solvomind.de
       </p>
 
       <h2>Gewerbeanmeldung</h2>
