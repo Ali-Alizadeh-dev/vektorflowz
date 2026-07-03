@@ -4,7 +4,7 @@
 
 :root {
   /* solvomind brand palette */
-  --bg: #f5f7fa; /* cool light */
+  --bg: #f5f7fa; /* cool light — section base */
   --surface: #ffffff;
   --fg: #0b1220; /* near-black navy ink */
   --muted: #5b6472; /* cool grey */
@@ -12,6 +12,7 @@
   --accent: #003df0; /* solvomind blue */
   --accent-soft: rgba(0, 61, 240, 0.08);
   --accent-bright: #003df0; /* blue — also used for the hero glow */
+  --ink: #0b1220; /* dark surface (footer, premium cards) */
   color-scheme: light;
 }
 
@@ -30,10 +31,24 @@ html {
 }
 
 body {
-  background: var(--bg);
+  /* Soft blue-grey gradient page canvas — the floating white container
+     sits on top of this, giving the whole page depth (Aurelio-style). */
+  background: linear-gradient(180deg, #e6edf7 0%, #eef3fa 30%, #f1f5fb 100%)
+    no-repeat;
+  background-attachment: fixed;
   color: var(--fg);
   letter-spacing: -0.011em;
   text-rendering: optimizeLegibility;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+/* Headlines use the distinctive display face (Space Grotesk) everywhere
+   without touching every component. */
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
 }
 
 ::selection {
@@ -117,3 +132,4 @@ body {
   border: 1px solid var(--line);
   border-radius: 18px;
 }
+

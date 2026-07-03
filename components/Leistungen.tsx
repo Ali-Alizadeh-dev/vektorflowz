@@ -1,341 +1,111 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import SectionHeader from "./SectionHeader";
-import {
-  Bot,
-  Workflow,
-  Database,
-  Mail,
-  FileSpreadsheet,
-  Sparkles,
-  Check,
-} from "lucide-react";
-
-const TAB_DURATION = 6; // seconds per tab before auto-advance
+import { Phone, Bot, Users, Workflow, Database, MessageCircle } from "lucide-react";
 
 const services = [
   {
-    id: "assistants",
+    icon: Phone,
+    title: "KI-Telefonassistenten",
+    text: "Beantworten Anrufe natürlich, buchen Termine und beantworten Kundenfragen — rund um die Uhr, jeden Tag.",
+  },
+  {
     icon: Bot,
-    title: "KI-Assistenten",
-    short: "Schnelle Antworten. Rund um die Uhr.",
-    long: "Digitale Assistenten unterstützen Kunden, Mitarbeitende und Interessenten bei wiederkehrenden Fragen und Aufgaben.",
-    points: [
-      "Entlastung von Support und Service",
-      "Zugriff auf Unternehmenswissen in Sekunden",
-      "Individuell auf Ihre Anforderungen abgestimmt",
-    ],
+    title: "KI-Mitarbeiter",
+    text: "Individuelle Assistenten, trainiert auf Ihr Unternehmenswissen, die Ihr Team unterstützen und wiederkehrende Aufgaben übernehmen.",
   },
   {
-    id: "process",
+    icon: Users,
+    title: "KI-Agenten-Teams",
+    text: "Mehrere spezialisierte Agenten, die über Ihren gesamten Betrieb hinweg zusammenarbeiten.",
+    tags: ["Vertrieb", "Support", "Admin", "Betrieb"],
+  },
+  {
     icon: Workflow,
-    title: "Prozess-Automatisierung",
-    short: "Routine läuft automatisch.",
-    long: "Wiederkehrende Aufgaben werden automatisiert und standardisiert, damit Prozesse schneller und zuverlässiger ablaufen.",
-    points: [
-      "Weniger manuelle Arbeit",
-      "Schnellere Bearbeitungszeiten",
-      "Höhere Prozesssicherheit",
-    ],
+    title: "Workflow-Automatisierung",
+    text: "Automatisieren Sie die wiederkehrenden Prozesse, die Ihr Team ausbremsen.",
+    tags: ["E-Mails", "Dokumente", "Freigaben", "Reports"],
   },
   {
-    id: "data",
     icon: Database,
-    title: "Daten-Integration",
-    short: "Verbundene Systeme statt Datensilos.",
-    long: "Bestehende Anwendungen werden intelligent miteinander verknüpft, damit Informationen dort ankommen, wo sie benötigt werden.",
-    points: [
-      "Automatischer Datenaustausch",
-      "Weniger doppelte Eingaben",
-      "Einheitliche Datenbasis",
-    ],
+    title: "CRM-KI-Integration",
+    text: "Verbinden Sie KI direkt mit Ihrem CRM: Kundendaten lesen, Datensätze aktualisieren, Follow-ups erstellen und Ihren Vertrieb unterstützen.",
   },
   {
-    id: "content",
-    icon: Sparkles,
-    title: "Content & Kommunikation",
-    short: "Professionelle Inhalte mit weniger Aufwand.",
-    long: "E-Mails, Angebote, Berichte oder interne Kommunikation werden automatisiert vorbereitet und in Ihrer Tonalität erstellt.",
-    points: [
-      "Konsistente Kommunikation",
-      "Individuelle Vorlagen",
-      "Mehrsprachige Inhalte möglich",
-    ],
+    icon: MessageCircle,
+    title: "KI-Chatbots",
+    text: "Website-Chatbots, die Fragen beantworten, Leads qualifizieren und Besucher rund um die Uhr unterstützen.",
   },
-  {
-    id: "leads",
-    icon: Mail,
-    title: "Lead-Bearbeitung",
-    short: "Keine Anfrage bleibt liegen.",
-    long: "Anfragen werden automatisch erfasst, qualifiziert und an die richtige Stelle weitergeleitet.",
-    points: [
-      "Schnellere Reaktionszeiten",
-      "Automatische Qualifizierung",
-      "Strukturierte Übergabe an den Vertrieb",
-    ],
-  }
 ];
 
 export default function Leistungen() {
   const ref = useRef<HTMLDivElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
-  const tweenRef = useRef<gsap.core.Tween | null>(null);
-  const [activeIdx, setActiveIdx] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [inView, setInView] = useState(false);
-  const active = services[activeIdx];
 
-  // Initial scroll-in animation + viewport visibility tracking.
-  // The auto-rotate loop only runs while the section is on screen, so we
-  // don't trigger React re-renders + panel animations every 6s in the
-  // background — a meaningful battery/CPU saver on mobile.
   useGSAP(
     () => {
-      const isDesktop = window.matchMedia(
-        "(min-width: 768px) and (prefers-reduced-motion: no-preference)"
-      ).matches;
-
-      const tabs = gsap.utils.toArray<HTMLElement>("[data-svc-item]");
-      const panel = panelRef.current;
-
-      // Tween toward visible via onEnter so nothing can get stuck hidden;
-      // side-slides only on desktop, light fade-up on phones.
-      gsap.set(tabs, isDesktop ? { x: -40, opacity: 0 } : { y: 16, opacity: 0 });
-      if (panel)
-        gsap.set(panel, isDesktop ? { x: 40, opacity: 0 } : { y: 16, opacity: 0 });
-
-      ScrollTrigger.create({
-        trigger: '[data-svc-list]',
-        start: "top 85%",
+      const cards = gsap.utils.toArray<HTMLElement>("[data-svc-card]");
+      if (!cards.length) return;
+      gsap.set(cards, { y: 26, opacity: 0 });
+      ScrollTrigger.batch(cards, {
+        start: "top 88%",
         once: true,
-        onEnter: () =>
-          gsap.to(tabs, {
-            x: 0,
+        onEnter: (batch) =>
+          gsap.to(batch, {
             y: 0,
             opacity: 1,
-            duration: isDesktop ? 0.8 : 0.55,
+            duration: 0.6,
             stagger: 0.07,
             ease: "power3.out",
             overwrite: true,
           }),
       });
-      if (panel) {
-        ScrollTrigger.create({
-          trigger: panel,
-          start: "top 85%",
-          once: true,
-          onEnter: () =>
-            gsap.to(panel, {
-              x: 0,
-              y: 0,
-              opacity: 1,
-              duration: isDesktop ? 1 : 0.55,
-              ease: "power3.out",
-              overwrite: true,
-            }),
-        });
-      }
-
-      ScrollTrigger.create({
-        trigger: ref.current,
-        start: "top bottom",
-        end: "bottom top",
-        onToggle: (self) => setInView(self.isActive),
-      });
-
       ScrollTrigger.refresh();
     },
     { scope: ref }
   );
 
-  // Auto-iterate + drive the active tab's progress bar
-  useGSAP(
-    () => {
-      tweenRef.current?.kill();
-      // Reset all bars
-      gsap.set('[data-bar-fill]', { scaleY: 0 });
-
-      // Don't run the loop while the section is off screen.
-      if (!inView) return;
-
-      const bar = document.querySelector(
-        `[data-bar-fill="${activeIdx}"]`
-      );
-      if (!bar) return;
-
-      tweenRef.current = gsap.fromTo(
-        bar,
-        { scaleY: 0 },
-        {
-          scaleY: 1,
-          duration: TAB_DURATION,
-          ease: "none",
-          transformOrigin: "top center",
-          onComplete: () => {
-            setActiveIdx((i) => (i + 1) % services.length);
-          },
-        }
-      );
-
-      if (paused) tweenRef.current.pause();
-    },
-    { dependencies: [activeIdx, paused, inView] }
-  );
-
-  // Re-animate panel content on tab change
-  useGSAP(
-    () => {
-      const el = panelRef.current;
-      if (!el) return;
-      gsap.fromTo(
-        el.querySelectorAll('[data-panel-anim]'),
-        { y: 16, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.06,
-          ease: "power3.out",
-          overwrite: true,
-        }
-      );
-    },
-    { dependencies: [activeIdx], scope: panelRef }
-  );
-
   return (
     <section id="leistungen" ref={ref} className="section">
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
+      <div className="mx-auto max-w-6xl px-5 md:px-8">
         <SectionHeader
-          label="Leistungen"
-          title="Automatisierungen, die echten Mehrwert schaffen."
-          intro="Jedes Unternehmen hat Prozesse, die Zeit kosten, Ressourcen binden oder vermeidbare Fehler verursachen. Wir entwickeln intelligente Lösungen, die Abläufe vereinfachen und Ihr Team nachhaltig entlasten."
+          label="Unsere KI-Lösungen"
+          title="Alles, was Sie brauchen, um KI einzusetzen."
+          intro="Sechs maßgeschneiderte Lösungen, die sich in Ihre bestehenden Abläufe einfügen."
         />
 
-        <div
-          className="mt-16 md:mt-24 grid lg:grid-cols-12 gap-5 md:gap-8"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
-          {/* Tab list */}
-          <ol data-svc-list className="lg:col-span-5 flex flex-col gap-2.5">
-            {services.map((s, i) => {
-              const isActive = i === activeIdx;
-              return (
-                <li key={s.id} data-svc-item>
-                  <button
-                    onClick={() => setActiveIdx(i)}
-                    aria-pressed={isActive}
-                    className={`relative w-full text-left rounded-2xl  pl-5 pr-7 py-4 flex items-center gap-4 transition-all duration-300 overflow-hidden ${
-                      isActive
-                        ? "bg-accent text-bg border-accent shadow-accent-glow"
-                        : "bg-surface border-line hover:border-fg/20 hover:bg-fg/[0.03]"
-                    }`}
-                  >
-                    <span
-                      className={`shrink-0 inline-flex items-center justify-center w-11 h-11 rounded-xl transition-colors ${
-                        isActive
-                          ? "bg-bg/15 text-bg"
-                          : "bg-accent-soft text-accent"
-                      }`}
-                    >
-                      <s.icon size={18} />
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-lg font-medium tracking-tight">
-                        {s.title}
-                      </span>
-                      <span
-                        className={`block text-base mt-0.5 ${
-                          isActive ? "text-bg/65" : "text-muted"
-                        }`}
-                      >
-                        {s.short}
-                      </span>
-                    </span>
-
-                    {/* Vertical progress bar on the right */}
-                    <span
-                      aria-hidden
-                      className={`absolute top-3 bottom-3 right-2 w-[3px] rounded-full overflow-hidden ${
-                        isActive ? "bg-bg/20" : "bg-transparent"
-                      }`}
-                    >
-                      <span
-                        data-bar-fill={i}
-                        className="block w-full h-full bg-bg origin-top"
-                        style={{ transform: "scaleY(0)" }}
-                      />
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ol>
-
-          {/* Detail panel */}
-          <div className="lg:col-span-7">
-            <div
-              ref={panelRef}
-              className="card shadow-card p-6 md:p-8 min-h-[380px] flex flex-col"
+        <div className="mt-14 md:mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {services.map((s) => (
+            <article
+              key={s.title}
+              data-svc-card
+              className="card shadow-card p-7 flex flex-col"
             >
-              <div className="flex items-center gap-3" data-panel-anim>
-                <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-accent-soft text-accent">
-                  <active.icon size={20} />
-                </span>
-                <span className="text-sm uppercase tracking-[0.2em] text-muted">
-                  {String(activeIdx + 1).padStart(2, "0")} · {active.short}
-                </span>
-              </div>
-
-              <h3
-                data-panel-anim
-                className="mt-6 text-3xl md:text-4xl font-medium tracking-tight"
-              >
-                {active.title}
+              <span className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-accent-soft text-accent">
+                <s.icon size={22} />
+              </span>
+              <h3 className="mt-5 text-xl font-medium tracking-tight">
+                {s.title}
               </h3>
-
-              <p
-                data-panel-anim
-                className="mt-5 text-lg text-muted leading-relaxed max-w-prose"
-              >
-                {active.long}
+              <p className="mt-2 text-base text-muted leading-relaxed">
+                {s.text}
               </p>
-
-              <ul data-panel-anim className="mt-6 space-y-3">
-                {active.points.map((p) => (
-                  <li key={p} className="flex gap-3 items-start text-base">
-                    <Check
-                      size={18}
-                      className="text-accent shrink-0 mt-0.5"
-                    />
-                    <span>{p}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div
-                data-panel-anim
-                className="mt-auto pt-8 border-none flex items-center justify-end"
-              >
-                <a
-                  href="#kontakt"
-                  className="group text-base font-medium inline-flex items-center gap-1.5 hover:text-accent transition-colors"
-                >
-                  Anfragen
-                  <span
-                    aria-hidden
-                    className="inline-block group-hover:translate-x-0.5 transition-transform"
-                  >
-                    →
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
+              {s.tags && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {s.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="text-xs font-medium text-muted bg-bg border border-line px-2.5 py-1 rounded-full"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))}
         </div>
       </div>
     </section>

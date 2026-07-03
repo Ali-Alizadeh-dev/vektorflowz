@@ -3,29 +3,24 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-import SplitWords from "./SplitWords";
-import { Minimize2, Clock, Link2, TrendingUp } from "lucide-react";
+import NeuralNetwork from "./NeuralNetwork";
+import { Clock, ShieldCheck, Target } from "lucide-react";
 
-const reasons = [
-  {
-    icon: Minimize2,
-    title: "Prozesse vereinfachen",
-    text: "Manuelle Aufgaben werden reduziert und Abläufe spürbar effizienter gestaltet.",
-  },
+const outcomes = [
   {
     icon: Clock,
-    title: "Zeit gewinnen",
-    text: "Weniger Routine bedeutet mehr Freiraum für die wertschöpfende Arbeit.",
+    title: "Weniger Handarbeit",
+    text: "Routineaufgaben laufen automatisch – Ihr Team gewinnt Stunden zurück.",
   },
   {
-    icon: Link2,
-    title: "Systeme verbinden",
-    text: "Informationen fließen automatisch, statt zwischen Tools verloren zu gehen.",
+    icon: ShieldCheck,
+    title: "Weniger Fehler",
+    text: "Klare Abläufe statt Copy-&-Paste. Konsistent und zuverlässig, jedes Mal.",
   },
   {
-    icon: TrendingUp,
-    title: "Nachhaltig skalieren",
-    text: "Automatisierungen wachsen mit Ihrem Unternehmen und Ihren Anforderungen.",
+    icon: Target,
+    title: "Mehr Fokus",
+    text: "Ihr Team kümmert sich um das Wesentliche – nicht um Kleinkram.",
   },
 ];
 
@@ -34,25 +29,22 @@ export default function Mehrwert() {
 
   useGSAP(
     () => {
-      const header = gsap.utils.toArray<HTMLElement>("[data-mw-head]");
-      const rows = gsap.utils.toArray<HTMLElement>("[data-mw-row]");
-
-      gsap.set([...header, ...rows], { y: 28, opacity: 0 });
-
-      ScrollTrigger.batch([...header, ...rows], {
+      const items = gsap.utils.toArray<HTMLElement>("[data-mw-reveal]");
+      if (!items.length) return;
+      gsap.set(items, { y: 26, opacity: 0 });
+      ScrollTrigger.batch(items, {
         start: "top 88%",
         once: true,
         onEnter: (batch) =>
           gsap.to(batch, {
             y: 0,
             opacity: 1,
-            duration: 0.8,
-            stagger: 0.09,
+            duration: 0.7,
+            stagger: 0.1,
             ease: "power3.out",
             overwrite: true,
           }),
       });
-
       ScrollTrigger.refresh();
     },
     { scope: ref }
@@ -60,58 +52,105 @@ export default function Mehrwert() {
 
   return (
     <section id="warum" ref={ref} className="section">
-      <div className="mx-auto max-w-7xl px-5 md:px-8 grid lg:grid-cols-12 gap-12 lg:gap-16">
-        {/* Left: editorial heading */}
-        <div className="lg:col-span-5 lg:sticky lg:top-28 self-start">
-          <span
-            data-mw-head
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-fg text-bg text-sm font-medium"
-          >
-            Warum solvomind
-          </span>
-          <SplitWords
-            as="h2"
-            data-mw-head
-            text="Automatisierung mit klarem Mehrwert."
-            className="mt-8 text-4xl md:text-5xl font-medium tracking-tightest leading-[1.05]"
-          />
-          <p
-            data-mw-head
-            className="mt-6 text-lg md:text-xl text-muted leading-relaxed"
-          >
-            Technologie entfaltet ihren Wert erst dann, wenn sie konkrete
-            Probleme löst. Genau hier setzen wir an – mit Lösungen, die
-            entlasten statt zu beeindrucken.
-          </p>
-        </div>
-
-        {/* Right: value list with dividers (no cards) */}
-        <ul className="lg:col-span-7 lg:pt-2">
-          {reasons.map((r, i) => (
-            <li
-              key={r.title}
-              data-mw-row
-              className="group flex gap-5 md:gap-7 py-7 border-t border-line first:border-t-0 lg:first:border-t lg:first:pt-7"
+      <div className="mx-auto max-w-6xl px-5 md:px-8">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          {/* Left: value proposition */}
+          <div>
+            <span
+              data-mw-reveal
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent-soft text-accent text-sm font-medium"
             >
-              <span className="shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-accent-soft text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-white">
-                <r.icon size={22} />
-              </span>
-              <div className="flex-1">
-                <div className="flex items-baseline gap-3">
-                  <span className="text-sm font-mono text-muted">
-                    0{i + 1}
+              Warum solvomind
+            </span>
+            <h2
+              data-mw-reveal
+              className="mt-6 text-4xl md:text-5xl font-semibold tracking-tightest leading-[1.03]"
+            >
+              Aus Aufwand
+              <br />
+              wird Ablauf.
+            </h2>
+            <p
+              data-mw-reveal
+              className="mt-5 text-lg text-muted leading-relaxed max-w-md"
+            >
+              Wir bündeln Ihre verstreuten, manuellen Aufgaben zu einem
+              automatisierten Fluss – und machen Ihre Arbeit spürbar
+              effizienter.
+            </p>
+
+            <ul className="mt-9 space-y-6">
+              {outcomes.map((o) => (
+                <li
+                  key={o.title}
+                  data-mw-reveal
+                  className="flex gap-4"
+                >
+                  <span className="shrink-0 inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-accent-soft text-accent">
+                    <o.icon size={20} />
                   </span>
-                  <h3 className="text-xl md:text-2xl font-medium tracking-tight">
-                    {r.title}
-                  </h3>
-                </div>
-                <p className="mt-2 text-base md:text-lg text-muted leading-relaxed">
-                  {r.text}
+                  <div>
+                    <h3 className="text-lg font-medium tracking-tight">
+                      {o.title}
+                    </h3>
+                    <p className="mt-1 text-base text-muted leading-relaxed">
+                      {o.text}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Right: premium dark network card */}
+          <div data-mw-reveal className="relative">
+            {/* ambient accent glow behind the card */}
+            <div
+              aria-hidden
+              className="absolute -inset-6 rounded-[2.5rem] opacity-60 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(50% 50% at 60% 40%, rgba(0,61,240,0.28), transparent 70%)",
+              }}
+            />
+            <div className="relative rounded-[1.75rem] bg-[#0b1220] shadow-card-lg overflow-hidden aspect-[4/5] sm:aspect-[16/12] lg:aspect-[4/5]">
+              <NeuralNetwork
+                tone="dark"
+                density={1.25}
+                className="absolute inset-0 w-full h-full"
+              />
+              {/* subtle top vignette + grid feel handled by canvas */}
+              <div
+                aria-hidden
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "radial-gradient(120% 80% at 50% 0%, transparent 55%, rgba(11,18,32,0.5) 100%)",
+                }}
+              />
+
+              {/* live label chip */}
+              <div className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-white text-xs font-medium">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5b8cff] opacity-70" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#5b8cff]" />
+                </span>
+                Automatisierung · aktiv
+              </div>
+
+              {/* caption */}
+              <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+                <p className="text-white font-medium text-lg">
+                  Ihr vernetztes System
+                </p>
+                <p className="mt-1 text-sm text-white/60 max-w-xs">
+                  Informationen fließen automatisch dorthin, wo sie gebraucht
+                  werden.
                 </p>
               </div>
-            </li>
-          ))}
-        </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

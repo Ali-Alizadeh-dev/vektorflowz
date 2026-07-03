@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Space_Grotesk, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-// preload: false lets us omit `subsets` while next/font still self-hosts
-// the font (no request to Google servers — keeps the DSGVO promise on
-// the Datenschutz page intact).
-const roboto = Roboto({
+// Self-hosted via next/font (no request to Google servers — keeps the
+// DSGVO promise on the Datenschutz page intact).
+// Space Grotesk = distinctive tech/AI display face for headlines.
+const display = Space_Grotesk({
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+  preload: false,
+});
+
+// DM Sans = clean, warm body face.
+const sans = DM_Sans({
   weight: ["400", "500", "700"],
-  variable: "--font-roboto",
+  variable: "--font-sans",
   display: "swap",
   preload: false,
 });
@@ -44,8 +52,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" className={roboto.variable}>
-      <body className="font-sans">{children}</body>
+    <html lang="de" className={`${display.variable} ${sans.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

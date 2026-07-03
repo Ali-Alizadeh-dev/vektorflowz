@@ -4,49 +4,27 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import SectionHeader from "./SectionHeader";
-import {
-  MessageCircle,
-  Search,
-  Lightbulb,
-  Wrench,
-  Rocket,
-} from "lucide-react";
 
 const steps = [
   {
-    n: "01",
-    icon: MessageCircle,
-    title: "Kennenlernen",
-    text: "Wir lernen uns kennen: Sie schildern Ihre aktuellen Herausforderungen, wir hören zu und loten erste Potenziale aus.",
-    tag: "Ganz unverbindlich",
+    n: "1",
+    title: "Kostenloses KI-Erstgespräch",
+    text: "Wir lernen Ihr Unternehmen, Ihre Ziele und Ihre täglichen Engpässe kennen.",
   },
   {
-    n: "02",
-    icon: Search,
-    title: "Analyse",
-    text: "Wir schauen uns Ihre Abläufe im Detail an und finden die Stellen, an denen Automatisierung den größten Hebel hat.",
-    tag: "Potenziale sichtbar machen",
+    n: "2",
+    title: "Prozess-Analyse",
+    text: "Wir identifizieren die Automatisierungspotenziale mit dem größten Hebel.",
   },
   {
-    n: "03",
-    icon: Lightbulb,
-    title: "Konzept",
-    text: "Sie erhalten einen konkreten Lösungsvorschlag inklusive Aufwand, Zeitrahmen und transparenter Kostenübersicht.",
-    tag: "Klare Roadmap",
+    n: "3",
+    title: "Individuelle KI-Entwicklung",
+    text: "Wir entwickeln KI-Lösungen speziell für Ihr Unternehmen.",
   },
   {
-    n: "04",
-    icon: Wrench,
-    title: "Umsetzung",
-    text: "Wir bauen die Lösung Schritt für Schritt – mit regelmäßigen Abstimmungen, damit Sie jederzeit wissen, wo das Projekt steht.",
-    tag: "Schrittweise Entwicklung",
-  },
-  {
-    n: "05",
-    icon: Rocket,
-    title: "Go-Live & Support",
-    text: "Nach der Einführung unterstützen wir Sie bei Fragen, Optimierungen und Erweiterungen.",
-    tag: "Langfristige Begleitung",
+    n: "4",
+    title: "Umsetzung & Optimierung",
+    text: "Wir integrieren, testen und verbessern Ihre Systeme kontinuierlich.",
   },
 ];
 
@@ -55,166 +33,108 @@ export default function Ablauf() {
 
   useGSAP(
     () => {
-      const isDesktop = window.matchMedia(
-        "(min-width: 768px) and (prefers-reduced-motion: no-preference)"
+      const reduce = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
       ).matches;
 
-      // Each item: card slides in from its side (desktop) or fades up
-      // lightly (mobile). We tween toward the visible state so a missed
-      // trigger can never leave a card stuck invisible.
-      const items = gsap.utils.toArray<HTMLElement>("[data-step-item]");
-      items.forEach((item) => {
-        const side = item.dataset.side; // 'left' | 'right'
-        const card = item.querySelector("[data-step-card]");
-        const orb = item.querySelector("[data-step-orb]");
-        if (!card || !orb) return;
+      const track = ref.current?.querySelector("[data-track]");
+      if (!track) return;
 
-        const cardFrom = isDesktop
-          ? { x: side === "left" ? -60 : 60, opacity: 0 }
-          : { y: 20, opacity: 0 };
+      const line = track.querySelector<HTMLElement>("[data-line]");
+      const items = gsap.utils.toArray<HTMLElement>("[data-step]");
 
-        gsap.set(card, cardFrom);
-        gsap.set(orb, isDesktop ? { scale: 0, opacity: 0 } : { opacity: 0 });
-
-        ScrollTrigger.create({
-          trigger: item,
-          start: "top 85%",
-          once: true,
-          onEnter: () => {
-            gsap.to(card, {
-              x: 0,
-              y: 0,
-              opacity: 1,
-              duration: isDesktop ? 1 : 0.6,
-              ease: "power3.out",
-              overwrite: true,
-            });
-            gsap.to(orb, {
-              scale: 1,
-              opacity: 1,
-              duration: isDesktop ? 0.8 : 0.5,
-              ease: isDesktop ? "back.out(2)" : "power2.out",
-              delay: 0.1,
-              overwrite: true,
-            });
-          },
-        });
-      });
-
-      // The vertical line draws downward as you scroll through the section
-      const list = ref.current?.querySelector("[data-step-line]");
-      if (list) {
-        gsap.fromTo(
-          list,
-          { scaleY: 0 },
-          {
-            scaleY: 1,
-            transformOrigin: "top center",
-            ease: "none",
-            scrollTrigger: {
-              trigger: "[data-step-track]",
-              start: "top 70%",
-              end: "bottom 80%",
-              // numeric scrub adds inertia so the line tween isn't recomputed
-              // on every single scroll event — smoother on mobile
-              scrub: 0.5,
-            },
-          }
-        );
+      if (reduce) {
+        // Respect reduced motion — show everything, no popping.
+        gsap.set([...items, line].filter(Boolean), { clearProps: "all" });
+        return;
       }
 
-      // Refresh after layout settles
+      // Start hidden: orbs collapsed, cards down + faded, connector empty.
+      const orbs = items.map((i) => i.querySelector("[data-orb]"));
+      const cards = items.map((i) => i.querySelector("[data-card]"));
+      gsap.set(orbs, { scale: 0, opacity: 0 });
+      gsap.set(cards, { y: 22, opacity: 0, scale: 0.92 });
+      if (line) gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: track,
+          start: "top 72%",
+          once: true,
+        },
+      });
+
+      // Connector draws across first…
+      if (line) {
+        tl.to(line, { scaleX: 1, duration: 0.9, ease: "power2.inOut" }, 0);
+      }
+
+      // …then each step pops: orb springs in, card follows underneath.
+      items.forEach((_, i) => {
+        const at = 0.25 + i * 0.16;
+        tl.to(
+          orbs[i],
+          { scale: 1, opacity: 1, duration: 0.55, ease: "back.out(2.2)" },
+          at
+        ).to(
+          cards[i],
+          { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" },
+          at + 0.08
+        );
+      });
+
       ScrollTrigger.refresh();
     },
     { scope: ref }
   );
 
   return (
-    <section id="ablauf" ref={ref} className="section bg-bg">
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
+    <section id="ablauf" ref={ref} className="section">
+      <div className="mx-auto max-w-6xl px-5 md:px-8">
         <SectionHeader
-          label="Ablauf"
-          title="So läuft die Zusammenarbeit ab."
-          intro="Transparent, strukturiert und nachvollziehbar – vom ersten Gespräch bis zur fertigen Lösung."
+          label="Unser Ablauf"
+          title="Ein einfacher Weg von der Idee zum Ergebnis."
+          intro="Transparent, strukturiert und nachvollziehbar — vom ersten Gespräch bis zur fertigen Lösung."
         />
 
-        <div data-step-track className="mt-20 md:mt-28 relative">
-          {/* Vertical line: centered on desktop, left on mobile */}
+        <div
+          data-track
+          className="mt-16 md:mt-20 relative grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6"
+        >
+          {/* Dashed connector line — spans the row of orbs on desktop */}
           <div
             aria-hidden
-            className="absolute top-0 bottom-0 w-px bg-line left-6 md:left-1/2 md:-translate-x-1/2"
+            className="hidden md:block absolute top-[27px] left-[12.5%] right-[12.5%] h-px"
           >
             <div
-              data-step-line
-              className="absolute inset-0 w-full bg-fg/30 origin-top"
+              data-line
+              className="h-full w-full"
+              style={{
+                background:
+                  "repeating-linear-gradient(90deg, var(--accent) 0 7px, transparent 7px 15px)",
+                opacity: 0.4,
+              }}
             />
           </div>
 
-          <ol className="relative space-y-10 md:space-y-20">
-            {steps.map((s, i) => {
-              const side = i % 2 === 0 ? "left" : "right";
-              return (
-                <li
-                  key={s.n}
-                  data-step-item
-                  data-side={side}
-                  className="relative md:grid md:grid-cols-2 md:gap-12 items-center"
-                >
-                  {/* Orb on the line */}
-                  <span
-                    data-step-orb
-                    className="absolute top-6 left-6 md:left-1/2 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 z-10 inline-flex items-center justify-center w-11 h-11 rounded-full bg-fg text-bg shadow-card-lg ring-4 ring-bg"
-                  >
-                    <s.icon size={16} />
-                  </span>
-
-                  {/* Card — left or right column on desktop, always right on mobile */}
-                  <div
-                    data-step-card
-                    className={`
-                      ml-16 md:ml-0
-                      ${side === "left" ? "md:col-start-1 md:pr-12 md:text-right" : "md:col-start-2 md:pl-12"}
-                    `}
-                  >
-                    <article
-                      className={`card shadow-card p-6 md:p-7 inline-block w-full ${
-                        side === "left" ? "md:ml-auto" : ""
-                      }`}
-                    >
-                      <div
-                        className={`flex items-center gap-3 ${
-                          side === "left" ? "md:justify-end" : ""
-                        }`}
-                      >
-                        <span className="text-sm text-muted font-mono">
-                          {s.n}
-                        </span>
-                        <h3 className="text-xl md:text-2xl font-medium tracking-tight">
-                          {s.title}
-                        </h3>
-                      </div>
-                      <p className="mt-3 text-base md:text-lg text-muted leading-relaxed">
-                        {s.text}
-                      </p>
-                      <div
-                        className={`mt-5 pt-4 border-t border-line text-sm text-accent font-medium ${
-                          side === "left" ? "md:text-right" : ""
-                        }`}
-                      >
-                        {s.tag}
-                      </div>
-                    </article>
-                  </div>
-
-                  {/* Spacer for opposite column on desktop */}
-                  <div
-                    aria-hidden
-                    className={`hidden md:block ${side === "left" ? "md:col-start-2" : "md:col-start-1 md:row-start-1"}`}
-                  />
-                </li>
-              );
-            })}
-          </ol>
+          {steps.map((s) => (
+            <div key={s.n} data-step className="relative text-center">
+              <span
+                data-orb
+                className="relative z-10 mx-auto flex items-center justify-center w-[54px] h-[54px] rounded-2xl bg-accent text-white text-xl font-semibold shadow-accent-glow ring-4 ring-surface"
+              >
+                {s.n}
+              </span>
+              <div data-card className="mt-5">
+                <h3 className="text-lg font-medium tracking-tight">
+                  {s.title}
+                </h3>
+                <p className="mt-2 text-sm md:text-base text-muted leading-relaxed">
+                  {s.text}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

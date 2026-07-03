@@ -7,11 +7,11 @@ import { X } from "lucide-react";
 import { LogoMark } from "./Logo";
 
 const links = [
-  { href: "#home", label: "Home" },
-  { href: "#leistungen", label: "Leistungen" },
+  { href: "#leistungen", label: "Lösungen" },
   { href: "#ablauf", label: "Ablauf" },
+  { href: "#showcase", label: "Automatisierung" },
+  { href: "#ueber-uns", label: "Über uns" },
   { href: "#faq", label: "FAQ" },
-  { href: "#ueber-mich", label: "Über uns" },
   { href: "#kontakt", label: "Kontakt" },
 ];
 
@@ -98,15 +98,14 @@ export default function Navbar() {
     <>
       <header
         ref={ref}
-        data-scrolled="false"
-        className="fixed top-0 inset-x-0 z-50 transition-all duration-300 data-[scrolled=true]:bg-bg/75 data-[scrolled=true]:backdrop-blur-md data-[scrolled=true]:border-b data-[scrolled=true]:border-line"
+        className="fixed top-2 sm:top-3 lg:top-4 inset-x-0 z-50 px-3 sm:px-5"
       >
-        <nav className="mx-auto max-w-7xl px-5 md:px-8 h-16 flex items-center justify-between">
+        <nav className="mx-auto max-w-5xl h-14 flex items-center justify-between gap-4 pl-5 pr-2 rounded-full bg-surface/80 backdrop-blur-md border border-line shadow-card">
           <a href="#home" className="text-lg inline-flex items-center">
             <Wordmark />
           </a>
 
-          <ul className="hidden md:flex items-center gap-8 text-base text-muted">
+          <ul className="hidden md:flex items-center gap-7 text-[0.95rem] text-muted">
             {links.slice(0, -1).map((l) => (
               <li key={l.href}>
                 <a href={l.href} className="hover:text-fg transition-colors">
@@ -119,10 +118,10 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <a
               href="#kontakt"
-              className="hidden md:inline-flex items-center gap-2 pl-5 pr-3 py-2 rounded-full bg-accent text-bg text-base font-medium hover:bg-accent/90"
+              className="hidden md:inline-flex items-center gap-2 pl-4 pr-2 py-1.5 rounded-full bg-accent text-white text-[0.95rem] font-medium hover:bg-accent/90 transition-colors"
             >
               Kontakt
-              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-bg/15">
+              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/20">
                 →
               </span>
             </a>
@@ -132,7 +131,7 @@ export default function Navbar() {
               aria-label="Menü öffnen"
               aria-expanded={open}
               onClick={() => setOpen(true)}
-              className="md:hidden flex flex-col gap-[5px] w-10 h-10 items-center justify-center rounded-full border border-line"
+              className="md:hidden flex flex-col gap-[5px] w-10 h-10 items-center justify-center rounded-full border border-line bg-surface"
             >
               <span className="block w-4 h-px bg-fg" />
               <span className="block w-4 h-px bg-fg" />
