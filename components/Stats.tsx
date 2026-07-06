@@ -7,9 +7,9 @@ import { Clock, Timer, Zap, TrendingDown } from "lucide-react";
 
 const stats = [
   { icon: Clock, value: "24/7", label: "Verfügbarkeit, jeden Tag" },
-  { icon: Timer, value: "Hunderte", label: "eingesparte Stunden" },
-  { icon: Zap, value: "Schneller", label: "Reaktion auf Kundenanfragen" },
-  { icon: TrendingDown, value: "Geringer", label: "Betriebskosten" },
+  { icon: Timer, value: "100+", label: "Gesparte Arbeitsstunden" },
+  { icon: Zap, value: "Schneller", label: "Reaktion für Kunden" },
+  { icon: TrendingDown, value: "Weniger", label: "Betriebskosten" },
 ];
 
 export default function Stats() {
@@ -46,10 +46,11 @@ export default function Stats() {
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <div className="text-center max-w-xl mx-auto">
           <p className="text-sm font-semibold uppercase tracking-[0.08em] text-accent">
-            Unternehmen arbeiten smarter mit KI
+            Unternehmen mit KI smarter machen
           </p>
           <p className="mt-2 text-lg text-muted">
-            Praktische KI-Systeme mit messbaren Ergebnissen — keine Experimente.
+            Praktische KI-Systeme, die messbare Ergebnisse liefern — keine
+            Experimente.
           </p>
         </div>
 

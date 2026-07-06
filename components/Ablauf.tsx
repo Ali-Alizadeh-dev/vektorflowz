@@ -8,13 +8,13 @@ import SectionHeader from "./SectionHeader";
 const steps = [
   {
     n: "1",
-    title: "Kostenloses KI-Erstgespräch",
-    text: "Wir lernen Ihr Unternehmen, Ihre Ziele und Ihre täglichen Engpässe kennen.",
+    title: "Kostenlose KI-Beratung",
+    text: "Wir lernen Ihr Unternehmen, Ihre Ziele und täglichen Engpässe kennen.",
   },
   {
     n: "2",
-    title: "Prozess-Analyse",
-    text: "Wir identifizieren die Automatisierungspotenziale mit dem größten Hebel.",
+    title: "Prozessanalyse",
+    text: "Wir identifizieren die wirkungsvollsten Automatisierungsmöglichkeiten.",
   },
   {
     n: "3",
@@ -23,7 +23,7 @@ const steps = [
   },
   {
     n: "4",
-    title: "Umsetzung & Optimierung",
+    title: "Implementierung & Optimierung",
     text: "Wir integrieren, testen und verbessern Ihre Systeme kontinuierlich.",
   },
 ];
@@ -92,7 +92,7 @@ export default function Ablauf() {
     <section id="ablauf" ref={ref} className="section">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <SectionHeader
-          label="Unser Ablauf"
+          label="Unser Vorgehen"
           title="Ein einfacher Weg von der Idee zum Ergebnis."
           intro="Transparent, strukturiert und nachvollziehbar — vom ersten Gespräch bis zur fertigen Lösung."
         />

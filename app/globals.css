@@ -90,6 +90,23 @@ h3,
   display: inline-block;
 }
 
+/* Hero "vernetztes KI-Team" — flowing dashes along the connector lines
+   and a soft pulse on the live-status dot. */
+@keyframes flowdash {
+  to {
+    stroke-dashoffset: -8;
+  }
+}
+@keyframes softpulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 .hairline {
   height: 1px;
   width: 100%;

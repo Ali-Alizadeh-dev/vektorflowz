@@ -8,24 +8,28 @@ import { Plus } from "lucide-react";
 
 const faqs = [
   {
-    q: "Für welche Unternehmen lohnt sich KI-Automatisierung?",
-    a: "Grundsätzlich für jedes Unternehmen, das wiederkehrende, regelbasierte Aufgaben hat – von der Angebotserstellung über die Lead-Bearbeitung bis zum Reporting. Schon kleine Teams sparen oft mehrere Stunden pro Woche.",
+    q: "Wie lange dauert die Implementierung?",
+    a: "Die meisten Projekte gehen innerhalb weniger Wochen live. Nach der kostenlosen Beratung legen wir einen klaren Zeitplan fest – einfache Automatisierungen laufen oft in wenigen Tagen, größere Multi-Agenten-Systeme brauchen etwas länger.",
   },
   {
-    q: "Wie lange dauert ein typisches Projekt?",
-    a: "Das hängt vom Umfang ab. Kleinere Automatisierungen sind oft in ein bis zwei Wochen einsatzbereit, größere Integrationen dauern entsprechend länger. Nach dem Erstgespräch erhalten Sie eine klare Einschätzung mit Zeitrahmen.",
+    q: "Lässt sich KI in unsere bestehende Software integrieren?",
+    a: "Ja. Wir bauen auf den Tools auf, die Sie bereits nutzen – CRM, Kalender, E-Mail, Telefonanlage und interne Datenbanken – damit sich KI in Ihren Betrieb einfügt, statt ihn zu ersetzen.",
   },
   {
-    q: "Was passiert mit unseren Daten? Ist das DSGVO-konform?",
-    a: "Datenschutz hat Priorität. Wir arbeiten DSGVO-konform, setzen wo möglich auf europäische oder selbst gehostete Lösungen und verarbeiten nur die Daten, die für die jeweilige Aufgabe wirklich nötig sind.",
+    q: "Brauchen wir technisches Wissen?",
+    a: "Nein. Wir übernehmen Konzeption, Entwicklung und Integration vollständig und schulen Ihr Team. Wenn Sie Ihren Arbeitsalltag beschreiben können, reicht das, um zu starten.",
   },
   {
-    q: "Müssen wir unsere bestehenden Tools wechseln?",
-    a: "Nein. Wir setzen auf Ihre vorhandenen Systeme auf und verbinden sie miteinander, statt alles neu aufzubauen. Ziel ist, Ihren Alltag zu erleichtern – nicht ihn umzukrempeln.",
+    q: "Wie sicher sind unsere Daten?",
+    a: "Sicherheit ist von Anfang an eingebaut. Wir arbeiten DSGVO-konform, Ihre Daten bleiben in Ihren freigegebenen Systemen und werden in der EU verarbeitet, Zugriffe sind kontrolliert und nachvollziehbar.",
   },
   {
-    q: "Was kostet eine Automatisierung?",
-    a: "Jedes Projekt ist individuell. Sie erhalten vorab eine transparente Kostenübersicht mit Fixpreis oder klarem Rahmen – ohne versteckte Posten. Das Erstgespräch ist immer unverbindlich und kostenfrei.",
+    q: "Welche Unternehmen profitieren am meisten?",
+    a: "Jedes Unternehmen mit wiederkehrenden Prozessen, hohem Anruf- oder Nachrichtenaufkommen oder manueller Datenarbeit – vom lokalen Dienstleister bis zum vertriebs- und betriebsstarken Unternehmen.",
+  },
+  {
+    q: "Wie viel lässt sich mit KI automatisieren?",
+    a: "Oft mehr als erwartet. Wir beginnen mit Ihren wirkungsvollsten, wiederkehrenden Aufgaben und erweitern Schritt für Schritt, sobald Sie Ergebnisse sehen.",
   },
 ];
 
@@ -62,7 +66,7 @@ export default function FAQ() {
       <div className="mx-auto max-w-3xl px-5 md:px-8">
         <SectionHeader
           label="FAQ"
-          title="Häufige Fragen."
+          title="Häufige Fragen, klar beantwortet."
           intro="Was Unternehmen vor der Zusammenarbeit am häufigsten wissen möchten."
         />
 

@@ -21,13 +21,13 @@ const services = [
     icon: Users,
     title: "KI-Agenten-Teams",
     text: "Mehrere spezialisierte Agenten, die über Ihren gesamten Betrieb hinweg zusammenarbeiten.",
-    tags: ["Vertrieb", "Support", "Admin", "Betrieb"],
+    tags: ["Vertrieb", "Support", "Verwaltung", "Betrieb"],
   },
   {
     icon: Workflow,
     title: "Workflow-Automatisierung",
     text: "Automatisieren Sie die wiederkehrenden Prozesse, die Ihr Team ausbremsen.",
-    tags: ["E-Mails", "Dokumente", "Freigaben", "Reports"],
+    tags: ["E-Mails", "Dokumente", "Freigaben", "Berichte"],
   },
   {
     icon: Database,
@@ -73,7 +73,7 @@ export default function Leistungen() {
         <SectionHeader
           label="Unsere KI-Lösungen"
           title="Alles, was Sie brauchen, um KI einzusetzen."
-          intro="Sechs maßgeschneiderte Lösungen, die sich in Ihre bestehenden Abläufe einfügen."
+          intro="Sechs maßgeschneiderte Lösungen, die sich in Ihren bestehenden Betrieb einfügen."
         />
 
         <div className="mt-14 md:mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">

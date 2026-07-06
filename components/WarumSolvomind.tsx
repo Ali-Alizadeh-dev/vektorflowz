@@ -61,7 +61,7 @@ export default function WarumSolvomind() {
             Warum solvomind
           </div>
           <h2 className="mt-3 text-3xl md:text-5xl font-semibold tracking-tightest leading-[1.08]">
-            Ein Partner, kein reiner Dienstleister.
+            Ein Partner, kein bloßer Anbieter.
           </h2>
         </div>
 

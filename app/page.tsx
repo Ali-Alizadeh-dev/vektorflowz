@@ -6,6 +6,7 @@ import Leistungen from "@/components/Leistungen";
 import Vergleich from "@/components/Vergleich";
 import Ablauf from "@/components/Ablauf";
 import Showcase from "@/components/Showcase";
+import Sicherheit from "@/components/Sicherheit";
 import WarumSolvomind from "@/components/WarumSolvomind";
 import UeberMich from "@/components/UeberMich";
 import FAQ from "@/components/FAQ";
@@ -28,6 +29,7 @@ export default function Page() {
           <Vergleich />
           <Ablauf />
           <Showcase />
+          <Sicherheit />
           <WarumSolvomind />
           <UeberMich />
           <FAQ />

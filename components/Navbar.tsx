@@ -10,8 +10,8 @@ const links = [
   { href: "#leistungen", label: "Lösungen" },
   { href: "#ablauf", label: "Ablauf" },
   { href: "#showcase", label: "Automatisierung" },
+  { href: "#security", label: "Sicherheit" },
   { href: "#ueber-uns", label: "Über uns" },
-  { href: "#faq", label: "FAQ" },
   { href: "#kontakt", label: "Kontakt" },
 ];
 
