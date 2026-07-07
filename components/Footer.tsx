@@ -3,7 +3,7 @@ import { LogoMark } from "./Logo";
 
 const nav = [
   { href: "#leistungen", label: "Lösungen" },
-  { href: "#ablauf", label: "Ablauf" },
+  { href: "#ablauf", label: "So arbeiten wir" },
   { href: "#showcase", label: "Automatisierung" },
   { href: "#warum-solvomind", label: "Warum solvomind" },
   { href: "#ueber-uns", label: "Über uns" },
@@ -28,8 +28,8 @@ export default function Footer() {
                 </span>
               </Link>
               <p className="mt-4 max-w-sm text-base leading-relaxed text-white/55">
-                KI-Automatisierungen, die wiederkehrende Aufgaben übernehmen –
-                persönlich umgesetzt, praxisnah und DSGVO-konform.
+                KI-Automatisierungen für Unternehmen – persönlich entwickelt,
+                praxisnah umgesetzt und DSGVO-konform.
               </p>
             </div>
 

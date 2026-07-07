@@ -53,25 +53,23 @@ export default function FinalCTA() {
           />
           <div className="relative">
             <h2 className="mx-auto max-w-2xl text-3xl md:text-5xl font-semibold tracking-tightest leading-[1.08] text-white">
-              Bereit, Ihre KI-Belegschaft aufzubauen?
+              Weniger Routine. Mehr Zeit für Ihr Kerngeschäft.
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-lg md:text-xl text-white/85 leading-relaxed">
-              Entdecken Sie, wie maßgeschneiderte KI-Lösungen Kosten senken,
-              wiederkehrende Arbeit automatisieren und Ihr Unternehmen wachsen
-              lassen.
+              Lassen Sie uns gemeinsam herausfinden, welche Prozesse sich in
+              Ihrem Unternehmen sinnvoll automatisieren lassen.
             </p>
             <a
               href="#kontakt"
               className="group mt-9 inline-flex items-center justify-center gap-2.5 pl-7 pr-2.5 py-2.5 rounded-full bg-white text-accent text-base font-semibold hover:bg-white/90 transition-colors"
             >
-              Kostenlose KI-Beratung buchen
+              Kostenloses Erstgespräch
               <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 group-hover:translate-x-0.5 transition-transform">
                 <ArrowRight size={16} />
               </span>
             </a>
             <div className="mt-5 text-sm font-medium text-white/70">
-              Unverbindlich · 30-minütiges Gespräch · Maßgeschneiderte
-              Empfehlungen
+              Unverbindlich · 30 Minuten · Individuelle Empfehlungen
             </div>
           </div>
         </div>

@@ -9,35 +9,34 @@ import { Phone, Bot, Users, Workflow, Database, MessageCircle } from "lucide-rea
 const services = [
   {
     icon: Phone,
-    title: "KI-Telefonassistenten",
-    text: "Beantworten Anrufe natürlich, buchen Termine und beantworten Kundenfragen — rund um die Uhr, jeden Tag.",
+    title: "KI-Telefonassistent",
+    text: "Nimmt Anrufe entgegen, beantwortet häufige Fragen, vereinbart Termine und ist auch außerhalb Ihrer Geschäftszeiten erreichbar.",
   },
   {
     icon: Bot,
     title: "KI-Mitarbeiter",
-    text: "Individuelle Assistenten, trainiert auf Ihr Unternehmenswissen, die Ihr Team unterstützen und wiederkehrende Aufgaben übernehmen.",
+    text: "Digitale Assistenten, die Ihr Unternehmenswissen kennen und Ihr Team bei täglichen Aufgaben unterstützen.",
   },
   {
     icon: Users,
-    title: "KI-Agenten-Teams",
-    text: "Mehrere spezialisierte Agenten, die über Ihren gesamten Betrieb hinweg zusammenarbeiten.",
+    title: "KI-Agenten",
+    text: "Mehrere spezialisierte KI-Agenten arbeiten zusammen und übernehmen unterschiedliche Aufgaben in Ihrem Unternehmen.",
     tags: ["Vertrieb", "Support", "Verwaltung", "Betrieb"],
   },
   {
     icon: Workflow,
     title: "Workflow-Automatisierung",
-    text: "Automatisieren Sie die wiederkehrenden Prozesse, die Ihr Team ausbremsen.",
-    tags: ["E-Mails", "Dokumente", "Freigaben", "Berichte"],
+    text: "Automatisiert wiederkehrende Abläufe wie E-Mails, Dokumente, Freigaben oder Berichte.",
   },
   {
     icon: Database,
-    title: "CRM-KI-Integration",
-    text: "Verbinden Sie KI direkt mit Ihrem CRM: Kundendaten lesen, Datensätze aktualisieren, Follow-ups erstellen und Ihren Vertrieb unterstützen.",
+    title: "CRM-Integration",
+    text: "KI greift auf Ihr CRM zu, aktualisiert Daten, erstellt Follow-ups und unterstützt Ihren Vertrieb direkt im bestehenden System.",
   },
   {
     icon: MessageCircle,
-    title: "KI-Chatbots",
-    text: "Website-Chatbots, die Fragen beantworten, Leads qualifizieren und Besucher rund um die Uhr unterstützen.",
+    title: "KI-Chatbot",
+    text: "Beantwortet Fragen auf Ihrer Website, qualifiziert Anfragen und hilft Besuchern rund um die Uhr weiter.",
   },
 ];
 
@@ -71,9 +70,9 @@ export default function Leistungen() {
     <section id="leistungen" ref={ref} className="section">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <SectionHeader
-          label="Unsere KI-Lösungen"
-          title="Alles, was Sie brauchen, um KI einzusetzen."
-          intro="Sechs maßgeschneiderte Lösungen, die sich in Ihren bestehenden Betrieb einfügen."
+          label="Unsere Lösungen"
+          title="KI-Lösungen für den Arbeitsalltag."
+          intro="Nicht jede Aufgabe braucht einen neuen Mitarbeiter. Viele wiederkehrende Tätigkeiten lassen sich automatisieren – zuverlässig und ohne Ihre bestehenden Abläufe auf den Kopf zu stellen."
         />
 
         <div className="mt-14 md:mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">

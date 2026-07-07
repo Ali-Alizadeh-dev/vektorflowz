@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Stats from "@/components/Stats";
 import Leistungen from "@/components/Leistungen";
-import Vergleich from "@/components/Vergleich";
 import Ablauf from "@/components/Ablauf";
 import Showcase from "@/components/Showcase";
 import Sicherheit from "@/components/Sicherheit";
@@ -11,7 +10,6 @@ import WarumSolvomind from "@/components/WarumSolvomind";
 import UeberMich from "@/components/UeberMich";
 import FAQ from "@/components/FAQ";
 import Kontakt from "@/components/Kontakt";
-import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
 export default function Page() {
@@ -26,7 +24,6 @@ export default function Page() {
           <Hero />
           <Stats />
           <Leistungen />
-          <Vergleich />
           <Ablauf />
           <Showcase />
           <Sicherheit />
@@ -34,7 +31,6 @@ export default function Page() {
           <UeberMich />
           <FAQ />
           <Kontakt />
-          <FinalCTA />
         </div>
       </div>
 

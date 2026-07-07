@@ -8,18 +8,18 @@ import { Target, Puzzle, HeartHandshake } from "lucide-react";
 const reasons = [
   {
     icon: Target,
-    title: "Business-First-Ansatz",
-    text: "Jede KI-Lösung ist auf Ihr Unternehmen, Ihre Ziele und Ihre Kunden zugeschnitten — keine Vorlage von der Stange.",
+    title: "Individuell",
+    text: "Jedes Unternehmen arbeitet anders. Deshalb entwickeln wir Lösungen, die zu Ihren Prozessen passen – nicht umgekehrt.",
   },
   {
     icon: Puzzle,
-    title: "Individuelle Integrationen",
-    text: "Wir arbeiten mit Ihren bestehenden Tools und Ihrer Software, damit KI sich in Ihren Betrieb einfügt.",
+    title: "Integration statt Umstellung",
+    text: "Wir bauen auf den Systemen auf, die Sie bereits nutzen.",
   },
   {
     icon: HeartHandshake,
-    title: "Langfristige Partnerschaft",
-    text: "Wir optimieren Ihre KI-Lösungen kontinuierlich weiter, während Ihr Unternehmen wächst und sich Ihre Anforderungen verändern.",
+    title: "Langfristige Zusammenarbeit",
+    text: "Auch nach der Einführung begleiten wir Sie weiter und entwickeln Ihre Automatisierungen gemeinsam mit Ihnen weiter.",
   },
 ];
 
@@ -61,7 +61,7 @@ export default function WarumSolvomind() {
             Warum solvomind
           </div>
           <h2 className="mt-3 text-3xl md:text-5xl font-semibold tracking-tightest leading-[1.08]">
-            Ein Partner, kein bloßer Anbieter.
+            Persönliche Zusammenarbeit statt Standardlösungen.
           </h2>
         </div>
 

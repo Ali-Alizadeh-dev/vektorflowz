@@ -8,28 +8,28 @@ import { Plus } from "lucide-react";
 
 const faqs = [
   {
-    q: "Wie lange dauert die Implementierung?",
-    a: "Die meisten Projekte gehen innerhalb weniger Wochen live. Nach der kostenlosen Beratung legen wir einen klaren Zeitplan fest – einfache Automatisierungen laufen oft in wenigen Tagen, größere Multi-Agenten-Systeme brauchen etwas länger.",
+    q: "Wie lange dauert die Umsetzung?",
+    a: "Das hängt vom Umfang des Projekts ab. Kleinere Automatisierungen können innerhalb weniger Tage umgesetzt werden, größere Lösungen benötigen meist einige Wochen. Nach dem Erstgespräch erhalten Sie einen realistischen Zeitplan.",
   },
   {
-    q: "Lässt sich KI in unsere bestehende Software integrieren?",
-    a: "Ja. Wir bauen auf den Tools auf, die Sie bereits nutzen – CRM, Kalender, E-Mail, Telefonanlage und interne Datenbanken – damit sich KI in Ihren Betrieb einfügt, statt ihn zu ersetzen.",
+    q: "Funktioniert das mit unserer Software?",
+    a: "In den meisten Fällen ja. Wir integrieren unsere Lösungen in bestehende Systeme wie CRM, Kalender, Telefonanlagen oder interne Datenbanken.",
   },
   {
-    q: "Brauchen wir technisches Wissen?",
-    a: "Nein. Wir übernehmen Konzeption, Entwicklung und Integration vollständig und schulen Ihr Team. Wenn Sie Ihren Arbeitsalltag beschreiben können, reicht das, um zu starten.",
+    q: "Brauchen wir technisches Vorwissen?",
+    a: "Nein. Wir übernehmen Konzeption, Entwicklung und Einrichtung. Sie müssen lediglich Ihre Abläufe kennen – um den Rest kümmern wir uns.",
   },
   {
     q: "Wie sicher sind unsere Daten?",
-    a: "Sicherheit ist von Anfang an eingebaut. Wir arbeiten DSGVO-konform, Ihre Daten bleiben in Ihren freigegebenen Systemen und werden in der EU verarbeitet, Zugriffe sind kontrolliert und nachvollziehbar.",
+    a: "Datenschutz hat für uns einen hohen Stellenwert. Wir arbeiten DSGVO-konform, setzen auf europäische Datenverarbeitung und sorgen dafür, dass Zugriffe nachvollziehbar bleiben.",
   },
   {
-    q: "Welche Unternehmen profitieren am meisten?",
-    a: "Jedes Unternehmen mit wiederkehrenden Prozessen, hohem Anruf- oder Nachrichtenaufkommen oder manueller Datenarbeit – vom lokalen Dienstleister bis zum vertriebs- und betriebsstarken Unternehmen.",
+    q: "Für welche Unternehmen lohnt sich KI?",
+    a: "Für alle Unternehmen, die regelmäßig ähnliche Aufgaben erledigen, viele Kundenanfragen bearbeiten oder wiederkehrende Prozesse automatisieren möchten.",
   },
   {
-    q: "Wie viel lässt sich mit KI automatisieren?",
-    a: "Oft mehr als erwartet. Wir beginnen mit Ihren wirkungsvollsten, wiederkehrenden Aufgaben und erweitern Schritt für Schritt, sobald Sie Ergebnisse sehen.",
+    q: "Wie viel lässt sich automatisieren?",
+    a: "Oft deutlich mehr, als zunächst vermutet wird. Gemeinsam identifizieren wir zuerst die Bereiche mit dem größten Nutzen und erweitern die Automatisierung anschließend Schritt für Schritt.",
   },
 ];
 
@@ -66,7 +66,7 @@ export default function FAQ() {
       <div className="mx-auto max-w-3xl px-5 md:px-8">
         <SectionHeader
           label="FAQ"
-          title="Häufige Fragen, klar beantwortet."
+          title="Häufige Fragen."
           intro="Was Unternehmen vor der Zusammenarbeit am häufigsten wissen möchten."
         />
 

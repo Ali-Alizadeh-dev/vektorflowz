@@ -61,7 +61,7 @@ export default function Kontakt() {
         <SectionHeader
           label="Kontakt"
           title="Lassen Sie uns über Ihre Prozesse sprechen."
-          intro="Schildern Sie kurz Ihr Anliegen. Sie erhalten innerhalb von 24 Stunden eine persönliche Rückmeldung."
+          intro="Beschreiben Sie kurz Ihr Anliegen. Wir melden uns in der Regel innerhalb eines Werktages persönlich bei Ihnen."
         />
 
         <div className="mt-16 md:mt-20 grid lg:grid-cols-12 gap-6 max-w-5xl mx-auto">
@@ -96,10 +96,10 @@ export default function Kontakt() {
                 Erstgespräch
               </p>
               <p className="mt-3 text-lg font-medium">
-                Unverbindlich &amp; kostenfrei
+                Kostenlos und unverbindlich.
               </p>
               <p className="mt-1 text-sm text-muted">
-                Antwort werktags innerhalb von 24 Stunden.
+                Wir melden uns in der Regel innerhalb eines Werktages.
               </p>
             </div>
           </aside>
@@ -146,7 +146,7 @@ export default function Kontakt() {
             </button>
 
             <p data-field className="text-sm text-muted text-center">
-              Mit dem Absenden öffnet sich Ihr E-Mail-Programm. Es werden keine Daten gespeichert oder an Server übertragen.
+              Beim Absenden öffnet sich Ihr E-Mail-Programm. Es werden keine Daten auf unserer Website gespeichert.
             </p>
           </form>
         </div>

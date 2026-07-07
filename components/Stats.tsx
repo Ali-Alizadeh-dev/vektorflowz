@@ -6,10 +6,10 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { Clock, Timer, Zap, TrendingDown } from "lucide-react";
 
 const stats = [
-  { icon: Clock, value: "24/7", label: "Verfügbarkeit, jeden Tag" },
-  { icon: Timer, value: "100+", label: "Gesparte Arbeitsstunden" },
-  { icon: Zap, value: "Schneller", label: "Reaktion für Kunden" },
-  { icon: TrendingDown, value: "Weniger", label: "Betriebskosten" },
+  { icon: Clock, value: "24/7", label: "für Kunden erreichbar" },
+  { icon: Timer, value: "100+ Std.", label: "potenziell eingesparte Routinearbeit" },
+  { icon: Zap, value: "Schnellere", label: "Reaktionszeiten" },
+  { icon: TrendingDown, value: "Weniger", label: "manuelle Prozesse" },
 ];
 
 export default function Stats() {
@@ -46,11 +46,10 @@ export default function Stats() {
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <div className="text-center max-w-xl mx-auto">
           <p className="text-sm font-semibold uppercase tracking-[0.08em] text-accent">
-            Unternehmen mit KI smarter machen
+            Unternehmen mit sinnvoller KI entlasten
           </p>
           <p className="mt-2 text-lg text-muted">
-            Praktische KI-Systeme, die messbare Ergebnisse liefern — keine
-            Experimente.
+            KI sollte den Arbeitsalltag einfacher machen – nicht komplizierter.
           </p>
         </div>
 

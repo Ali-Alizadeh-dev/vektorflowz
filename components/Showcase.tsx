@@ -6,10 +6,10 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { PhoneCall, Phone, Check, ArrowRight } from "lucide-react";
 
 const subDefs = [
-  { label: "Wissensdatenbank", at: 2 },
-  { label: "CRM-Abfrage", at: 3 },
-  { label: "Termin buchen", at: 4 },
-  { label: "Bestätigungs-E-Mail", at: 5 },
+  { label: "Informationen prüfen", at: 2 },
+  { label: "CRM aktualisieren", at: 3 },
+  { label: "Termin anlegen", at: 4 },
+  { label: "Bestätigung senden", at: 5 },
 ];
 
 export default function Showcase() {
@@ -63,11 +63,13 @@ export default function Showcase() {
             Automatisierung in Aktion
           </div>
           <h2 className="mt-3 text-3xl md:text-5xl font-semibold tracking-tightest leading-[1.08]">
-            Ein Anruf. Komplett bearbeitet — von A bis Z.
+            So läuft ein Anruf automatisch durch Ihr System.
           </h2>
           <p className="mt-4 text-lg text-muted">
-            Sehen Sie live, wie ein einzelner eingehender Anruf durch Ihr
-            KI-System läuft und sich selbst erledigt.
+            Der KI-Telefonassistent nimmt den Anruf entgegen, beantwortet Fragen,
+            prüft Informationen, legt Termine an, aktualisiert Ihr CRM und
+            verschickt bei Bedarf eine Bestätigung – automatisch und
+            nachvollziehbar.
           </p>
         </div>
 

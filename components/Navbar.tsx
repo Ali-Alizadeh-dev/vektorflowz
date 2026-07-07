@@ -8,7 +8,7 @@ import { LogoMark } from "./Logo";
 
 const links = [
   { href: "#leistungen", label: "Lösungen" },
-  { href: "#ablauf", label: "Ablauf" },
+  { href: "#ablauf", label: "So arbeiten wir" },
   { href: "#showcase", label: "Automatisierung" },
   { href: "#security", label: "Sicherheit" },
   { href: "#ueber-uns", label: "Über uns" },
@@ -118,9 +118,9 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <a
               href="#kontakt"
-              className="hidden md:inline-flex items-center gap-2 pl-4 pr-2 py-1.5 rounded-full bg-accent text-white text-[0.95rem] font-medium hover:bg-accent/90 transition-colors"
+              className="hidden md:inline-flex items-center gap-2 pl-4 pr-2 py-1.5 rounded-full bg-accent text-white text-[0.95rem] font-medium hover:bg-accent/90 transition-colors whitespace-nowrap"
             >
-              Kontakt
+              Erstgespräch
               <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/20">
                 →
               </span>

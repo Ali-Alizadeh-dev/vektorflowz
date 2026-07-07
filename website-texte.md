@@ -1,303 +1,246 @@
-# Vektorflowz — Website-Texte
+# solvomind — Website-Texte
 
-> Moderne KI-Automatisierungen für Unternehmen, die Prozesse vereinfachen und Teams entlasten.
-
----
-
-# Navigation
-
-* Home
-* Leistungen
-* Ablauf
-* Über uns
-* Kontakt
+Alle Texte der Landingpage, in der Reihenfolge, in der sie auf der Seite erscheinen.
 
 ---
 
-# Hero
+## Navigation
 
-## Überschrift
+- Lösungen
+- So arbeiten wir
+- Automatisierung
+- Sicherheit
+- Über uns
+- Kontakt
 
-**Weniger Aufwand. Mehr Wirkung.**
-
-## Untertitel
-
-KI-gestützte Automatisierungen für effizientere Prozesse und mehr Zeit fürs Wesentliche.
-
-## Buttons
-
-* Unverbindlich austauschen
-* Leistungen entdecken
+CTA (Navbar): **Erstgespräch →**
+Mobiles Menü zusätzlich: **Unverbindlich austauschen →**
 
 ---
 
-# Warum Vektorflowz
+## Hero
 
-## Überschrift
+**Eyebrow:** KI-Automatisierung für Unternehmen
 
-**Automatisierung mit klarem Mehrwert.**
+**Headline:**
+KI-Lösungen, die Ihrem Team **täglich Arbeit abnehmen.**
 
-## Intro
+**Subtext:**
+Wir entwickeln KI-Lösungen, die wiederkehrende Aufgaben zuverlässig übernehmen – von der Telefonannahme über Kundenanfragen bis hin zu internen Prozessen. Jede Lösung wird auf Ihr Unternehmen abgestimmt und in Ihre bestehenden Abläufe integriert.
 
-Moderne Technologien entfalten ihren Wert erst dann, wenn sie konkrete Probleme lösen. Deshalb entwickeln wir Lösungen, die Prozesse vereinfachen, Teams entlasten und nachhaltig Zeit sparen.
+**Buttons:**
+- Kostenloses Erstgespräch
+- So arbeiten wir →
 
-### Prozesse vereinfachen
-
-Manuelle Aufgaben werden reduziert und Abläufe effizienter gestaltet.
-
-### Zeit gewinnen
-
-Weniger Routine bedeutet mehr Freiraum für wertschöpfende Arbeit.
-
-### Systeme verbinden
-
-Informationen fließen automatisch statt zwischen Tools verloren zu gehen.
-
-### Nachhaltig skalieren
-
-Automatisierungen wachsen mit Ihrem Unternehmen und Ihren Anforderungen.
+**Visual „Ihr KI-System":**
+- Status: Aktiv
+- Zentraler Knoten: KI-Zentrale (AI-Icon, kein Firmenlogo)
+- Agenten: Vertrieb, Support, Verwaltung, Betrieb (je „KI-Agent")
+- Statische Verbindungslinien zeigen die Vernetzung der Agenten
+- Fußzeile: Alle Agenten greifen auf dieselben Informationen zu und arbeiten miteinander.
 
 ---
 
-# Leistungen
+## Stats / Trust-Leiste
 
-## Abschnitts-Label
+**Label:** Unternehmen mit sinnvoller KI entlasten
+**Untertitel:** KI sollte den Arbeitsalltag einfacher machen – nicht komplizierter.
 
-Leistungen
-
-## Überschrift
-
-**Automatisierungen, die echten Mehrwert schaffen.**
-
-## Intro
-
-Jedes Unternehmen hat Prozesse, die Zeit kosten, Ressourcen binden oder vermeidbare Fehler verursachen. Wir entwickeln intelligente Lösungen, die Abläufe vereinfachen und Teams nachhaltig entlasten.
+| Wert | Beschreibung |
+|---|---|
+| 24/7 | für Kunden erreichbar |
+| 100+ Std. | potenziell eingesparte Routinearbeit |
+| Schnellere | Reaktionszeiten |
+| Weniger | manuelle Prozesse |
 
 ---
 
-## KI-Assistenten
+## Unsere Lösungen
 
-### Schnelle Antworten. Rund um die Uhr.
+**Label:** Unsere Lösungen
+**Headline:** KI-Lösungen für den Arbeitsalltag.
+**Untertitel:** Nicht jede Aufgabe braucht einen neuen Mitarbeiter. Viele wiederkehrende Tätigkeiten lassen sich automatisieren – zuverlässig und ohne Ihre bestehenden Abläufe auf den Kopf zu stellen.
 
-Digitale Assistenten unterstützen Kunden, Mitarbeitende und Interessenten bei wiederkehrenden Fragen und Aufgaben.
+**1. KI-Telefonassistent**
+Nimmt Anrufe entgegen, beantwortet häufige Fragen, vereinbart Termine und ist auch außerhalb Ihrer Geschäftszeiten erreichbar.
 
-* Entlastung von Support und Service
-* Zugriff auf Unternehmenswissen in Sekunden
-* Individuell auf Ihre Anforderungen abgestimmt
+**2. KI-Mitarbeiter**
+Digitale Assistenten, die Ihr Unternehmenswissen kennen und Ihr Team bei täglichen Aufgaben unterstützen.
 
----
+**3. KI-Agenten**
+Mehrere spezialisierte KI-Agenten arbeiten zusammen und übernehmen unterschiedliche Aufgaben in Ihrem Unternehmen.
+Tags: Vertrieb · Support · Verwaltung · Betrieb
 
-## Prozess-Automatisierung
+**4. Workflow-Automatisierung**
+Automatisiert wiederkehrende Abläufe wie E-Mails, Dokumente, Freigaben oder Berichte.
 
-### Routine läuft automatisch.
+**5. CRM-Integration**
+KI greift auf Ihr CRM zu, aktualisiert Daten, erstellt Follow-ups und unterstützt Ihren Vertrieb direkt im bestehenden System.
 
-Wiederkehrende Aufgaben werden automatisiert und standardisiert, damit Prozesse schneller und zuverlässiger ablaufen.
-
-* Weniger manuelle Arbeit
-* Schnellere Bearbeitungszeiten
-* Höhere Prozesssicherheit
-
----
-
-## Daten-Integration
-
-### Verbundene Systeme statt Datensilos.
-
-Bestehende Anwendungen werden intelligent miteinander verknüpft, damit Informationen dort ankommen, wo sie benötigt werden.
-
-* Automatischer Datenaustausch
-* Weniger doppelte Eingaben
-* Einheitliche Datenbasis
+**6. KI-Chatbot**
+Beantwortet Fragen auf Ihrer Website, qualifiziert Anfragen und hilft Besuchern rund um die Uhr weiter.
 
 ---
 
-## Content & Kommunikation
+## Warum Unternehmen automatisieren
 
-### Professionelle Inhalte mit weniger Aufwand.
+**Label:** Warum Unternehmen automatisieren
+**Headline:** Weniger Routine. Mehr Zeit für wichtige Aufgaben.
 
-E-Mails, Angebote, Berichte oder interne Kommunikation werden automatisiert vorbereitet und in Ihrer Tonalität erstellt.
+**Heute:**
+- Viele wiederkehrende Aufgaben kosten täglich Zeit.
+- Kunden warten auf Rückmeldungen.
+- Daten werden mehrfach manuell eingetragen.
+- Prozesse wachsen mit dem Unternehmen immer weiter.
+- Mitarbeiter beschäftigen sich mit Aufgaben, die sich automatisieren lassen.
 
-* Konsistente Kommunikation
-* Individuelle Vorlagen
-* Mehrsprachige Inhalte möglich
-
----
-
-## Lead-Bearbeitung
-
-### Keine Anfrage bleibt liegen.
-
-Anfragen werden automatisch erfasst, qualifiziert und an die richtige Stelle weitergeleitet.
-
-* Schnellere Reaktionszeiten
-* Automatische Qualifizierung
-* Strukturierte Übergabe an den Vertrieb
+**Mit solvomind:**
+- Routineaufgaben laufen automatisch.
+- Kunden erhalten schneller eine Antwort.
+- Weniger manuelle Arbeit und weniger Fehler.
+- Mehr Zeit für wertschöpfende Aufgaben.
+- Prozesse lassen sich einfach erweitern, wenn Ihr Unternehmen wächst.
 
 ---
 
-## Reporting & Insights
+## So arbeiten wir
 
-### Relevante Zahlen auf einen Blick.
+**Label:** So arbeiten wir
+**Headline:** Von der Idee bis zur fertigen Lösung.
+**Untertitel:** Wir halten den Ablauf bewusst einfach und transparent.
 
-Daten werden automatisch ausgewertet und verständlich aufbereitet.
+**1. Erstgespräch**
+Wir lernen Ihr Unternehmen kennen und besprechen, welche Prozesse heute Zeit kosten.
 
-* Zentrale Auswertungen
-* Automatische Berichte
-* Bessere Entscheidungsgrundlagen
+**2. Analyse**
+Gemeinsam finden wir heraus, welche Automatisierungen den größten Nutzen bringen.
 
----
+**3. Umsetzung**
+Wir entwickeln Ihre KI-Lösung und passen sie an Ihre bestehenden Systeme an.
 
-# Ablauf
-
-## Abschnitts-Label
-
-Ablauf
-
-## Überschrift
-
-**So läuft die Zusammenarbeit ab.**
-
-## Intro
-
-Transparent, strukturiert und nachvollziehbar – vom ersten Gespräch bis zur fertigen Lösung.
+**4. Einführung**
+Nach der Integration testen wir alles gemeinsam und entwickeln die Lösung bei Bedarf weiter.
 
 ---
 
-## 01 — Kennenlernen
+## Automatisierung in Aktion
 
-**30 Minuten · unverbindlich**
+**Label:** Automatisierung in Aktion
+**Headline:** So läuft ein Anruf automatisch durch Ihr System.
+**Beschreibung:** Der KI-Telefonassistent nimmt den Anruf entgegen, beantwortet Fragen, prüft Informationen, legt Termine an, aktualisiert Ihr CRM und verschickt bei Bedarf eine Bestätigung – automatisch und nachvollziehbar.
 
-Wir besprechen Ihre aktuellen Herausforderungen und identifizieren erste Potenziale.
-
----
-
-## 02 — Analyse
-
-**Potenziale sichtbar machen**
-
-Bestehende Prozesse werden analysiert und Optimierungsmöglichkeiten identifiziert.
+Konsole-Schritte: Eingehender Anruf → Telefonassistent → Informationen prüfen · CRM aktualisieren · Termin anlegen · Bestätigung senden → Aufgabe erledigt
 
 ---
 
-## 03 — Konzept
+## Sicherheit
 
-**Klare Roadmap**
+**Label:** Sicherheit
+**Headline:** KI verantwortungsvoll einsetzen.
+**Untertitel:** Datenschutz und Transparenz gehören von Anfang an dazu.
 
-Sie erhalten einen konkreten Lösungsvorschlag inklusive Aufwand, Zeitrahmen und transparenter Kostenübersicht.
+**DSGVO-konform**
+Ihre Daten werden ausschließlich in den freigegebenen Systemen verarbeitet und nach europäischen Datenschutzstandards behandelt.
 
----
+**Menschliche Kontrolle**
+Wichtige Entscheidungen trifft weiterhin ein Mensch. KI unterstützt Ihr Team, ersetzt aber keine Verantwortung.
 
-## 04 — Umsetzung
-
-**Schrittweise Entwicklung**
-
-Die Lösung wird transparent entwickelt und regelmäßig abgestimmt.
-
----
-
-## 05 — Go-Live & Support
-
-**Langfristige Begleitung**
-
-Nach der Einführung unterstützen wir Sie bei Fragen, Optimierungen und Erweiterungen.
+**Datenverarbeitung in der EU**
+Ihre Daten bleiben unter Ihrer Kontrolle und werden innerhalb der EU verarbeitet.
 
 ---
 
-# Über uns
+## Warum solvomind
 
-## Abschnitts-Label
+**Label:** Warum solvomind
+**Headline:** Persönliche Zusammenarbeit statt Standardlösungen.
 
-Über uns
+**Individuell**
+Jedes Unternehmen arbeitet anders. Deshalb entwickeln wir Lösungen, die zu Ihren Prozessen passen – nicht umgekehrt.
 
-## Überschrift
+**Integration statt Umstellung**
+Wir bauen auf den Systemen auf, die Sie bereits nutzen.
 
-**Technologie sollte Arbeit erleichtern.**
-
-## Intro
-
-Vektorflowz unterstützt Unternehmen dabei, Prozesse intelligenter zu gestalten und wiederkehrende Aufgaben zu automatisieren. Unser Fokus liegt auf Lösungen, die sich nahtlos in bestehende Abläufe integrieren und einen spürbaren Mehrwert im Arbeitsalltag schaffen.
-
----
-
-### Persönlich
-
-Direkte Kommunikation, kurze Wege und eine enge Zusammenarbeit während des gesamten Projekts.
+**Langfristige Zusammenarbeit**
+Auch nach der Einführung begleiten wir Sie weiter und entwickeln Ihre Automatisierungen gemeinsam mit Ihnen weiter.
 
 ---
 
-### Praxisnah
+## Über uns
 
-Keine unnötige Komplexität. Wir entwickeln Lösungen, die zuverlässig funktionieren und echten Nutzen bringen.
+**Label:** Über uns
+**Headline:** Hinter solvomind.
+**Untertitel:** Bei kleinen Teams ist Vertrauen wichtig. Deshalb wissen Sie immer, mit wem Sie zusammenarbeiten.
 
----
+**Ali Alizadeh** — Gründer von solvomind — Hamburg · deutschlandweit
 
-### Messbar
+> „Gute Automatisierung fällt kaum auf. Sie sorgt einfach dafür, dass Arbeit zuverlässig erledigt wird und Menschen mehr Zeit für das Wesentliche haben."
 
-Erfolg wird nicht an Funktionen gemessen, sondern an Ergebnissen – mehr Effizienz, weniger Aufwand und optimierte Prozesse.
+**Unsere Geschichte**
+solvomind ist entstanden mit dem Ziel, KI im Unternehmensalltag wirklich nutzbar zu machen – nicht als komplizierte Technologie, sondern als praktische Unterstützung für wiederkehrende Aufgaben. Wir entwickeln Lösungen, die sich in bestehende Prozesse einfügen und Unternehmen spürbar entlasten – ohne unnötige Komplexität.
 
----
+**Persönlich** — Sie sprechen direkt mit uns – vom ersten Gespräch bis zur fertigen Lösung.
+**Praxisnah** — Wir setzen auf Ihre vorhandenen Systeme auf, statt alles neu aufzubauen.
+**Messbar** — Vor Projektbeginn legen wir gemeinsam fest, woran wir den Erfolg messen.
 
-## Zitat
-
-> „Die besten Prozesse sind die, die zuverlässig im Hintergrund funktionieren und Menschen den Rücken freihalten.“
-
-— Vektorflowz
-
-### Link
-
-Projekt besprechen
+CTA: **Lernen wir uns kennen →**
 
 ---
 
-# Kontakt
+## FAQ
 
-## Abschnitts-Label
+**Headline:** Häufige Fragen.
 
-Kontakt
+**Wie lange dauert die Umsetzung?**
+Das hängt vom Umfang des Projekts ab. Kleinere Automatisierungen können innerhalb weniger Tage umgesetzt werden, größere Lösungen benötigen meist einige Wochen. Nach dem Erstgespräch erhalten Sie einen realistischen Zeitplan.
 
-## Überschrift
+**Funktioniert das mit unserer Software?**
+In den meisten Fällen ja. Wir integrieren unsere Lösungen in bestehende Systeme wie CRM, Kalender, Telefonanlagen oder interne Datenbanken.
 
-**Lassen Sie uns über Ihre Prozesse sprechen.**
+**Brauchen wir technisches Vorwissen?**
+Nein. Wir übernehmen Konzeption, Entwicklung und Einrichtung. Sie müssen lediglich Ihre Abläufe kennen – um den Rest kümmern wir uns.
 
-## Intro
+**Wie sicher sind unsere Daten?**
+Datenschutz hat für uns einen hohen Stellenwert. Wir arbeiten DSGVO-konform, setzen auf europäische Datenverarbeitung und sorgen dafür, dass Zugriffe nachvollziehbar bleiben.
 
-Schildern Sie kurz Ihr Anliegen. Sie erhalten innerhalb von 24 Stunden eine persönliche Rückmeldung.
+**Für welche Unternehmen lohnt sich KI?**
+Für alle Unternehmen, die regelmäßig ähnliche Aufgaben erledigen, viele Kundenanfragen bearbeiten oder wiederkehrende Prozesse automatisieren möchten.
 
----
-
-## Info-Karten
-
-| Label        | Inhalt                                              |
-| ------------ | --------------------------------------------------- |
-| Direkt       | [hallo@vektorflowz.de](mailto:hallo@vektorflowz.de) |
-| Antwortzeit  | Werktags innerhalb von 24 Stunden                   |
-| Erstgespräch | 30 Minuten · unverbindlich · kostenfrei             |
+**Wie viel lässt sich automatisieren?**
+Oft deutlich mehr, als zunächst vermutet wird. Gemeinsam identifizieren wir zuerst die Bereiche mit dem größten Nutzen und erweitern die Automatisierung anschließend Schritt für Schritt.
 
 ---
 
-## Formular
+## Kontakt
 
-* Name
-* E-Mail
-* Unternehmen (optional)
+**Headline:** Lassen Sie uns über Ihre Prozesse sprechen.
+**Untertitel:** Beschreiben Sie kurz Ihr Anliegen. Wir melden uns in der Regel innerhalb eines Werktages persönlich bei Ihnen.
 
-### Placeholder
+- E-Mail: ali.alizadeh@solvomind.de
+- Telefon: 0179 4392400
+- Erstgespräch: Kostenlos und unverbindlich. Wir melden uns in der Regel innerhalb eines Werktages.
 
-Welche Prozesse kosten aktuell besonders viel Zeit oder Aufwand?
+Button: **Nachricht senden**
 
-### Button
-
-Nachricht senden
-
-### Hinweis
-
-Mit dem Absenden öffnet sich Ihr E-Mail-Programm. Es werden keine Daten gespeichert oder an Server übertragen.
+Hinweis: Beim Absenden öffnet sich Ihr E-Mail-Programm. Es werden keine Daten auf unserer Website gespeichert.
 
 ---
 
-# Footer
+## Final CTA
 
-© 2026 Vektorflowz
+**Headline:** Weniger Routine. Mehr Zeit für Ihr Kerngeschäft.
+**Untertitel:** Lassen Sie uns gemeinsam herausfinden, welche Prozesse sich in Ihrem Unternehmen sinnvoll automatisieren lassen.
 
-* Impressum
-* Datenschutz
+Button: **Kostenloses Erstgespräch**
+
+Fußzeile: Unverbindlich · 30 Minuten · Individuelle Empfehlungen
+
+---
+
+## Footer
+
+**Claim:** KI-Automatisierungen für Unternehmen – persönlich entwickelt, praxisnah umgesetzt und DSGVO-konform.
+
+Navigation: Lösungen · So arbeiten wir · Automatisierung · Warum solvomind · Über uns · FAQ
+Kontakt: ali.alizadeh@solvomind.de · 0179 4392400 · Hamburg, Deutschland
+Rechtliches: Impressum · Datenschutz
