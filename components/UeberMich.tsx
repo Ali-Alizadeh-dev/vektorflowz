@@ -20,6 +20,10 @@ const pillars = [
     title: "Messbar",
     text: "Vor Projektbeginn legen wir gemeinsam fest, woran wir den Erfolg messen.",
   },
+  {
+    title: "Langfristig",
+    text: "Auch nach der Einführung begleiten wir Sie weiter und entwickeln Ihre Automatisierungen gemeinsam mit Ihnen weiter.",
+  },
 ];
 
 export default function UeberMich() {

@@ -59,7 +59,7 @@ export default function Ablauf() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: track,
-          start: "top 72%",
+          start: "top 85%",
           once: true,
         },
       });

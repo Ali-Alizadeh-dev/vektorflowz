@@ -5,7 +5,6 @@ const nav = [
   { href: "#leistungen", label: "Lösungen" },
   { href: "#ablauf", label: "So arbeiten wir" },
   { href: "#showcase", label: "Automatisierung" },
-  { href: "#warum-solvomind", label: "Warum solvomind" },
   { href: "#ueber-uns", label: "Über uns" },
   { href: "#faq", label: "FAQ" },
 ];

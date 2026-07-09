@@ -6,10 +6,10 @@ import Leistungen from "@/components/Leistungen";
 import Ablauf from "@/components/Ablauf";
 import Showcase from "@/components/Showcase";
 import Sicherheit from "@/components/Sicherheit";
-import WarumSolvomind from "@/components/WarumSolvomind";
 import UeberMich from "@/components/UeberMich";
 import FAQ from "@/components/FAQ";
 import Kontakt from "@/components/Kontakt";
+import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
 export default function Page() {
@@ -27,10 +27,10 @@ export default function Page() {
           <Ablauf />
           <Showcase />
           <Sicherheit />
-          <WarumSolvomind />
           <UeberMich />
           <FAQ />
           <Kontakt />
+          <FinalCTA />
         </div>
       </div>
 
