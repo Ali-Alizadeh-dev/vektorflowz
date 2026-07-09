@@ -149,20 +149,20 @@ export default function Hero() {
             <div className="mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <a
                 data-hero="cta"
-                href="#kontakt"
+                href="#ablauf"
                 className="group inline-flex items-center justify-center gap-2.5 pl-7 pr-2.5 py-2.5 rounded-full bg-accent text-white text-base font-medium hover:bg-accent/90 transition-colors shadow-accent-glow"
               >
-                Kostenloses Erstgespräch
+                So arbeiten wir
                 <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/15 group-hover:translate-x-0.5 transition-transform">
                   <ArrowDown size={16} className="-rotate-90" />
                 </span>
               </a>
               <a
                 data-hero="cta"
-                href="#ablauf"
+                href="#kontakt"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-line bg-surface/80 backdrop-blur-sm text-base font-medium text-fg hover:border-fg/25 transition-colors"
               >
-                So arbeiten wir
+                Kostenloses Erstgespräch
                 <span className="text-accent">→</span>
               </a>
             </div>

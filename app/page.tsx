@@ -9,7 +9,6 @@ import Sicherheit from "@/components/Sicherheit";
 import UeberMich from "@/components/UeberMich";
 import FAQ from "@/components/FAQ";
 import Kontakt from "@/components/Kontakt";
-import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
 export default function Page() {
@@ -30,7 +29,7 @@ export default function Page() {
           <UeberMich />
           <FAQ />
           <Kontakt />
-          <FinalCTA />
+
         </div>
       </div>
 
