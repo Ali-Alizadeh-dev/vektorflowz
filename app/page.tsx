@@ -29,7 +29,6 @@ export default function Page() {
           <UeberMich />
           <FAQ />
           <Kontakt />
-
         </div>
       </div>
 
