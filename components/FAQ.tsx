@@ -12,6 +12,10 @@ const faqs = [
     a: "Das hängt vom Umfang des Projekts ab. Kleinere Automatisierungen können innerhalb weniger Tage umgesetzt werden, größere Lösungen benötigen meist einige Wochen. Nach dem Erstgespräch erhalten Sie einen realistischen Zeitplan.",
   },
   {
+    q: "Mit welchen Kosten muss ich rechnen?",
+    a: "Das hängt vom Umfang des Projekts ab. Nach dem Erstgespräch erstellen wir ein individuelles Angebot – gemeinsam finden wir eine faire Lösung, die sich für Ihr Unternehmen lohnt.",
+  },
+  {
     q: "Funktioniert das mit unserer Software?",
     a: "In den meisten Fällen ja. Wir integrieren unsere Lösungen in bestehende Systeme wie CRM, Kalender, Telefonanlagen oder interne Datenbanken.",
   },
