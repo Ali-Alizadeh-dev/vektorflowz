@@ -10,7 +10,7 @@ import {
   Bot,
   Search,
   PenLine,
-  TrendingUp,
+  Headset,
 } from "lucide-react";
 
 // Sub-agents coordinated by the master. `x` is the connector line's landing
@@ -23,7 +23,7 @@ const agents: {
 }[] = [
   { icon: Search, name: "Data Researcher", role: "Recherche", x: 16 },
   { icon: PenLine, name: "Content Writer", role: "Texterstellung", x: 50 },
-  { icon: TrendingUp, name: "SEO Optimizer", role: "Optimierung", x: 84 },
+  { icon: Headset, name: "Kundensupport", role: "Support", x: 84 },
 ];
 
 export default function Hero() {
