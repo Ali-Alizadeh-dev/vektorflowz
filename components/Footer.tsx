@@ -63,14 +63,6 @@ export default function Footer() {
                     ali.alizadeh@solvomind.de
                   </a>
                 </li>
-                <li>
-                  <a
-                    href="tel:+491794392400"
-                    className="text-white/70 hover:text-white transition-colors"
-                  >
-                    0179 4392400
-                  </a>
-                </li>
                 <li className="text-white/55">Hamburg, Deutschland</li>
               </ul>
             </div>

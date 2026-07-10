@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import SectionHeader from "./SectionHeader";
-import { ArrowRight, Mail, Phone } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 
 export default function Kontakt() {
   const ref = useRef<HTMLDivElement>(null);
@@ -60,7 +60,7 @@ export default function Kontakt() {
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeader
           label="Kontakt"
-          title="Lassen Sie uns über Ihre Prozesse sprechen."
+          title="Mehr Effizienz beginnt mit dem richtigen Gespräch."
           intro="Beschreiben Sie kurz Ihr Anliegen. Wir melden uns in der Regel innerhalb eines Werktages persönlich bei Ihnen."
         />
 
@@ -78,17 +78,6 @@ export default function Kontakt() {
               >
                 <Mail size={18} className="shrink-0 text-accent" />{" "}
                 ali.alizadeh@solvomind.de
-              </a>
-            </div>
-            <div data-field className="py-6 border-b border-line">
-              <p className="text-sm uppercase tracking-[0.2em] text-muted">
-                Telefon
-              </p>
-              <a
-                href="tel:+491794392400"
-                className="mt-3 inline-flex items-center gap-2 text-lg font-medium hover:text-accent transition-colors"
-              >
-                <Phone size={18} className="shrink-0 text-accent" /> 0179 4392400
               </a>
             </div>
             <div data-field className="pt-6">

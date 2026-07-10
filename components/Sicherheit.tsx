@@ -16,11 +16,6 @@ const features = [
     title: "Menschliche Kontrolle",
     text: "Wichtige Entscheidungen trifft weiterhin ein Mensch. KI unterstützt Ihr Team, ersetzt aber keine Verantwortung.",
   },
-  {
-    icon: Globe,
-    title: "Datenverarbeitung in der EU",
-    text: "Ihre Daten bleiben unter Ihrer Kontrolle und werden innerhalb der EU verarbeitet.",
-  },
 ];
 
 export default function Sicherheit() {

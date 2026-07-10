@@ -22,8 +22,6 @@ export default function DatenschutzPage() {
         22111 Hamburg
         <br />
         E-Mail: ali.alizadeh@solvomind.de
-        <br />
-        Telefon: 0179 4392400
       </p>
       <p className="text-sm text-muted">
         Hinweis: Die Gewerbeanmeldung und Gewerbenummer befinden sich derzeit

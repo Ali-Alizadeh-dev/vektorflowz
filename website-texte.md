@@ -146,7 +146,7 @@ Ihre Daten werden ausschließlich in den freigegebenen Systemen verarbeitet und 
 Wichtige Entscheidungen trifft weiterhin ein Mensch. KI unterstützt Ihr Team, ersetzt aber keine Verantwortung.
 
 **Datenverarbeitung in der EU**
-Ihre Daten bleiben unter Ihrer Kontrolle und werden innerhalb der EU verarbeitet.
+Ihre Daten bleiben unter Ihrer vollen Kontrolle.
 
 ---
 

@@ -10,16 +10,11 @@ const services = [
   {
     icon: Phone,
     title: "KI-Telefonassistent",
-    text: "Nimmt Anrufe entgegen, beantwortet häufige Fragen, vereinbart Termine und ist auch außerhalb Ihrer Geschäftszeiten erreichbar.",
-  },
-  {
-    icon: Bot,
-    title: "KI-Mitarbeiter",
-    text: "Digitale Assistenten, die Ihr Unternehmenswissen kennen und Ihr Team bei täglichen Aufgaben unterstützen.",
+    text: "Nimmt Anrufe entgegen, beantwortet  Fragen, vereinbart Termine und ist auch außerhalb Ihrer Geschäftszeiten erreichbar.",
   },
   {
     icon: Users,
-    title: "KI-Agenten",
+    title: "KI-Agenten Team",
     text: "Mehrere spezialisierte KI-Agenten arbeiten zusammen und übernehmen unterschiedliche Aufgaben in Ihrem Unternehmen.",
     tags: ["Vertrieb", "Support", "Verwaltung", "Betrieb"],
   },
@@ -37,7 +32,7 @@ const services = [
     icon: MessageCircle,
     title: "KI-Chatbot",
     text: "Beantwortet Fragen auf Ihrer Website, qualifiziert Anfragen und hilft Besuchern rund um die Uhr weiter.",
-  },
+  }
 ];
 
 export default function Leistungen() {
@@ -71,7 +66,7 @@ export default function Leistungen() {
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <SectionHeader
           label="Unsere Lösungen"
-          title="KI-Lösungen für den Arbeitsalltag."
+          title="Die passende automatisierung für ihren Use Case"
           intro="Nicht jede Aufgabe braucht einen neuen Mitarbeiter. Viele wiederkehrende Tätigkeiten lassen sich automatisieren – zuverlässig und ohne Ihre bestehenden Abläufe auf den Kopf zu stellen."
         />
 

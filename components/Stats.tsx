@@ -9,7 +9,7 @@ const stats = [
   { icon: Clock, value: "24/7", label: "für Kunden erreichbar" },
   { icon: Timer, value: "100+ Std.", label: "potenziell eingesparte Routinearbeit" },
   { icon: Zap, value: "Schnellere", label: "Reaktionszeiten" },
-  { icon: TrendingDown, value: "Weniger", label: "manuelle Prozesse" },
+  { icon: TrendingDown, value: "Weniger", label: "manueller Aufwand" },
 ];
 
 export default function Stats() {
@@ -49,7 +49,7 @@ export default function Stats() {
             Unternehmen mit sinnvoller KI entlasten
           </p>
           <p className="mt-2 text-lg text-muted">
-            KI sollte den Arbeitsalltag einfacher machen – nicht komplizierter.
+            Mit dem richtigen Einsatz von Künstlicher Intelligenz Arbeitsabläufe optimieren.
           </p>
         </div>
 

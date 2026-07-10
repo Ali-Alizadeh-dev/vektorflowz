@@ -20,12 +20,8 @@ const faqs = [
     a: "Nein. Wir übernehmen Konzeption, Entwicklung und Einrichtung. Sie müssen lediglich Ihre Abläufe kennen – um den Rest kümmern wir uns.",
   },
   {
-    q: "Wie sicher sind unsere Daten?",
-    a: "Datenschutz hat für uns einen hohen Stellenwert. Wir arbeiten DSGVO-konform, setzen auf europäische Datenverarbeitung und sorgen dafür, dass Zugriffe nachvollziehbar bleiben.",
-  },
-  {
-    q: "Für welche Unternehmen lohnt sich KI?",
-    a: "Für alle Unternehmen, die regelmäßig ähnliche Aufgaben erledigen, viele Kundenanfragen bearbeiten oder wiederkehrende Prozesse automatisieren möchten.",
+    q: "Wann lohnt sich der angepasste Einsatz von Künstlicher Intelligenz?",
+    a: "Für alle Unternehmen, die regelmäßig ähnliche Aufgaben erledigen, viele Kundenanfragen bearbeiten müssen oder wiederkehrende Prozesse automatisieren möchten und gleichzeitig Ressourcen und Geld sparen möchten.",
   },
   {
     q: "Wie viel lässt sich automatisieren?",

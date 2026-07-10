@@ -24,8 +24,6 @@ export default function ImpressumPage() {
 
       <h2>Kontakt</h2>
       <p>
-        Telefon: 0179 4392400
-        <br />
         E-Mail: ali.alizadeh@solvomind.de
       </p>
 

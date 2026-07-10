@@ -66,7 +66,7 @@ export default function Showcase() {
             So läuft ein Anruf automatisch durch Ihr System.
           </h2>
           <p className="mt-4 text-lg text-muted">
-            Der KI-Telefonassistent nimmt den Anruf entgegen, beantwortet Fragen,
+            Ein KI-Telefonangent nimmt den Anruf entgegen, beantwortet Fragen,
             prüft Informationen, legt Termine an, aktualisiert Ihr CRM und
             verschickt bei Bedarf eine Bestätigung – automatisch und
             nachvollziehbar.
