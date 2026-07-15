@@ -133,16 +133,16 @@ export default function Hero() {
               data-hero="title"
               className="mt-6 text-[10vw] sm:text-5xl lg:text-[3.4rem] leading-[1.03] font-semibold tracking-tightest"
             >
-              <SplitWords text="KI-Lösungen, die Ihrem Team" />{" "}
+              <SplitWords text="Ihre Routinearbeit läuft —" />{" "}
               <span className="text-accent">
-                <SplitWords text="täglich Arbeit abnehmen." />
+                <SplitWords text="auch wenn niemand im Büro ist." />
               </span>
             </h1>
 
             <SplitWords
               as="p"
               data-hero="sub"
-              text="Wir entwickeln KI-Lösungen, die wiederkehrende Aufgaben zuverlässig übernehmen – von der Telefonannahme über Kundenanfragen bis hin zu internen Prozessen. Jede Lösung wird auf Ihr Unternehmen abgestimmt und in Ihre bestehenden Abläufe integriert."
+              text="Wir bauen KI-Systeme, die Anrufe, Anfragen und Routineaufgaben zuverlässig übernehmen. Aufbau, Integration und Betrieb — komplett von uns."
               className="mt-6 max-w-xl text-lg md:text-xl text-muted leading-relaxed"
             />
 
