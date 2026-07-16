@@ -75,14 +75,14 @@ export default function Showcase() {
 
         <div
           data-console
-          className="mt-12 rounded-[1.75rem] bg-[#0b1220] shadow-card-lg overflow-hidden"
+          className="mt-12 rounded-[1.75rem] bg-ink border border-line shadow-card-lg overflow-hidden"
         >
           {/* Console title bar */}
-          <div className="flex items-center gap-2 px-5 py-4 border-b border-white/10">
+          <div className="flex items-center gap-2 px-5 py-4 border-b border-line">
             <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
             <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
             <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-            <span className="ml-3 text-[13px] font-medium text-white/50">
+            <span className="ml-3 text-[13px] font-medium text-muted">
               solvomind · Automatisierungs-Konsole
             </span>
           </div>
@@ -92,15 +92,15 @@ export default function Showcase() {
             className="p-8 md:p-11"
             style={{
               background:
-                "radial-gradient(900px 320px at 50% -10%, rgba(0,61,240,0.22), transparent)",
+                "radial-gradient(900px 320px at 50% -10%, rgba(164,230,58,0.16), transparent)",
             }}
           >
             <div className="flex flex-col md:flex-row items-stretch md:items-start gap-4 md:gap-2">
               {/* Incoming call */}
               <ConsoleStep
-                icon={<PhoneCall size={20} className="text-slate-300" />}
-                iconWrap="bg-white/[0.06] border border-white/10"
-                glow={callActive ? "0 0 0 4px rgba(96,165,250,.35)" : "none"}
+                icon={<PhoneCall size={20} className="text-fg/80" />}
+                iconWrap="bg-fg/[0.06] border border-line"
+                glow={callActive ? "0 0 0 4px rgba(164,230,58,.3)" : "none"}
                 label="Eingehender Anruf"
                 badge="Empfangen"
                 badgeClass="text-emerald-400 bg-emerald-400/10"
@@ -109,16 +109,16 @@ export default function Showcase() {
 
               {/* Voice agent */}
               <ConsoleStep
-                icon={<Phone size={20} className="text-white" />}
+                icon={<Phone size={20} className="text-on-accent" />}
                 iconWrap="bg-accent"
                 glow={
                   agentActive
-                    ? "0 0 0 4px rgba(96,165,250,.4), 0 10px 24px rgba(0,61,240,.5)"
-                    : "0 10px 24px rgba(0,61,240,.35)"
+                    ? "0 0 0 4px rgba(164,230,58,.35), 0 10px 24px rgba(164,230,58,.4)"
+                    : "0 10px 24px rgba(164,230,58,.25)"
                 }
                 label="Telefonassistent"
                 badge="Bearbeitet"
-                badgeClass="text-blue-300 bg-blue-400/15"
+                badgeClass="text-amber-300 bg-amber-400/15"
               />
               <Arrow />
 
@@ -133,22 +133,22 @@ export default function Showcase() {
                       className="flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 border transition-colors duration-300"
                       style={{
                         background: isDone
-                          ? "rgba(34,197,94,.12)"
+                          ? "rgba(52,211,153,.12)"
                           : isActive
-                          ? "rgba(96,165,250,.16)"
-                          : "rgba(255,255,255,.05)",
+                          ? "rgba(251,191,36,.16)"
+                          : "rgba(244,246,248,.05)",
                         borderColor: isDone
-                          ? "rgba(74,222,128,.4)"
+                          ? "rgba(52,211,153,.4)"
                           : isActive
-                          ? "rgba(96,165,250,.5)"
-                          : "rgba(255,255,255,.1)",
+                          ? "rgba(251,191,36,.5)"
+                          : "rgba(244,246,248,.1)",
                       }}
                     >
                       <span
                         className="w-1.5 h-1.5 rounded-full"
-                        style={{ background: isDone ? "#4ade80" : "#60a5fa" }}
+                        style={{ background: isDone ? "#34d399" : "#fbbf24" }}
                       />
-                      <span className="flex-1 text-[13px] font-medium text-slate-200">
+                      <span className="flex-1 text-[13px] font-medium text-fg/85">
                         {s.label}
                       </span>
                       <Check
@@ -164,11 +164,11 @@ export default function Showcase() {
 
               {/* Done */}
               <ConsoleStep
-                icon={<Check size={24} className="text-white" />}
-                iconWrap={doneActive ? "bg-emerald-500" : "bg-white/[0.08]"}
+                icon={<Check size={24} className={doneActive ? "text-canvas" : "text-fg"} />}
+                iconWrap={doneActive ? "bg-emerald-400" : "bg-fg/[0.08]"}
                 glow={
                   doneActive
-                    ? "0 0 0 4px rgba(74,222,128,.3), 0 10px 24px rgba(16,185,129,.45)"
+                    ? "0 0 0 4px rgba(52,211,153,.3), 0 10px 24px rgba(52,211,153,.4)"
                     : "none"
                 }
                 label="Aufgabe erledigt"
@@ -206,7 +206,7 @@ function ConsoleStep({
       >
         {icon}
       </span>
-      <span className="text-[13px] font-medium text-slate-200">{label}</span>
+      <span className="text-[13px] font-medium text-fg">{label}</span>
       <span className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full ${badgeClass}`}>
         {badge}
       </span>

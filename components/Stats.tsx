@@ -41,7 +41,7 @@ export default function Stats() {
   return (
     <section
       ref={ref}
-      className="section bg-bg border-y border-line !py-16 md:!py-20"
+      className="section bg-bg !py-16 md:!py-20"
     >
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <div className="text-center max-w-xl mx-auto">

@@ -110,7 +110,7 @@ export default function Hero() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(60% 50% at 78% 12%, rgba(0,61,240,0.07) 0%, transparent 60%)",
+            "radial-gradient(60% 50% at 78% 12%, rgba(164,230,58,0.10) 0%, transparent 60%)",
         }}
       />
 
@@ -150,10 +150,10 @@ export default function Hero() {
               <a
                 data-hero="cta"
                 href="#ablauf"
-                className="group inline-flex items-center justify-center gap-2.5 pl-7 pr-2.5 py-2.5 rounded-full bg-accent text-white text-base font-medium hover:bg-accent/90 transition-colors shadow-accent-glow"
+                className="group inline-flex items-center justify-center gap-2.5 pl-7 pr-2.5 py-2.5 rounded-full bg-accent text-on-accent text-base font-medium hover:bg-accent/90 transition-colors shadow-accent-glow"
               >
                 So arbeiten wir
-                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/15 group-hover:translate-x-0.5 transition-transform">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-on-accent/15 group-hover:translate-x-0.5 transition-transform">
                   <ArrowDown size={16} className="-rotate-90" />
                 </span>
               </a>
@@ -185,7 +185,7 @@ export default function Hero() {
                   </div>
                 </div>
               </div>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-medium text-emerald-600">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-2.5 py-1 text-[11px] font-medium text-emerald-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 Live
               </span>
@@ -199,12 +199,13 @@ export default function Hero() {
                 onMouseLeave={() => setActive(null)}
                 className="relative z-10 flex w-max items-center gap-3 rounded-2xl border border-accent/20 bg-accent-soft px-4 py-3 transition-transform hover:scale-[1.03]"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-white shadow-accent-glow">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-on-accent shadow-accent-glow">
                   <Bot size={22} strokeWidth={1.75} />
                 </span>
                 <div>
                   <p className="text-sm font-semibold leading-tight">Koordinator</p>
-                  <p className="text-xs text-muted">Master Agent</p>
+                  {/* muted is too dim over the accent-soft tint — needs the brighter ink */}
+                  <p className="text-xs text-fg/70">Master Agent</p>
                 </div>
               </div>
             </div>

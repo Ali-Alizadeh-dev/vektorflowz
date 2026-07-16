@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Footer from "./Footer";
+import { LogoLockup } from "./Logo";
 
 export default function LegalLayout({
   title,
@@ -18,14 +19,12 @@ export default function LegalLayout({
           >
             <span aria-hidden>←</span> Zurück
           </Link>
-          <span className="font-semibold tracking-tight">
-            solvomind<span className="text-accent">.</span>
-          </span>
+          <LogoLockup />
         </div>
       </header>
 
       <article className="mx-auto max-w-3xl px-5 md:px-8 py-20 md:py-24">
-        <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent text-bg text-xs font-medium">
+        <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent text-on-accent text-xs font-medium">
           Rechtliches
         </span>
         <h1 className="mt-6 text-4xl md:text-6xl font-medium tracking-tightest leading-[1.05]">

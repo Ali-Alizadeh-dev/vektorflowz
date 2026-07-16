@@ -90,7 +90,7 @@ export default function FAQ() {
                   <span
                     className={`shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-full border border-line transition-all duration-300 ${
                       isOpen
-                        ? "bg-accent text-white rotate-45 border-accent"
+                        ? "bg-accent text-on-accent rotate-45 border-accent"
                         : "text-accent"
                     }`}
                   >

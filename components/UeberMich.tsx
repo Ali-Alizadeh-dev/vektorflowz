@@ -74,7 +74,7 @@ export default function UeberMich() {
                           className="absolute -inset-2 rounded-[1.75rem] opacity-70"
                           style={{
                               background:
-                                  "radial-gradient(60% 60% at 30% 20%, rgba(0,61,240,0.22), transparent 70%)",
+                                  "radial-gradient(60% 60% at 30% 20%, rgba(164,230,58,0.18), transparent 70%)",
                           }}
                       />
                       {/* NEU: mx-auto sorgt für die Zentrierung auf mobilen Geräten */}

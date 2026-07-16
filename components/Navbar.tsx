@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import { X } from "lucide-react";
-import { LogoMark } from "./Logo";
+import { LogoLockup } from "./Logo";
 
 const links = [
   { href: "#leistungen", label: "Lösungen" },
@@ -14,15 +14,6 @@ const links = [
   { href: "#ueber-uns", label: "Über uns" },
   { href: "#kontakt", label: "Kontakt" },
 ];
-
-const Wordmark = ({ className = "" }: { className?: string }) => (
-  <span className="inline-flex items-center gap-2.5">
-    <LogoMark className="w-7 h-7" />
-    <span className={`font-semibold tracking-tight ${className}`}>
-      solvomind<span className="text-accent">.</span>
-    </span>
-  </span>
-);
 
 export default function Navbar() {
   const ref = useRef<HTMLElement>(null);
@@ -101,8 +92,8 @@ export default function Navbar() {
         className="fixed top-2 sm:top-3 lg:top-4 inset-x-0 z-50 px-3 sm:px-5"
       >
         <nav className="mx-auto max-w-5xl h-14 flex items-center justify-between gap-4 pl-5 pr-2 rounded-full bg-surface/80 backdrop-blur-md border border-line shadow-card">
-          <a href="#home" className="text-lg inline-flex items-center">
-            <Wordmark />
+          <a href="#home" className="inline-flex items-center">
+            <LogoLockup />
           </a>
 
           <ul className="hidden md:flex items-center gap-7 text-[0.95rem] text-muted">
@@ -118,10 +109,10 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <a
               href="#kontakt"
-              className="hidden md:inline-flex items-center gap-2 pl-4 pr-2 py-1.5 rounded-full bg-accent text-white text-[0.95rem] font-medium hover:bg-accent/90 transition-colors whitespace-nowrap"
+              className="hidden md:inline-flex items-center gap-2 pl-4 pr-2 py-1.5 rounded-full bg-accent text-on-accent text-[0.95rem] font-medium hover:bg-accent/90 transition-colors whitespace-nowrap"
             >
               Erstgespräch
-              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/20">
+              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-on-accent/15">
                 →
               </span>
             </a>
@@ -144,7 +135,7 @@ export default function Navbar() {
       <div
         ref={backdropRef}
         onClick={() => setOpen(false)}
-        className="md:hidden fixed inset-0 z-[60] bg-bg/60 backdrop-blur-sm opacity-0 pointer-events-none"
+        className="md:hidden fixed inset-0 z-[60] bg-canvas/80 backdrop-blur-sm opacity-0 pointer-events-none"
         aria-hidden="true"
       />
 
@@ -159,7 +150,7 @@ export default function Navbar() {
       >
         {/* Drawer header */}
         <div className="flex items-center justify-between px-6 h-16 border-b border-line shrink-0">
-          <Wordmark className="text-base" />
+          <LogoLockup />
           <button
             aria-label="Menü schließen"
             onClick={() => setOpen(false)}
@@ -192,7 +183,7 @@ export default function Navbar() {
           <a
             href="#kontakt"
             onClick={() => setOpen(false)}
-            className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-accent text-bg text-base font-medium hover:bg-accent/90"
+            className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-accent text-on-accent text-base font-medium hover:bg-accent/90"
           >
             Unverbindlich austauschen →
           </a>

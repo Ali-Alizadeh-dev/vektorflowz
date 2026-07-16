@@ -3,17 +3,21 @@
 @tailwind utilities;
 
 :root {
-  /* solvomind brand palette */
-  --bg: #f5f7fa; /* cool light — section base */
-  --surface: #ffffff;
-  --fg: #0b1220; /* near-black navy ink */
-  --muted: #5b6472; /* cool grey */
-  --line: rgba(11, 18, 32, 0.1);
-  --accent: #003df0; /* solvomind blue */
-  --accent-soft: rgba(0, 61, 240, 0.08);
-  --accent-bright: #003df0; /* blue — also used for the hero glow */
-  --ink: #0b1220; /* dark surface (footer, premium cards) */
-  color-scheme: light;
+  /* solvomind brand palette — charcoal canvas, lime accent */
+  --canvas: #1b2128; /* deepest tone — page behind the sheet, footer */
+  --bg: #2a333c; /* brand charcoal — section base */
+  --surface: #2a333c; /* the floating sheet */
+  --surface-2: #333d47; /* elevated card on the sheet */
+  --fg: #f4f6f8; /* light ink */
+  --muted: #9fabb8; /* cool grey — 5.49:1 on surface */
+  --line: rgba(244, 246, 248, 0.12);
+  --accent: #a4e63a; /* solvomind lime — 8.53:1 on charcoal */
+  --accent-soft: rgba(164, 230, 58, 0.12);
+  --accent-bright: #a4e63a; /* lime — also used for the hero glow */
+  --ink: #151a20; /* deepest surface (console panels) */
+  /* Text that sits ON the lime accent (buttons, logo glyph) */
+  --on-accent: #1b2128;
+  color-scheme: dark;
 }
 
 * {
@@ -31,9 +35,9 @@ html {
 }
 
 body {
-  /* Soft blue-grey gradient page canvas — the floating white container
-     sits on top of this, giving the whole page depth (Aurelio-style). */
-  background: linear-gradient(180deg, #e6edf7 0%, #eef3fa 30%, #f1f5fb 100%)
+  /* Deep charcoal page canvas — the floating sheet sits on top of this,
+     giving the whole page depth. */
+  background: linear-gradient(180deg, #151a20 0%, #1b2128 30%, #212a33 100%)
     no-repeat;
   background-attachment: fixed;
   color: var(--fg);
@@ -53,7 +57,7 @@ h3,
 
 ::selection {
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
 }
 
 /* Visible, on-brand focus ring for keyboard users (trust + a11y) */
@@ -124,19 +128,18 @@ h3,
   }
 }
 
-/* Subtle texture */
+/* Subtle texture — light dots on the dark sheet */
 .bg-paper {
   background-image: radial-gradient(
     circle at 1px 1px,
-    rgba(16, 19, 22, 0.05) 1px,
+    rgba(244, 246, 248, 0.06) 1px,
     transparent 0
   );
   background-size: 24px 24px;
 }
 
 .card {
-  background: var(--surface);
+  background: var(--surface-2);
   border: 1px solid var(--line);
   border-radius: 18px;
 }
-

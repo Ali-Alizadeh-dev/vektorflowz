@@ -126,10 +126,10 @@ export default function Kontakt() {
             <button
               data-field
               type="submit"
-              className="group w-full inline-flex items-center justify-center gap-2.5 pl-7 pr-2.5 py-2.5 rounded-full bg-accent text-bg text-base font-medium hover:bg-accent/90"
+              className="group w-full inline-flex items-center justify-center gap-2.5 pl-7 pr-2.5 py-2.5 rounded-full bg-accent text-on-accent text-base font-medium hover:bg-accent/90"
             >
               {sent ? "E-Mail-Programm geöffnet" : "Nachricht senden"}
-              <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-bg/15 group-hover:translate-x-0.5 transition-transform">
+              <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-on-accent/15 group-hover:translate-x-0.5 transition-transform">
                 <ArrowRight size={16} />
               </span>
             </button>

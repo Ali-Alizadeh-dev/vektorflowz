@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Space_Grotesk, DM_Sans } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Space_Grotesk, DM_Sans, Montserrat } from "next/font/google";
 import "./globals.css";
 
 // Self-hosted via next/font (no request to Google servers — keeps the
@@ -16,6 +16,14 @@ const display = Space_Grotesk({
 const sans = DM_Sans({
   weight: ["400", "500", "700"],
   variable: "--font-sans",
+  display: "swap",
+  preload: false,
+});
+
+// Montserrat = wordmark only (single weight keeps the payload small).
+const brand = Montserrat({
+  weight: ["800"],
+  variable: "--font-brand",
   display: "swap",
   preload: false,
 });
@@ -46,13 +54,21 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  // Matches --canvas so mobile browser chrome blends into the dark page.
+  themeColor: "#1b2128",
+};
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" className={`${display.variable} ${sans.variable}`}>
+    <html
+      lang="de"
+      className={`${display.variable} ${sans.variable} ${brand.variable}`}
+    >
       <body>{children}</body>
     </html>
   );

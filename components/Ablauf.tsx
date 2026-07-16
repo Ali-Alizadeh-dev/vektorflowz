@@ -121,7 +121,7 @@ export default function Ablauf() {
             <div key={s.n} data-step className="relative text-center">
               <span
                 data-orb
-                className="relative z-10 mx-auto flex items-center justify-center w-[54px] h-[54px] rounded-2xl bg-accent text-white text-xl font-semibold shadow-accent-glow ring-4 ring-surface"
+                className="relative z-10 mx-auto flex items-center justify-center w-[54px] h-[54px] rounded-2xl bg-accent text-on-accent text-xl font-semibold shadow-accent-glow ring-4 ring-surface"
               >
                 {s.n}
               </span>

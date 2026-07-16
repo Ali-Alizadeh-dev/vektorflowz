@@ -48,7 +48,7 @@ export default function Sicherheit() {
     <section
       id="security"
       ref={ref}
-      className="section bg-bg border-y border-line"
+      className="section bg-bg"
     >
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -101,7 +101,7 @@ export default function Sicherheit() {
             <div className="mt-5 flex flex-col">
               {/* KI proposes */}
               <div className="flex items-center gap-3.5 rounded-2xl bg-accent-soft border border-accent/20 px-4 py-3.5">
-                <span className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-xl bg-accent text-white shadow-accent-glow">
+                <span className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-xl bg-accent text-on-accent shadow-accent-glow">
                   <Sparkles size={17} />
                 </span>
                 <div className="min-w-0">
@@ -119,9 +119,9 @@ export default function Sicherheit() {
               {/* Human decides — highlighted */}
               <div
                 className="relative flex items-center gap-3.5 rounded-2xl bg-surface border-2 border-accent px-4 py-3.5"
-                style={{ boxShadow: "0 12px 26px -10px rgba(0,61,240,0.35)" }}
+                style={{ boxShadow: "0 12px 26px -10px rgba(164,230,58,0.3)" }}
               >
-                <span className="absolute -top-2.5 left-4 rounded-full bg-accent px-2.5 py-0.5 text-[10.5px] font-semibold tracking-[0.04em] text-white">
+                <span className="absolute -top-2.5 left-4 rounded-full bg-accent px-2.5 py-0.5 text-[10.5px] font-semibold tracking-[0.04em] text-on-accent">
                   MENSCH ENTSCHEIDET
                 </span>
                 <span className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-xl bg-accent-soft text-accent">
@@ -140,15 +140,15 @@ export default function Sicherheit() {
               <Connector />
 
               {/* KI executes */}
-              <div className="flex items-center gap-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 px-4 py-3.5">
-                <span className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-500 text-white">
+              <div className="flex items-center gap-3.5 rounded-2xl bg-emerald-400/10 border border-emerald-400/25 px-4 py-3.5">
+                <span className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-400 text-canvas">
                   <Check size={18} />
                 </span>
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-emerald-700">
+                  <p className="text-sm font-semibold text-emerald-400">
                     KI führt automatisch aus
                   </p>
-                  <p className="text-xs text-emerald-600/80">
+                  <p className="text-xs text-emerald-400">
                     Erst nach menschlicher Freigabe — protokolliert &amp;
                     nachvollziehbar
                   </p>

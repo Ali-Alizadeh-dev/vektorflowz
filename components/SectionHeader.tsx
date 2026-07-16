@@ -70,7 +70,7 @@ export default function SectionHeader({
     <div ref={ref} className={`max-w-3xl ${alignClass}`}>
       <span
         data-sec="pill"
-        className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-fg text-bg text-sm font-medium`}
+        className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/25 bg-accent-soft text-accent text-sm font-medium`}
       >
         {label}
       </span>
