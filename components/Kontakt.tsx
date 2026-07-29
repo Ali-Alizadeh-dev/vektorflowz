@@ -1,14 +1,16 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import Script from "next/script";
 import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import SectionHeader from "./SectionHeader";
-import { ArrowRight, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
+
+const CALENDLY_URL = "https://calendly.com/ali-alizadeh-solvomind/neues-meeting";
 
 export default function Kontakt() {
   const ref = useRef<HTMLDivElement>(null);
-  const [sent, setSent] = useState(false);
 
   useGSAP(
     () => {
@@ -42,26 +44,13 @@ export default function Kontakt() {
     { scope: ref }
   );
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const subject = encodeURIComponent(
-      `Anfrage von ${data.get("name") ?? "Website"}`
-    );
-    const body = encodeURIComponent(
-      `Name: ${data.get("name")}\nE-Mail: ${data.get("email")}\nUnternehmen: ${data.get("company")}\n\n${data.get("message")}`
-    );
-    window.location.href = `mailto:ali.alizadeh@solvomind.de?subject=${subject}&body=${body}`;
-    setSent(true);
-  }
-
   return (
     <section id="kontakt" ref={ref} className="section">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeader
           label="Kontakt"
           title="Mehr Effizienz beginnt mit dem richtigen Gespräch."
-          intro="Beschreiben Sie kurz Ihr Anliegen. Wir melden uns in der Regel innerhalb eines Werktages persönlich bei Ihnen."
+          intro="Buchen Sie direkt ein kostenloses 30-minütiges Erstgespräch — passende Zeitfenster finden Sie im Kalender."
         />
 
         <div className="mt-16 md:mt-20 grid lg:grid-cols-12 gap-6 max-w-5xl mx-auto">
@@ -87,87 +76,25 @@ export default function Kontakt() {
               <p className="mt-3 text-lg font-medium">
                 Kostenlos und unverbindlich.
               </p>
-              <p className="mt-1 text-sm text-muted">
-                Wir melden uns in der Regel innerhalb eines Werktages.
-              </p>
             </div>
           </aside>
 
-          <form
+          <div
             data-card
-            onSubmit={handleSubmit}
-            className="lg:col-span-8 card shadow-card p-6 md:p-8 space-y-5"
+            className="lg:col-span-8 card shadow-card p-6 md:p-8"
           >
-            <div className="grid sm:grid-cols-2 gap-5">
-              <Field data-field name="name" label="Name" required />
-              <Field
-                data-field
-                name="email"
-                label="E-Mail"
-                type="email"
-                required
-              />
-            </div>
-            <Field data-field name="company" label="Unternehmen (optional)" />
-
-            <div data-field>
-              <label className="block text-sm uppercase tracking-[0.18em] text-muted mb-2">
-                Ihr Anliegen
-              </label>
-              <textarea
-                name="message"
-                required
-                rows={5}
-                placeholder="Welche Prozesse kosten aktuell besonders viel Zeit oder Aufwand?"
-                className="w-full rounded-xl bg-bg border border-line px-4 py-3 text-base md:text-lg text-fg placeholder:text-muted/60 focus:outline-none focus:border-accent transition resize-none"
-              />
-            </div>
-
-            <button
-              data-field
-              type="submit"
-              className="group w-full inline-flex items-center justify-center gap-2.5 pl-7 pr-2.5 py-2.5 rounded-full bg-accent text-on-accent text-base font-medium hover:bg-accent/90"
-            >
-              {sent ? "E-Mail-Programm geöffnet" : "Nachricht senden"}
-              <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-on-accent/15 group-hover:translate-x-0.5 transition-transform">
-                <ArrowRight size={16} />
-              </span>
-            </button>
-
-            <p data-field className="text-sm text-muted text-center">
-              Beim Absenden öffnet sich Ihr E-Mail-Programm. Es werden keine Daten auf unserer Website gespeichert.
-            </p>
-          </form>
+            <Script
+              src="https://assets.calendly.com/assets/external/widget.js"
+              strategy="afterInteractive"
+            />
+            <div
+              className="calendly-inline-widget rounded-xl overflow-hidden"
+              data-url={CALENDLY_URL}
+              style={{ minWidth: "320px", height: "700px" }}
+            />
+          </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function Field({
-  name,
-  label,
-  type = "text",
-  required,
-  ...rest
-}: {
-  name: string;
-  label: string;
-  type?: string;
-  required?: boolean;
-  [key: string]: any;
-}) {
-  return (
-    <div {...rest}>
-      <label className="block text-xs uppercase tracking-[0.18em] text-muted mb-2">
-        {label}
-      </label>
-      <input
-        name={name}
-        type={type}
-        required={required}
-        className="w-full rounded-xl bg-bg border border-line px-4 py-3 text-base md:text-lg text-fg placeholder:text-muted/60 focus:outline-none focus:border-accent transition"
-      />
-    </div>
   );
 }

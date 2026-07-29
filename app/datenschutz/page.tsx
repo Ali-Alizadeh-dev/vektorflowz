@@ -84,30 +84,68 @@ export default function DatenschutzPage() {
 
       <h2>5. Kontaktaufnahme</h2>
       <p>
-        Wenn Sie uns per Kontaktformular oder E-Mail Anfragen zukommen lassen,
-        werden Ihre Angaben inklusive der von Ihnen dort angegebenen
-        Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von
-        Anschlussfragen bei mir gespeichert. Diese Daten gebe ich nicht ohne
-        Ihre Einwilligung weiter. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b
-        DSGVO (Vertragsanbahnung) bzw. Art. 6 Abs. 1 lit. f DSGVO
-        (berechtigtes Interesse an der Beantwortung).
+        Wenn Sie uns per E-Mail Anfragen zukommen lassen, werden Ihre Angaben
+        inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks
+        Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei mir
+        gespeichert. Diese Daten gebe ich nicht ohne Ihre Einwilligung weiter.
+        Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung)
+        bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der
+        Beantwortung).
       </p>
       <p>
-        Das Kontaktformular dieser Website öffnet Ihr lokales E-Mail-Programm
-        mit den von Ihnen eingegebenen Inhalten — es findet bei Absenden des
-        Formulars keine Übermittlung an einen Server von uns statt. Erst wenn
-        Sie die E-Mail aus Ihrem Programm versenden, werden die Daten an uns
-        übertragen.
+        Der E-Mail-Link dieser Website öffnet Ihr lokales E-Mail-Programm —
+        es findet dabei keine Übermittlung an einen Server von uns statt.
+        Erst wenn Sie die E-Mail aus Ihrem Programm versenden, werden die
+        Daten an uns übertragen.
       </p>
 
-      <h2>6. Cookies und Tracking</h2>
+      <h2>6. Terminbuchung über Calendly</h2>
       <p>
-        Diese Website verwendet keine Cookies zu Tracking- oder Marketing­zwecken
-        und bindet keine externen Analyse-Dienste (z. B. Google Analytics,
-        Meta Pixel) ein.
+        Für die Buchung eines kostenlosen Erstgesprächs binden wir im
+        Kontaktbereich einen Kalender unseres Dienstleisters{" "}
+        <strong>Calendly, LLC</strong> (USA) ein. Der Kalender wird{" "}
+        <strong>automatisch beim Aufruf der Kontaktseite geladen</strong>.
+        Dabei wird bereits ohne weitere Interaktion eine Verbindung zu
+        Servern von Calendly aufgebaut, es können technisch bedingte sowie
+        funktionale Cookies gesetzt und Daten wie Ihre IP-Adresse an
+        Calendly übermittelt werden.
+      </p>
+      <p>
+        Wenn Sie darüber einen Termin buchen, werden zusätzlich die von
+        Ihnen eingegebenen Daten (z. B. Name, E-Mail-Adresse, Telefonnummer,
+        gewählter Termin, optionale Angaben) an Calendly übermittelt und dort
+        verarbeitet, um den Termin zu organisieren und Erinnerungen zu
+        versenden. Eine Übermittlung in die USA kann dabei stattfinden.
+        Rechtsgrundlage ist unser berechtigtes Interesse an einer einfachen,
+        direkten Terminvereinbarung (Art. 6 Abs. 1 lit. f DSGVO) sowie, im
+        Fall einer Buchung, die Vertragsanbahnung (Art. 6 Abs. 1 lit. b
+        DSGVO). Calendly zeigt beim Laden zusätzlich einen eigenen
+        Cookie-Hinweis, über den Sie der Verarbeitung optionaler Cookies
+        widersprechen können.
+      </p>
+      <p>
+        Weitere Informationen zur Datenverarbeitung durch Calendly finden Sie
+        in dessen Datenschutzerklärung:{" "}
+        <a
+          href="https://calendly.com/privacy"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          calendly.com/privacy
+        </a>
+        . Alternativ erreichen Sie uns weiterhin direkt per E-Mail (siehe
+        Ziffer 5), ohne dass eine Verbindung zu Calendly aufgebaut wird.
       </p>
 
-      <h2>7. Schriftarten (Google Fonts, lokal eingebunden)</h2>
+      <h2>7. Cookies und Tracking</h2>
+      <p>
+        Diese Website selbst verwendet keine Cookies zu Tracking- oder
+        Marketing­zwecken und bindet keine externen Analyse-Dienste (z. B.
+        Google Analytics, Meta Pixel) ein. Der in Ziffer 6 beschriebene
+        Calendly-Kalender im Kontaktbereich kann eigene Cookies setzen.
+      </p>
+
+      <h2>8. Schriftarten (Google Fonts, lokal eingebunden)</h2>
       <p>
         Diese Website nutzt zur einheitlichen Darstellung von Schriftarten
         sogenannte „Google Fonts", die durch Next.js automatisch lokal
@@ -115,7 +153,7 @@ export default function DatenschutzPage() {
         Servern von Google statt.
       </p>
 
-      <h2>8. Ihre Rechte</h2>
+      <h2>9. Ihre Rechte</h2>
       <p>Sie haben jederzeit das Recht auf:</p>
       <ul className="list-disc pl-6 space-y-1">
         <li>Auskunft über die zu Ihrer Person gespeicherten Daten (Art. 15 DSGVO)</li>
@@ -134,7 +172,7 @@ export default function DatenschutzPage() {
         .
       </p>
 
-      <h2>9. Beschwerderecht bei der Aufsichtsbehörde</h2>
+      <h2>10. Beschwerderecht bei der Aufsichtsbehörde</h2>
       <p>
         Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über
         die Verarbeitung Ihrer personenbezogenen Daten zu beschweren. Eine
@@ -149,7 +187,7 @@ export default function DatenschutzPage() {
         .
       </p>
 
-      <h2>10. SSL-/TLS-Verschlüsselung</h2>
+      <h2>11. SSL-/TLS-Verschlüsselung</h2>
       <p>
         Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung
         vertraulicher Inhalte eine SSL-/TLS-Verschlüsselung. Eine verschlüsselte
@@ -157,7 +195,7 @@ export default function DatenschutzPage() {
         Adresszeile Ihres Browsers.
       </p>
 
-      <h2>11. Aktualität und Änderung dieser Datenschutzerklärung</h2>
+      <h2>12. Aktualität und Änderung dieser Datenschutzerklärung</h2>
       <p>
         Diese Datenschutzerklärung ist aktuell gültig. Durch geänderte
         gesetzliche bzw. behördliche Vorgaben kann es notwendig werden, diese
