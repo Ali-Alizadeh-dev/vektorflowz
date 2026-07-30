@@ -81,7 +81,7 @@ export default function AgentsShowcase() {
           label="Unsere Lösungen"
           title={
             <>
-              Ein paar der Agenten, <Accent>die wir bauen.</Accent>
+              Beispiele aus <Accent>unserer Agenten-Bibliothek.</Accent>
             </>
           }
           intro="Jeder dieser Agenten ersetzt Stunden manueller Arbeit pro Woche. Ihrer wird genauso gebaut — um Ihre Workflows herum, nicht von der Stange."

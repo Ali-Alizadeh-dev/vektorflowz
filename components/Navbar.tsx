@@ -189,7 +189,7 @@ export default function Navbar() {
             onClick={() => setOpen(false)}
             className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-accent text-on-accent text-base font-medium hover:bg-accent/90"
           >
-            Unverbindlich austauschen →
+            Kostenloses Erstgespräch →
           </a>
         </div>
       </div>

@@ -87,7 +87,7 @@ const departments = [
    passend zur animation-duration der wf-*-Keyframes in globals.css). So
    läuft das Signal nacheinander Abteilung 1 → 2 → 3 → 4 → von vorn. */
 const CONNECTORS = [13, 38, 63, 88];
-const STEP_SECONDS = 1.5;
+const STEP_SECONDS = 3.5;
 
 type Department = (typeof departments)[number];
 type AgentEntry = Department["agents"][number];
@@ -155,8 +155,8 @@ export default function AIWorkforce() {
           label="Ihre KI-Workforce"
           title={
             <>
-              So arbeitet Ihr Unternehmen in ein paar Monaten —{" "}
-              <Accent>mit KI im Rücken.</Accent>
+              So arbeitet Ihr Unternehmen mit einer{" "}
+              <Accent>KI-Workforce an Ihrer Seite.</Accent>
             </>
           }
           intro="Ein KI-Betriebssystem, trainiert darauf, wie Ihr Unternehmen wirklich arbeitet: ein Team spezialisierter Agenten für Vertrieb, Marketing, Finanzen und Betrieb — im Hintergrund, mit Ihren Leuten am Steuer."
@@ -170,7 +170,7 @@ export default function AIWorkforce() {
             </span>
             <div className="text-left">
               <p className="text-base font-semibold tracking-tight leading-tight">
-                Master Agent
+                Koordinator
               </p>
               <p className="mt-0.5 inline-flex items-center gap-1.5 text-xs text-muted">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />

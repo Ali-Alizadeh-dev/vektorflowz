@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://solvomind.de"),
   title: "solvomind — KI-Automatisierungen für Unternehmen",
   description:
-    "Wir automatisieren wiederkehrende Aufgaben mit KI – damit Ihr Unternehmen Zeit spart, Fehler vermeidet und sich aufs Wesentliche konzentriert. Persönlich, praxisnah, DSGVO-konform. Aus Hamburg, deutschlandweit.",
+    "KI-Agenten, die zu Ihren Abläufen passen – nicht umgekehrt. Persönlich entwickelt, DSGVO-konform. Kostenloses Erstgespräch mit solvomind, Hamburg.",
   keywords: [
     "KI-Automatisierung",
     "Prozessautomatisierung",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "solvomind — KI-Automatisierungen für Unternehmen",
     description:
-      "Wir automatisieren wiederkehrende Aufgaben mit KI – damit Ihr Unternehmen Zeit spart und sich aufs Wesentliche konzentriert. Persönlich, praxisnah, DSGVO-konform.",
+      "Wir finden, wo Ihr Unternehmen Zeit und Geld an manuelle Arbeit verliert, und bauen KI-Agenten, die genau das übernehmen. Persönlich, praxisnah, DSGVO-konform.",
     locale: "de_DE",
     type: "website",
   },

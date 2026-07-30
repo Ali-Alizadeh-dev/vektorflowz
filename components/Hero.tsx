@@ -404,7 +404,7 @@ export default function Hero() {
           <div className="flex flex-col items-center">
             <BrainCanvas />
             <span className="mt-1 text-xl md:text-2xl font-semibold tracking-tight">
-              Second Brain
+              Das Gedächtnis Ihres Unternehmens
             </span>
             <span className="mt-1.5 text-sm text-muted">
               Ihr Unternehmenswissen, als System

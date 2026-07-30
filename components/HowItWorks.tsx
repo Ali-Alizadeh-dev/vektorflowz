@@ -66,7 +66,7 @@ export default function HowItWorks() {
               Ihre Abläufe, <Accent>neu gebaut für KI.</Accent>
             </>
           }
-          intro="Drei Schritte: Wir analysieren Ihre Abläufe, dokumentieren exakt, wie sie funktionieren — und bauen dann die Workflows, die sie am Laufen halten."
+          intro="Kein Tool von der Stange — ein Prozess, gebaut auf dem, was in Ihrem Unternehmen wirklich passiert."
         />
 
         {/* 01 — 02 — 03 Verbindungsleiste */}

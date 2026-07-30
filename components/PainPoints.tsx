@@ -19,7 +19,7 @@ const pains = [
     title: "Ihr Team lebt von Copy-Paste",
     text: "Daten zwischen Tools übertragen, Dokumente von Hand lesen, jeden Montag denselben Bericht neu erstellen. Ihre besten Leute leisten Arbeit ohne Wertschöpfung.",
     stat: "15–20 Std.",
-    statLabel: "verliert jede Person — pro Woche",
+    statLabel: "pro Person und Woche",
   },
   {
     icon: Lock,
@@ -67,10 +67,10 @@ export default function PainPoints() {
     <section id="probleme" ref={ref} className="section bg-bg">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionTitle
-          label="Für wen ist das"
+          label="Für wen ist das geeignet?"
           title={
             <>
-              Kommt Ihnen das <Accent>bekannt vor?</Accent>
+              Kommt Ihnen <Accent>bekannt vor?</Accent>
             </>
           }
           intro="Wir bauen für wachsende Unternehmen, die ihren Abläufen entwachsen sind — dort, wo manuelle Arbeit leise begrenzt, was das Team schaffen kann."
