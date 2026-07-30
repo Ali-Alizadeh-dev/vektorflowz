@@ -77,15 +77,15 @@ export default function Founder() {
                     "radial-gradient(60% 60% at 35% 25%, rgba(164,230,58,0.25), transparent 70%)",
                 }}
               />
-              <div className="relative h-full w-full overflow-hidden rounded-full border border-line">
-                <Image
-                  src="/ali-alizadeh.jpeg"
-                  alt="Ali Alizadeh, Gründer von solvomind"
-                  fill
-                  className="object-cover object-top"
-                  sizes="256px"
-                />
-              </div>
+                <div className="relative h-full w-full overflow-hidden rounded-full border border-line">
+                    <Image
+                        src="/ali-alizadeh.jpeg"
+                        alt="Ali Alizadeh, Gründer von solvomind"
+                        fill
+                        className="object-cover object-top scale-125 origin-top transition-transform"
+                        sizes="256px"
+                    />
+                </div>
             </div>
             <p className="mt-6 text-2xl font-semibold tracking-tight">
               Ali Alizadeh
