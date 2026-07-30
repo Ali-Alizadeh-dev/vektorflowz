@@ -62,7 +62,7 @@ export default function Founder() {
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <SectionTitle
           label="Über uns"
-          title="Kein Ticketsystem. Ein direkter Draht zu den Leuten, die bauen."
+          title="Hinter Solvomind."
         />
 
         <div className="mt-10 md:mt-12 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">

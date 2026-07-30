@@ -38,8 +38,7 @@ export default function Kontakt() {
           label="Sprechen wir"
           title={
             <>
-              Jeden Tag frisst manuelle Arbeit unbemerkt Ihre Marge.{" "}
-              <Accent>Spüren wir es gemeinsam auf.</Accent>
+                Ihre Marge verschwindet nicht von allein. Meist steckt manuelle Arbeit dahinter.
             </>
           }
           intro="Buchen Sie ein kostenloses 30-Minuten-Gespräch. Wir schauen uns an, wie Ihr Betrieb heute läuft, zeigen Ihnen, wo KI Zeit und Geld zurückholt — und Sie gehen mit einer klaren Roadmap raus, ob wir am Ende bauen oder nicht."
