@@ -3,8 +3,8 @@
 import { useRef } from "react";
 import Script from "next/script";
 import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
-import SectionHeader from "./SectionHeader";
+import { gsap } from "@/lib/gsap";
+import SectionTitle, { Accent } from "./SectionTitle";
 import { Mail } from "lucide-react";
 
 const CALENDLY_URL = "https://calendly.com/ali-alizadeh-solvomind/neues-meeting";
@@ -14,86 +14,51 @@ export default function Kontakt() {
 
   useGSAP(
     () => {
-      // Animate the aside rows + the form as whole blocks (not every single
-      // form field) — cheaper on phones and, because we tween toward the
-      // visible state via batch/onEnter, nothing can get stuck hidden.
-      const items = [
-        ...gsap.utils.toArray<HTMLElement>("aside [data-field]"),
-        ...gsap.utils.toArray<HTMLElement>("[data-card]"),
-      ];
-      if (!items.length) return;
-
-      gsap.set(items, { y: 24, opacity: 0 });
-
-      ScrollTrigger.batch(items, {
-        start: "top 88%",
-        once: true,
-        onEnter: (batch) =>
-          gsap.to(batch, {
-            y: 0,
-            opacity: 1,
-            duration: 0.7,
-            stagger: 0.08,
-            ease: "power3.out",
-            overwrite: true,
-          }),
+      const items = ref.current?.querySelectorAll("[data-contact]");
+      if (!items?.length) return;
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
+        defaults: { ease: "power3.out" },
       });
-
-      ScrollTrigger.refresh();
+      tl.from(items, {
+        y: 26,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.12,
+        clearProps: "transform,opacity",
+      });
+      if (document.hidden) tl.progress(1);
     },
     { scope: ref }
   );
 
   return (
-    <section id="kontakt" ref={ref} className="section">
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <SectionHeader
-          label="Kontakt"
-          title="Mehr Effizienz beginnt mit dem richtigen Gespräch."
-          intro="Buchen Sie direkt ein kostenloses 30-minütiges Erstgespräch — passende Zeitfenster finden Sie im Kalender."
+    <section id="kontakt" ref={ref} className="section bg-bg">
+      <div className="mx-auto max-w-5xl px-5 md:px-8">
+        <SectionTitle
+          label="Sprechen wir"
+          title={
+            <>
+              Jeden Tag frisst manuelle Arbeit unbemerkt Ihre Marge.{" "}
+              <Accent>Spüren wir es gemeinsam auf.</Accent>
+            </>
+          }
+          intro="Buchen Sie ein kostenloses 30-Minuten-Gespräch. Wir schauen uns an, wie Ihr Betrieb heute läuft, zeigen Ihnen, wo KI Zeit und Geld zurückholt — und Sie gehen mit einer klaren Roadmap raus, ob wir am Ende bauen oder nicht."
         />
 
-        <div className="mt-16 md:mt-20 grid lg:grid-cols-12 gap-6 max-w-5xl mx-auto">
-          {/* Plain divider list instead of three stacked cards — the form
-              stays the single card in this section */}
-          <aside className="lg:col-span-4">
-            <div data-field className="pb-6 border-b border-line">
-              <p className="text-sm uppercase tracking-[0.2em] text-muted">
-                E-Mail
-              </p>
-              <a
-                href="mailto:ali.alizadeh@solvomind.de"
-                className="mt-3 inline-flex items-center gap-2 text-lg font-medium hover:text-accent transition-colors break-all"
-              >
-                <Mail size={18} className="shrink-0 text-accent" />{" "}
-                ali.alizadeh@solvomind.de
-              </a>
-            </div>
-            <div data-field className="pt-6">
-              <p className="text-sm uppercase tracking-[0.2em] text-muted">
-                Erstgespräch
-              </p>
-              <p className="mt-3 text-lg font-medium">
-                Kostenlos und unverbindlich.
-              </p>
-            </div>
-          </aside>
-
+        {/* Calendly-Einbettung */}
+        <div data-contact className="mt-10 md:mt-12 card shadow-card-lg p-3 md:p-5">
+          <Script
+            src="https://assets.calendly.com/assets/external/widget.js"
+            strategy="afterInteractive"
+          />
           <div
-            data-card
-            className="lg:col-span-8 card shadow-card p-6 md:p-8"
-          >
-            <Script
-              src="https://assets.calendly.com/assets/external/widget.js"
-              strategy="afterInteractive"
-            />
-            <div
-              className="calendly-inline-widget rounded-xl overflow-hidden"
-              data-url={CALENDLY_URL}
-              style={{ minWidth: "320px", height: "700px" }}
-            />
-          </div>
+            className="calendly-inline-widget rounded-xl overflow-hidden"
+            data-url={CALENDLY_URL}
+            style={{ minWidth: "320px", height: "700px" }}
+          />
         </div>
+
       </div>
     </section>
   );

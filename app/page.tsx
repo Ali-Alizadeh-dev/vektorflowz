@@ -1,15 +1,20 @@
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Stats from "@/components/Stats";
-import Leistungen from "@/components/Leistungen";
-import Ablauf from "@/components/Ablauf";
-import Showcase from "@/components/Showcase";
-import Sicherheit from "@/components/Sicherheit";
-import UeberMich from "@/components/UeberMich";
+import PainPoints from "@/components/PainPoints";
+import HowItWorks from "@/components/HowItWorks";
+import AIWorkforce from "@/components/AIWorkforce";
+import AgentsShowcase from "@/components/AgentsShowcase";
+import Stack from "@/components/Stack";
+import Deliverables from "@/components/Deliverables";
+import ROICalculator from "@/components/ROICalculator";
+import Founder from "@/components/Founder";
 import FAQ from "@/components/FAQ";
 import Kontakt from "@/components/Kontakt";
 import Footer from "@/components/Footer";
+// Auskommentiert, bis echte Kundenstimmen & belegbare Zahlen vorliegen:
+// import Testimonials from "@/components/Testimonials";
+// import StatsBand from "@/components/StatsBand";
 
 export default function Page() {
   return (
@@ -17,20 +22,19 @@ export default function Page() {
       <SmoothScroll />
       <Navbar />
 
-      {/* Floating page frame — the white sheet sits on the gradient canvas */}
-      <div className="px-2 sm:px-3 lg:px-4 pt-2 sm:pt-3 lg:pt-4">
-        <div className="relative bg-surface rounded-[1.5rem] md:rounded-[2.25rem] shadow-frame overflow-hidden">
-          <Hero />
-          <Stats />
-          <Leistungen />
-          <Ablauf />
-          <Showcase />
-          <Sicherheit />
-          <UeberMich />
-          <FAQ />
-          <Kontakt />
-        </div>
-      </div>
+      <Hero />
+      <PainPoints />
+      <HowItWorks />
+      <AIWorkforce />
+      <AgentsShowcase />
+      <Stack />
+      <Deliverables />
+      {/* <StatsBand /> — einkommentieren, sobald echte Zahlen vorliegen */}
+      <ROICalculator />
+      {/* <Testimonials /> — einkommentieren, sobald echte Kundenstimmen vorliegen */}
+      <Founder />
+      <FAQ />
+      <Kontakt />
 
       <Footer />
     </main>

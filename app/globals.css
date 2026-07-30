@@ -117,15 +117,127 @@ h3,
 }
 
 .section {
-  padding-top: 8rem;
-  padding-bottom: 8rem;
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
 }
 
 @media (max-width: 768px) {
   .section {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: 3.75rem;
+    padding-bottom: 3.75rem;
   }
+}
+
+/* Altari-Stil Dot-Matrix — dichte, feine Punkte für Hero & Zahlen-Band */
+.bg-dotgrid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(244, 246, 248, 0.09) 1px,
+    transparent 0
+  );
+  background-size: 14px 14px;
+}
+
+/* Endlos-Marquee für die Tool-Chips (Stack-Sektion). Die Liste wird doppelt
+   gerendert; -50% ergibt eine nahtlose Schleife. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+.animate-marquee-reverse {
+  animation: marquee 46s linear infinite reverse;
+}
+.marquee-mask {
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none;
+  }
+}
+
+/* Hero "Second Brain": Agenten-Chips laufen vertikal in einer Endlosschleife
+   durch ihre Spalte. Der Inhalt ist doppelt gerendert; -50% ergibt einen
+   nahtlosen Loop. Dauer pro Spalte via --chip-dur (leicht versetzt). */
+@keyframes chipscroll {
+  to {
+    transform: translateY(-50%);
+  }
+}
+.animate-chipscroll {
+  animation: chipscroll var(--chip-dur, 22s) linear infinite;
+  will-change: transform;
+}
+.chip-window {
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    black 10%,
+    black 72%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    black 10%,
+    black 72%,
+    transparent 100%
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-chipscroll {
+    animation: none;
+  }
+}
+
+/* ROI-Rechner: Range-Slider im Markenlook (Lime-Daumen auf feiner Spur) */
+.roi-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent) 0%, rgba(164, 230, 58, 0.35) 100%);
+  outline-offset: 6px;
+  cursor: pointer;
+}
+.roi-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--accent);
+  border: 3px solid var(--canvas);
+  box-shadow: 0 0 0 1px rgba(164, 230, 58, 0.5);
+}
+.roi-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--accent);
+  border: 3px solid var(--canvas);
+  box-shadow: 0 0 0 1px rgba(164, 230, 58, 0.5);
 }
 
 /* Subtle texture — light dots on the dark sheet */

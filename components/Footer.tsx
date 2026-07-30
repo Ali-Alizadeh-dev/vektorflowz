@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { Instagram } from "lucide-react";
 import { LogoLockup } from "./Logo";
 
 const nav = [
   { href: "#leistungen", label: "Lösungen" },
-  { href: "#ablauf", label: "So arbeiten wir" },
-  { href: "#showcase", label: "Automatisierung" },
+  { href: "#ablauf", label: "Ablauf" },
+  { href: "#rechner", label: "Kosten-Rechner" },
   { href: "#ueber-uns", label: "Über uns" },
   { href: "#faq", label: "FAQ" },
 ];
@@ -24,6 +25,17 @@ export default function Footer() {
                 KI-Automatisierungen für Unternehmen – persönlich entwickelt,
                 praxisnah umgesetzt und DSGVO-konform.
               </p>
+              <div className="mt-6 flex items-center gap-3">
+                <a
+                  href="https://www.instagram.com/solvomind/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="solvomind auf Instagram"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-fg/70 hover:text-accent hover:border-accent/40 transition-colors"
+                >
+                  <Instagram size={18} strokeWidth={1.75} />
+                </a>
+              </div>
             </div>
 
             <div className="md:col-span-3">

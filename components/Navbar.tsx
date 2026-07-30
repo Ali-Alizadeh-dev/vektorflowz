@@ -8,9 +8,9 @@ import { LogoLockup } from "./Logo";
 
 const links = [
   { href: "#leistungen", label: "Lösungen" },
-  { href: "#ablauf", label: "So arbeiten wir" },
-  { href: "#showcase", label: "Automatisierung" },
-  { href: "#security", label: "Sicherheit" },
+  { href: "#ablauf", label: "Ablauf" },
+  // { href: "#testimonials", label: "Kundenstimmen" }, // einkommentieren, sobald echte Testimonials da sind
+  { href: "#faq", label: "FAQ" },
   { href: "#ueber-uns", label: "Über uns" },
   { href: "#kontakt", label: "Kontakt" },
 ];
@@ -131,11 +131,15 @@ export default function Navbar() {
         </nav>
       </header>
 
-      {/* Backdrop */}
+      {/* Backdrop — der Blur darf NUR bei offenem Menü aktiv sein. Ein statisch
+          gesetztes backdrop-blur rendert in Chromium auch bei opacity:0 weiter
+          und legt sich als Weichzeichner über die ganze Seite (v. a. mobil). */}
       <div
         ref={backdropRef}
         onClick={() => setOpen(false)}
-        className="md:hidden fixed inset-0 z-[60] bg-canvas/80 backdrop-blur-sm opacity-0 pointer-events-none"
+        className={`md:hidden fixed inset-0 z-[60] bg-canvas/80 opacity-0 pointer-events-none ${
+          open ? "backdrop-blur-sm" : ""
+        }`}
         aria-hidden="true"
       />
 
