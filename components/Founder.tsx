@@ -91,10 +91,6 @@ export default function Founder() {
             <p className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-accent">
               <MapPin size={14} /> Hamburg · deutschlandweit
             </p>
-            <p className="mt-5 inline-flex items-center gap-2 text-sm text-muted">
-              <ShieldCheck size={15} className="text-accent" />
-              Persönlich betreut · DSGVO-konform
-            </p>
           </div>
 
           {/* Fakten-Karte */}

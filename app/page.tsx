@@ -6,7 +6,6 @@ import HowItWorks from "@/components/HowItWorks";
 import AIWorkforce from "@/components/AIWorkforce";
 import AgentsShowcase from "@/components/AgentsShowcase";
 import Stack from "@/components/Stack";
-import Deliverables from "@/components/Deliverables";
 import ROICalculator from "@/components/ROICalculator";
 import Founder from "@/components/Founder";
 import FAQ from "@/components/FAQ";
@@ -28,7 +27,6 @@ export default function Page() {
       <AIWorkforce />
       <AgentsShowcase />
       <Stack />
-      <Deliverables />
       {/* <StatsBand /> — einkommentieren, sobald echte Zahlen vorliegen */}
       <ROICalculator />
       {/* <Testimonials /> — einkommentieren, sobald echte Kundenstimmen vorliegen */}

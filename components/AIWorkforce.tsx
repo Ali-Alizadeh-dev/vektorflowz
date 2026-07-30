@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import type { CSSProperties } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import SectionTitle, { Accent } from "./SectionTitle";
@@ -57,7 +58,6 @@ const departments = [
     icon: BadgeDollarSign,
     name: "Finanzen",
     count: "4 KI-Agenten",
-    highlight: true,
     agents: [
       { icon: Receipt, label: "Rechnungsstellung" },
       { icon: Scale, label: "Kontenabgleich" },
@@ -78,6 +78,49 @@ const departments = [
     ],
   },
 ];
+
+/* Horizontale Endpunkte (im 0–100-viewBox) der vier Verbindungslinien —
+   ausgerichtet auf die vier Abteilungsspalten, gleiche Reihenfolge wie
+   `departments`. Beam i und Spalte i teilen sich denselben Versatz, damit
+   Linie, Kopf und Agenten derselben Abteilung gemeinsam aufleuchten.
+   STEP_SECONDS = ein voller Schritt der Schleife (4 × 1,5 s = 6-s-Zyklus,
+   passend zur animation-duration der wf-*-Keyframes in globals.css). So
+   läuft das Signal nacheinander Abteilung 1 → 2 → 3 → 4 → von vorn. */
+const CONNECTORS = [13, 38, 63, 88];
+const STEP_SECONDS = 1.5;
+
+type Department = (typeof departments)[number];
+type AgentEntry = Department["agents"][number];
+
+/* Abteilungs-Kopf (Icon + Name + Agentenzahl) — geteilt von Desktop-Grid
+   und Mobile-Baum, damit beide Layouts identisch aussehen. */
+function DeptHead({ d }: { d: Department }) {
+  return (
+    <div className="card wf-head p-4 flex items-center gap-3">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent">
+        <d.icon size={17} strokeWidth={1.75} />
+      </span>
+      <div>
+        <div className="text-sm font-semibold tracking-tight">{d.name}</div>
+        <div className="text-[11px] text-muted">{d.count}</div>
+      </div>
+    </div>
+  );
+}
+
+/* Einzelne Agenten-Karte mit Status-Punkt rechts (leuchtet, wenn die
+   Abteilung im Zyklus aktiv ist — siehe .wf-dot in globals.css). */
+function AgentRow({ a }: { a: AgentEntry }) {
+  return (
+    <div className="wf-agent flex items-center justify-between gap-2 rounded-xl border bg-surface px-3.5 py-3 text-[13px] font-medium text-fg/85">
+      <span className="flex items-center gap-2.5 truncate">
+        <a.icon size={14} strokeWidth={1.75} className="shrink-0 text-muted" />
+        <span className="truncate">{a.label}</span>
+      </span>
+      <span className="wf-dot h-1.5 w-1.5 shrink-0 rounded-full" />
+    </div>
+  );
+}
 
 export default function AIWorkforce() {
   const ref = useRef<HTMLDivElement>(null);
@@ -127,7 +170,7 @@ export default function AIWorkforce() {
             </span>
             <div className="text-left">
               <p className="text-base font-semibold tracking-tight leading-tight">
-                Chief AI Officer
+                Master Agent
               </p>
               <p className="mt-0.5 inline-flex items-center gap-1.5 text-xs text-muted">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
@@ -137,70 +180,115 @@ export default function AIWorkforce() {
           </div>
         </div>
 
-        {/* Verbindungslinien */}
-        <div aria-hidden data-wf className="relative mx-auto h-10 max-w-4xl">
+        {/* ─────────────  Desktop (lg+): 4-Spalten-Orgchart  ───────────── */}
+
+        {/* Verbindungslinien — die aktive zeichnet sich zur Abteilung.
+            Nur ab lg, wo tatsächlich vier Spalten unter dem Fächer liegen. */}
+        <div
+          aria-hidden
+          data-wf
+          className="relative mx-auto hidden h-12 max-w-4xl lg:block"
+        >
           <svg
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
-            className="absolute inset-0 h-full w-full"
+            className="absolute inset-0 h-full w-full overflow-visible"
           >
-            {[13, 38, 63, 88].map((x) => (
+            {CONNECTORS.map((x) => (
               <path
-                key={x}
+                key={`line-${x}`}
                 d={`M 50 0 C 50 70, ${x} 30, ${x} 100`}
                 fill="none"
                 stroke="var(--accent)"
-                strokeOpacity="0.3"
+                strokeOpacity="0.18"
                 strokeWidth="1"
                 strokeDasharray="3 4"
+                vectorEffect="non-scaling-stroke"
+              />
+            ))}
+            {CONNECTORS.map((x, i) => (
+              <path
+                key={`beam-${x}`}
+                className="wf-beam"
+                style={{ animationDelay: `${i * STEP_SECONDS}s` }}
+                d={`M 50 0 C 50 70, ${x} 30, ${x} 100`}
+                pathLength={100}
+                fill="none"
+                stroke="var(--accent)"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeDasharray="100"
                 vectorEffect="non-scaling-stroke"
               />
             ))}
           </svg>
         </div>
 
-        {/* Abteilungen */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {departments.map((d) => (
-            <div key={d.name} data-wf>
-              <div
-                className={`card p-4 flex items-center gap-3 ${
-                  d.highlight ? "border-accent/40" : ""
-                }`}
-              >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent">
-                  <d.icon size={17} strokeWidth={1.75} />
-                </span>
-                <div>
-                  <div className="text-sm font-semibold tracking-tight">
-                    {d.name}
-                  </div>
-                  <div className="text-[11px] text-muted">{d.count}</div>
+        <div className="hidden gap-4 lg:grid lg:grid-cols-4">
+          {departments.map((d, i) => (
+            <div
+              key={d.name}
+              data-wf
+              style={{ "--wf-delay": `${i * STEP_SECONDS}s` } as CSSProperties}
+            >
+              <DeptHead d={d} />
+              <div className="relative mt-3">
+                {/* Vertikale Spalten-Verbindung (leuchtet mit der Abteilung) */}
+                <span
+                  aria-hidden
+                  className="wf-spine pointer-events-none absolute left-[1.3rem] top-0 bottom-2 w-px rounded-full"
+                />
+                <div className="space-y-2.5">
+                  {d.agents.map((a) => (
+                    <AgentRow key={a.label} a={a} />
+                  ))}
                 </div>
               </div>
-              <div className="mt-3 space-y-2.5">
-                {d.agents.map((a) => (
-                  <div
-                    key={a.label}
-                    className={`flex items-center justify-between gap-2 rounded-xl border bg-surface px-3.5 py-3 text-[13px] font-medium text-fg/85 ${
-                      d.highlight ? "border-accent/25" : "border-line"
-                    }`}
-                  >
-                    <span className="flex items-center gap-2.5 truncate">
-                      <a.icon
-                        size={14}
-                        strokeWidth={1.75}
-                        className="shrink-0 text-muted"
+            </div>
+          ))}
+        </div>
+
+        {/* ─────────────  Mobile / Tablet (<lg): vertikaler Baum  ─────────────
+            Statt vier Spalten stapeln sich die Abteilungen untereinander.
+            Jede hängt über einen zentralen Stamm am Master Agent, die Agenten
+            sind eingerückt an einer Zweiglinie aufgereiht — wie im Referenzbild.
+            Highlight-Zyklus (--wf-delay + .wf-* Keyframes) läuft identisch. */}
+        <div className="mx-auto mt-2 max-w-md lg:hidden">
+          {departments.map((d, i) => (
+            <div
+              key={d.name}
+              data-wf
+              style={{ "--wf-delay": `${i * STEP_SECONDS}s` } as CSSProperties}
+            >
+              {/* Stamm von oben (Master Agent bzw. vorherige Abteilung) */}
+              <div aria-hidden className="flex justify-center">
+                <span className="h-6 w-px bg-line" />
+              </div>
+
+              <DeptHead d={d} />
+
+              {/* Agenten, eingerückt an einer vertikalen Zweiglinie */}
+              <div className="relative mt-3">
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute left-[11px] top-4 bottom-6 w-px bg-line"
+                />
+                <span
+                  aria-hidden
+                  className="wf-spine pointer-events-none absolute left-[11px] top-4 bottom-6 w-px rounded-full"
+                />
+                <ul className="space-y-2.5 pl-6">
+                  {d.agents.map((a) => (
+                    <li key={a.label} className="relative">
+                      {/* horizontaler Zweig von der Stammlinie zur Karte */}
+                      <span
+                        aria-hidden
+                        className="pointer-events-none absolute -left-[13px] top-1/2 h-px w-[13px] -translate-y-1/2 bg-line"
                       />
-                      <span className="truncate">{a.label}</span>
-                    </span>
-                    <span
-                      className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                        d.highlight ? "bg-accent" : "bg-fg/20"
-                      }`}
-                    />
-                  </div>
-                ))}
+                      <AgentRow a={a} />
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           ))}

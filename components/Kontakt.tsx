@@ -5,7 +5,6 @@ import Script from "next/script";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import SectionTitle, { Accent } from "./SectionTitle";
-import { Mail } from "lucide-react";
 
 const CALENDLY_URL = "https://calendly.com/ali-alizadeh-solvomind/neues-meeting";
 

@@ -255,3 +255,140 @@ h3,
   border: 1px solid var(--line);
   border-radius: 18px;
 }
+
+/* KI-Workforce: das Signal wandert Abteilung für Abteilung — pro Schritt
+   leuchtet EINE komplette Spalte auf (Verbindungslinie + Kopf + Vertikale +
+   alle Agenten-Karten dieser Abteilung), dann die nächste:
+   Vertrieb → Marketing → Finanzen → Betrieb → von vorn. Immer nur eine aktiv.
+   6-s-Zyklus in 4 gleiche Schritte à 1,5 s (STEP_SECONDS in AIWorkforce.tsx);
+   jede Spalte teilt ihren Versatz über die geerbte CSS-Variable --wf-delay.
+   Alle Keyframes nutzen dasselbe Zeitfenster (aus bis 7 %, an 12–20 %, aus
+   ab 24 %), sodass sich die Fenster der vier Spalten (je 25 %) sauber
+   aneinanderreihen. `backwards` hält vor dem eigenen Einsatz den 0%-Keyframe
+   (aus), sonst blitzen wartende Spalten beim ersten Durchlauf auf. */
+
+/* Verbindungslinie: zeichnet sich zur aktiven Abteilung, hält, blendet aus. */
+@keyframes wf-beam {
+  0% {
+    stroke-dashoffset: 100;
+    opacity: 0;
+  }
+  2% {
+    opacity: 1;
+  }
+  12% {
+    stroke-dashoffset: 0;
+  }
+  20% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  24%,
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+.wf-beam {
+  animation: wf-beam 6s linear infinite backwards;
+  filter: drop-shadow(0 0 3px rgba(164, 230, 58, 0.9));
+}
+
+/* Kopf-Karte der aktiven Abteilung: Lime-Ring + Glow. */
+@keyframes wf-head {
+  0%,
+  7%,
+  24%,
+  100% {
+    border-color: var(--line);
+    box-shadow: 0 0 0 1px rgba(164, 230, 58, 0), 0 0 0 0 rgba(164, 230, 58, 0);
+  }
+  12%,
+  20% {
+    border-color: rgba(164, 230, 58, 0.5);
+    box-shadow: 0 0 0 1px rgba(164, 230, 58, 0.5),
+      0 0 26px 2px rgba(164, 230, 58, 0.28);
+  }
+}
+.wf-head {
+  animation: wf-head 6s ease-in-out infinite backwards;
+  animation-delay: var(--wf-delay, 0s);
+}
+
+/* Agenten-Karten der aktiven Abteilung: dezenter Lime-Rahmen. */
+@keyframes wf-agent {
+  0%,
+  7%,
+  24%,
+  100% {
+    border-color: var(--line);
+    box-shadow: 0 0 0 1px rgba(164, 230, 58, 0);
+  }
+  12%,
+  20% {
+    border-color: rgba(164, 230, 58, 0.4);
+    box-shadow: 0 0 0 1px rgba(164, 230, 58, 0.16);
+  }
+}
+.wf-agent {
+  border-color: var(--line);
+  animation: wf-agent 6s ease-in-out infinite backwards;
+  animation-delay: var(--wf-delay, 0s);
+}
+
+/* Status-Punkt: grau → Lime, solange die Abteilung aktiv ist. */
+@keyframes wf-dot {
+  0%,
+  7%,
+  24%,
+  100% {
+    background: rgba(244, 246, 248, 0.2);
+    box-shadow: 0 0 0 0 rgba(164, 230, 58, 0);
+  }
+  12%,
+  20% {
+    background: var(--accent);
+    box-shadow: 0 0 7px 0 rgba(164, 230, 58, 0.85);
+  }
+}
+.wf-dot {
+  background: rgba(244, 246, 248, 0.2);
+  animation: wf-dot 6s ease-in-out infinite backwards;
+  animation-delay: var(--wf-delay, 0s);
+}
+
+/* Vertikale, die Kopf und Agenten der aktiven Spalte verbindet. */
+@keyframes wf-spine {
+  0%,
+  7%,
+  24%,
+  100% {
+    opacity: 0;
+  }
+  12%,
+  20% {
+    opacity: 1;
+  }
+}
+.wf-spine {
+  background: linear-gradient(
+    180deg,
+    rgba(164, 230, 58, 0.85),
+    rgba(164, 230, 58, 0.12)
+  );
+  opacity: 0;
+  animation: wf-spine 6s ease-in-out infinite backwards;
+  animation-delay: var(--wf-delay, 0s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-beam,
+  .wf-spine {
+    display: none;
+  }
+  .wf-head,
+  .wf-agent,
+  .wf-dot {
+    animation: none;
+  }
+}
