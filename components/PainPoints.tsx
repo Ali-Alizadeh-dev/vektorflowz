@@ -67,10 +67,10 @@ export default function PainPoints() {
     <section id="probleme" ref={ref} className="section bg-bg">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionTitle
-          label="Für wen ist das geeignet?"
+          label="Die häufigsten Engpässe wachsender Unternehmen"
           title={
             <>
-              Kommt Ihnen <Accent>bekannt vor?</Accent>
+                Mehr Mitarbeiter und mehr Software lösen keine <Accent>ineffizienten Prozesse</Accent>.
             </>
           }
           intro="Wir bauen für wachsende Unternehmen, die ihren Abläufen entwachsen sind — dort, wo manuelle Arbeit leise begrenzt, was das Team schaffen kann."

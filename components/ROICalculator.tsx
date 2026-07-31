@@ -218,7 +218,7 @@ export default function ROICalculator() {
             </div>
             <div className="flex items-baseline justify-between gap-3 text-[0.95rem]">
               <span className="text-muted">
-                Tool-Wildwuchs × {selected.length}
+                Tool-Kosten × {selected.length}
               </span>
               <span
                 aria-hidden

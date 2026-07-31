@@ -83,11 +83,12 @@ const departments = [
    ausgerichtet auf die vier Abteilungsspalten, gleiche Reihenfolge wie
    `departments`. Beam i und Spalte i teilen sich denselben Versatz, damit
    Linie, Kopf und Agenten derselben Abteilung gemeinsam aufleuchten.
-   STEP_SECONDS = ein voller Schritt der Schleife (4 × 1,5 s = 6-s-Zyklus,
-   passend zur animation-duration der wf-*-Keyframes in globals.css). So
-   läuft das Signal nacheinander Abteilung 1 → 2 → 3 → 4 → von vorn. */
+   STEP_SECONDS × 4 MUSS der animation-duration der wf-*-Keyframes in
+   globals.css entsprechen (12-s-Zyklus), sonst verschieben sich die
+   Versätze gegeneinander und die Reihenfolge bricht. So läuft das Signal
+   nacheinander Abteilung 1 → 2 → 3 → 4 → von vorn. */
 const CONNECTORS = [13, 38, 63, 88];
-const STEP_SECONDS = 3.5;
+const STEP_SECONDS = 3;
 
 type Department = (typeof departments)[number];
 type AgentEntry = Department["agents"][number];
@@ -217,7 +218,6 @@ export default function AIWorkforce() {
                 stroke="var(--accent)"
                 strokeWidth="1.5"
                 strokeLinecap="round"
-                strokeDasharray="100"
                 vectorEffect="non-scaling-stroke"
               />
             ))}

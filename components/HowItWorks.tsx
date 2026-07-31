@@ -112,18 +112,6 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        <div data-how className="mt-10 text-center">
-          <p className="text-muted text-base md:text-lg">
-            Sehen Sie genau, wo KI in Ihr Unternehmen passt — bevor Sie sich
-            festlegen.
-          </p>
-          <a
-            href="#kontakt"
-            className="mt-5 inline-flex items-center justify-center px-6 py-3 rounded-full bg-fg text-canvas text-[0.95rem] font-semibold hover:bg-fg/90 transition-colors"
-          >
-            Kostenloses Erstgespräch
-          </a>
-        </div>
       </div>
     </section>
   );
