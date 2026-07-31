@@ -41,7 +41,7 @@ export default function Kontakt() {
                 Ihre Marge verschwindet nicht von allein. Meist steckt manuelle Arbeit dahinter.
             </>
           }
-          intro="Buchen Sie ein kostenloses 30-Minuten-Gespräch. Wir schauen uns an, wie Ihr Betrieb heute läuft, zeigen Ihnen, wo KI Zeit und Geld zurückholt — und Sie gehen mit einer klaren Roadmap raus, ob wir am Ende bauen oder nicht."
+          intro="Buchen Sie ein kostenloses 30-Minuten-Gespräch. Wir schauen uns an, wie Ihr Betrieb heute läuft, zeigen Ihnen, wo Sie Zeit und Geld verlieren, und wie wir das mit maßgeschneiderten KI lösen können."
         />
 
         {/* Calendly-Einbettung */}

@@ -344,16 +344,6 @@ export default function Hero() {
       />
 
       <div className="relative mx-auto w-full max-w-6xl px-5 md:px-8 text-center">
-        <span
-          data-hero="eyebrow"
-          className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/60 backdrop-blur-sm px-4 py-1.5 text-sm font-medium text-fg/80"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-          </span>
-          Audit-First-Ansatz
-        </span>
 
         <h1
           data-hero="title"
