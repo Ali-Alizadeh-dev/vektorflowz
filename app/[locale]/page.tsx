@@ -28,7 +28,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <DataSafety t={t.data} />
         <FAQ t={t.faq} />
         <FinalCta t={t.final} />
-        <Contact t={t.contact} locale={locale as Locale} />
+        <Contact t={t.contact} c={t.consent} locale={locale as Locale} />
       </main>
       <Footer t={t.footer} locale={locale as Locale} />
       <RevealObserver />

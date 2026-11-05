@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Instagram, Mail } from "lucide-react";
+import { CalendarDays, Instagram, Mail } from "lucide-react";
 import type { Dict, Locale } from "@/lib/i18n";
 import { SITE } from "@/lib/site";
+import { openConsent, saveConsent, useConsent } from "@/lib/consent";
 import { LogoLockup } from "@/components/Logo";
 import BrainCanvas from "./BrainCanvas";
 import { SectionHead } from "./ui";
@@ -88,7 +89,9 @@ function loadCal(): CalApi {
   return w.Cal;
 }
 
-export function Contact({ t, locale }: { t: Dict["contact"]; locale: Locale }) {
+export function Contact({ t, c, locale }: { t: Dict["contact"]; c: Dict["consent"]; locale: Locale }) {
+  const consent = useConsent();
+  const allowed = consent === "all";
   const ref = useRef<HTMLDivElement>(null);
   const box = useRef<HTMLDivElement>(null);
   const [load, setLoad] = useState(false);
@@ -103,7 +106,7 @@ export function Contact({ t, locale }: { t: Dict["contact"]; locale: Locale }) {
   }, []);
 
   useEffect(() => {
-    if (!load || !box.current) return;
+    if (!load || !allowed || !box.current) return;
     const ns = "solvomind";
     const Cal = loadCal();
     Cal("init", ns, { origin: "https://app.cal.com" });
@@ -123,13 +126,24 @@ export function Contact({ t, locale }: { t: Dict["contact"]; locale: Locale }) {
     api("on", { action: "linkReady", callback: () => setReady(true) });
     const fallback = setTimeout(() => setReady(true), 6000);
     return () => clearTimeout(fallback);
-  }, [load, locale]);
+  }, [load, allowed, locale]);
 
   return (
     <section id="kontakt" className="sec sec-paper">
       <div className="wrap">
         <SectionHead eyebrow={t.eyebrow} title={t.title} sub={t.sub} />
         <div ref={ref} className="rv relative mt-10">
+          {consent !== undefined && !allowed ? (
+            <div className="panel mx-auto grid min-h-[420px] max-w-[760px] place-items-center p-8 text-center">
+              <div className="max-w-[440px]">
+                <span className="mx-auto grid h-12 w-12 place-items-center rounded-xl border border-line-2 text-accent"><CalendarDays size={22} /></span>
+                <b className="mt-5 block text-[1.15rem] font-semibold">{c.calTitle}</b>
+                <p className="mt-3 text-[0.92rem] leading-relaxed text-muted">{c.calText}</p>
+                <button type="button" onClick={() => saveConsent("all")} className="btn btn-primary mt-6">{c.calLoad}</button>
+              </div>
+            </div>
+          ) : (
+            <>
           <div
             ref={box}
             className={`cal-box min-h-[640px] w-full transition-opacity duration-500 ${ready ? "opacity-100" : "opacity-0"}`}
@@ -138,6 +152,8 @@ export function Contact({ t, locale }: { t: Dict["contact"]; locale: Locale }) {
             <div className="pointer-events-none absolute inset-0 grid place-items-center text-[0.9rem] text-muted-2">
               <span className="tdots"><i /><i /><i /></span>
             </div>
+          )}
+            </>
           )}
         </div>
         <p className="mt-4 text-center text-[0.8rem] text-muted-2">
@@ -182,7 +198,10 @@ export function Footer({ t, locale }: { t: Dict["footer"]; locale: Locale }) {
         </div>
         <div className="mt-12 flex flex-col justify-between gap-3 border-t border-line pt-6 text-[0.8rem] text-muted-2 md:flex-row">
           <span>© {new Date().getFullYear()} solvomind · Ali Alizadeh. {t.rights}</span>
-          <span>{t.made}</span>
+          <span className="flex items-center gap-5">
+            <button type="button" onClick={openConsent} className="transition-colors hover:text-fg">{t.cookies}</button>
+            <span>{t.made}</span>
+          </span>
         </div>
       </div>
     </footer>

@@ -106,11 +106,12 @@ export default async function DatenschutzPage({ params }: { params: Promise<{ lo
         Für die Buchung eines kostenlosen Erstgesprächs binden wir im
         Kontaktbereich einen Kalender unseres Dienstleisters{" "}
         <strong>Cal.com, Inc.</strong> (USA) ein. Der Kalender wird{" "}
-        <strong>automatisch geladen, sobald Sie den Kontaktbereich der Seite erreichen</strong>.
-        Dabei wird bereits ohne weitere Interaktion eine Verbindung zu
-        Servern von Cal.com aufgebaut, es können technisch bedingte sowie
-        funktionale Cookies gesetzt und Daten wie Ihre IP-Adresse an
-        Cal.com übermittelt werden.
+        <strong>nur geladen, wenn Sie zuvor eingewilligt haben</strong>, entweder
+        über „Alle akzeptieren“ im Datenschutz-Hinweis oder über die
+        Schaltfläche „Kalender laden“ im Kontaktbereich. Erst dann wird eine
+        Verbindung zu Servern von Cal.com aufgebaut. Dabei können
+        technisch bedingte sowie funktionale Cookies gesetzt und Daten wie
+        Ihre IP-Adresse an Cal.com übermittelt werden.
       </p>
       <p>
         Wenn Sie darüber einen Termin buchen, werden zusätzlich die von
@@ -118,10 +119,14 @@ export default async function DatenschutzPage({ params }: { params: Promise<{ lo
         gewählter Termin, optionale Angaben) an Cal.com übermittelt und dort
         verarbeitet, um den Termin zu organisieren, Erinnerungen zu
         versenden und den Videoraum für das Gespräch bereitzustellen. Eine Übermittlung in die USA kann dabei stattfinden.
-        Rechtsgrundlage ist unser berechtigtes Interesse an einer einfachen,
-        direkten Terminvereinbarung (Art. 6 Abs. 1 lit. f DSGVO) sowie, im
-        Fall einer Buchung, die Vertragsanbahnung (Art. 6 Abs. 1 lit. b
-        DSGVO).
+        Rechtsgrundlage für das Laden des Kalenders und den Zugriff auf
+        Ihr Endgerät ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO,
+        § 25 Abs. 1 TDDDG). Eine Übermittlung in die USA erfolgt auf
+        Grundlage Ihrer Einwilligung (Art. 49 Abs. 1 lit. a DSGVO). Im Fall
+        einer Buchung ist zusätzlich die Vertragsanbahnung Rechtsgrundlage
+        (Art. 6 Abs. 1 lit. b DSGVO). Sie können Ihre Einwilligung jederzeit
+        mit Wirkung für die Zukunft widerrufen, indem Sie im Footer auf
+        „Cookie-Einstellungen“ klicken und „Nur notwendige“ wählen.
       </p>
       <p>
         Weitere Informationen zur Datenverarbeitung durch Cal.com finden Sie
@@ -142,7 +147,17 @@ export default async function DatenschutzPage({ params }: { params: Promise<{ lo
         Diese Website selbst verwendet keine Cookies zu Tracking- oder
         Marketing­zwecken und bindet keine externen Analyse-Dienste (z. B.
         Google Analytics, Meta Pixel) ein. Der in Ziffer 6 beschriebene
-        Cal.com-Kalender im Kontaktbereich kann eigene Cookies setzen.
+        Cal.com-Kalender kann eigene Cookies setzen, wird aber erst nach
+        Ihrer Einwilligung geladen.
+      </p>
+      <p>
+        Ihre Auswahl im Datenschutz-Hinweis speichern wir im lokalen Speicher
+        Ihres Browsers (localStorage), damit der Hinweis nicht bei jedem Besuch
+        erneut erscheint. Diese Speicherung ist technisch erforderlich (§ 25
+        Abs. 2 Nr. 2 TDDDG), es werden dabei keine Daten an uns oder Dritte
+        übertragen. Sie können die Auswahl jederzeit über
+        „Cookie-Einstellungen“ im Footer ändern oder durch Löschen der
+        Website-Daten in Ihrem Browser zurücksetzen.
       </p>
 
       <h2>8. Schriftarten (Google Fonts, lokal eingebunden)</h2>

@@ -345,6 +345,17 @@ export const en: typeof de = {
     alt: "No suitable slot? Email us directly:",
   },
 
+  consent: {
+    title: "Privacy settings",
+    text: "This website uses no tracking and no advertising cookies. Our booking calendar is provided by Cal.com and only loads with your consent. Cal.com may then set cookies and transfer data such as your IP address, including to the USA. You can change your choice at any time via “Cookie settings” in the footer.",
+    privacy: "Read the privacy policy",
+    necessary: "Necessary only",
+    all: "Accept all",
+    calTitle: "Load the booking calendar",
+    calText: "The calendar is provided by Cal.com. Loading it transfers data such as your IP address to Cal.com, including to the USA.",
+    calLoad: "Load calendar",
+  },
+
   footer: {
     claim: "Company knowledge and a team of AI agents. Built with you and GDPR-compliant.",
     product: "Platform",
@@ -357,6 +368,7 @@ export const en: typeof de = {
     },
     rights: "All rights reserved.",
     made: "Made in Hamburg.",
+    cookies: "Cookie settings",
   },
 
   legal: {

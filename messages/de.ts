@@ -350,6 +350,17 @@ export const de = {
     alt: "Kein passender Termin dabei? Schreiben Sie uns direkt:",
   },
 
+  consent: {
+    title: "Datenschutz-Einstellungen",
+    text: "Diese Website nutzt kein Tracking und keine Werbe-Cookies. Unseren Terminkalender stellt Cal.com bereit. Er wird erst mit Ihrer Einwilligung geladen. Dabei kann Cal.com Cookies setzen und Daten wie Ihre IP-Adresse auch in die USA übertragen. Ihre Wahl können Sie jederzeit über „Cookie-Einstellungen“ im Footer ändern.",
+    privacy: "Zur Datenschutzerklärung",
+    necessary: "Nur notwendige",
+    all: "Alle akzeptieren",
+    calTitle: "Terminkalender laden",
+    calText: "Der Kalender wird von Cal.com bereitgestellt. Wenn Sie ihn laden, werden Daten wie Ihre IP-Adresse an Cal.com übertragen, auch in die USA.",
+    calLoad: "Kalender laden",
+  },
+
   footer: {
     claim: "Firmenwissen und ein Team aus KI-Agenten. Persönlich umgesetzt und DSGVO-konform.",
     product: "Plattform",
@@ -362,6 +373,7 @@ export const de = {
     },
     rights: "Alle Rechte vorbehalten.",
     made: "Gemacht in Hamburg.",
+    cookies: "Cookie-Einstellungen",
   },
 
   legal: {

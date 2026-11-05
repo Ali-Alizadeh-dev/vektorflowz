@@ -4,6 +4,7 @@ import { Plus_Jakarta_Sans, Montserrat } from "next/font/google";
 import "../globals.css";
 import { LOCALES, getDict, isLocale } from "@/lib/i18n";
 import { SITE } from "@/lib/site";
+import ConsentBanner from "@/components/site/ConsentBanner";
 
 // Selbst gehostet über next/font – keine Anfrage an Google-Server (DSGVO).
 // Eine Schrift für alles (Headlines + Text), eng gesetzt.
@@ -45,7 +46,10 @@ export default async function LocaleLayout({
   if (!isLocale(locale)) notFound();
   return (
     <html lang={locale} className={`${sans.variable} ${brand.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <ConsentBanner t={getDict(locale).consent} locale={locale} />
+      </body>
     </html>
   );
 }
