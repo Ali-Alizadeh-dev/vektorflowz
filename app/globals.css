@@ -1,22 +1,28 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
+/* Utilities stehen bewusst am Dateiende, damit z. B. `hidden` auch eigene
+   Klassen wie `.btn` überschreibt. */
 
 :root {
-  /* solvomind brand palette — charcoal canvas, lime accent */
-  --canvas: #1b2128; /* deepest tone — page behind the sheet, footer */
-  --bg: #2a333c; /* brand charcoal — section base */
-  --surface: #2a333c; /* the floating sheet */
-  --surface-2: #333d47; /* elevated card on the sheet */
-  --fg: #f4f6f8; /* light ink */
-  --muted: #9fabb8; /* cool grey — 5.49:1 on surface */
-  --line: rgba(244, 246, 248, 0.12);
-  --accent: #a4e63a; /* solvomind lime — 8.53:1 on charcoal */
+  /* solvomind – neutrales Fast-Schwarz, Lime als Signalfarbe */
+  --canvas: #08090b;
+  --bg: #0b0c0e;
+  --surface: #121316;
+  --surface-2: #17191c;
+  --surface-3: #1f2125;
+  --fg: #efefed;
+  --muted: #9b9ea5;
+  --muted-2: #6b6f77;
+  --line: rgba(239, 239, 237, 0.075);
+  --line-2: rgba(239, 239, 237, 0.13);
+  --accent: #a4e63a;
   --accent-soft: rgba(164, 230, 58, 0.12);
-  --accent-bright: #a4e63a; /* lime — also used for the hero glow */
-  --ink: #151a20; /* deepest surface (console panels) */
-  /* Text that sits ON the lime accent (buttons, logo glyph) */
-  --on-accent: #1b2128;
+  --on-accent: #0b0c0e;
+  --ink: #08090b;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
   color-scheme: dark;
 }
 
@@ -27,374 +33,287 @@
 
 html {
   scroll-behavior: smooth;
-  /* Headings/anchors clear the fixed navbar when jumped to */
-  scroll-padding-top: 5rem;
-  /* Responsive base size — every rem-based text/padding scales with this.
-     ~15% smaller than browser default; keeps elements compact on desktop. */
-  font-size: clamp(13.5px, 0.82rem + 0.12vw, 14.5px);
+  scroll-padding-top: 5.5rem;
+  background: var(--canvas);
 }
 
 body {
-  /* Deep charcoal page canvas — the floating sheet sits on top of this,
-     giving the whole page depth. */
-  background: linear-gradient(180deg, #151a20 0%, #1b2128 30%, #212a33 100%)
-    no-repeat;
-  background-attachment: fixed;
+  background: var(--bg);
   color: var(--fg);
-  letter-spacing: -0.011em;
+  letter-spacing: -0.012em;
   text-rendering: optimizeLegibility;
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
 }
 
-/* Headlines use the distinctive display face (Space Grotesk) everywhere
-   without touching every component. */
-h1,
-h2,
-h3,
-.font-display {
-  font-family: var(--font-display), var(--font-sans), sans-serif;
+h1, h2, h3, .font-display {
+  font-family: var(--font-sans), sans-serif;
+  letter-spacing: -0.035em;
 }
 
-::selection {
-  background: var(--accent);
-  color: var(--on-accent);
-}
+::selection { background: var(--accent); color: var(--on-accent); }
 
-/* Visible, on-brand focus ring for keyboard users (trust + a11y) */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
-/* Respect users who prefer less motion */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+/* ---------- Bausteine ---------- */
+
+.wrap { width: min(100% - 32px, 1136px); margin-inline: auto; }
+@media (min-width: 768px) { .wrap { width: min(100% - 64px, 1136px); } }
+
+.sec { position: relative; padding-block: 136px; }
+@media (max-width: 768px) { .sec { padding-block: 80px; } }
+.sec-paper { background: #0e0f12; }
+/* Folgt eine Section mit gleichem Hintergrund direkt, entfällt ihr oberer Abstand (wie im Original). */
+.sec.flush { padding-top: 0; }
+.sec.faq-end { padding-bottom: 72px; }
+.sec-night {
+  background:
+    radial-gradient(120% 70% at 50% 110%, rgba(164, 230, 58, 0.09), transparent 60%),
+    radial-gradient(90% 60% at 50% 0%, rgba(96, 165, 250, 0.06), transparent 70%),
+    #090a0c;
 }
 
-/* GSAP word-mask helpers */
-.word-mask {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
-  padding-bottom: 0.12em;
-  margin-bottom: -0.12em;
-  line-height: 1;
-}
-.word-inner {
-  display: inline-block;
-}
-
-/* Hero "KI-Agenten-Workflow" — flowing dashes along the connector lines. */
-@keyframes flowdash {
-  to {
-    stroke-dashoffset: -16;
-  }
-}
-
-.hairline {
-  height: 1px;
-  width: 100%;
-  background: var(--line);
-  transform-origin: left center;
+.stars::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,.5), transparent 60%),
+    radial-gradient(1px 1px at 28% 72%, rgba(255,255,255,.35), transparent 60%),
+    radial-gradient(1px 1px at 46% 34%, rgba(255,255,255,.45), transparent 60%),
+    radial-gradient(1px 1px at 63% 82%, rgba(255,255,255,.3), transparent 60%),
+    radial-gradient(1px 1px at 78% 22%, rgba(255,255,255,.5), transparent 60%),
+    radial-gradient(1px 1px at 88% 58%, rgba(255,255,255,.35), transparent 60%),
+    radial-gradient(1.5px 1.5px at 6% 52%, rgba(255,255,255,.4), transparent 60%),
+    radial-gradient(1.5px 1.5px at 54% 8%, rgba(255,255,255,.35), transparent 60%),
+    radial-gradient(1px 1px at 36% 92%, rgba(255,255,255,.3), transparent 60%),
+    radial-gradient(1px 1px at 94% 90%, rgba(255,255,255,.3), transparent 60%);
+  background-size: 420px 420px;
+  opacity: 0.6;
 }
 
-.dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: var(--accent);
-  display: inline-block;
+.eyebrow {
+  display: block;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.h2 {
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.25rem, 1.1rem + 3.3vw, 3.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.038em;
+  white-space: pre-line;
+  max-width: 780px;
+  margin-inline: auto;
 }
 
-.section {
-  padding-top: 5.5rem;
-  padding-bottom: 5.5rem;
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
 }
-
-@media (max-width: 768px) {
-  .section {
-    padding-top: 3.75rem;
-    padding-bottom: 3.75rem;
-  }
-}
-
-/* Altari-Stil Dot-Matrix — dichte, feine Punkte für Hero & Zahlen-Band */
-.bg-dotgrid {
-  background-image: radial-gradient(
-    circle at 1px 1px,
-    rgba(244, 246, 248, 0.09) 1px,
-    transparent 0
-  );
-  background-size: 14px 14px;
-}
-
-/* Endlos-Marquee für die Tool-Chips (Stack-Sektion). Die Liste wird doppelt
-   gerendert; -50% ergibt eine nahtlose Schleife. */
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-.animate-marquee {
-  animation: marquee 40s linear infinite;
-}
-.animate-marquee-reverse {
-  animation: marquee 46s linear infinite reverse;
-}
-.marquee-mask {
-  mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
-}
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
-  .animate-marquee-reverse {
-    animation: none;
-  }
-}
-
-/* Hero "Second Brain": Agenten-Chips laufen vertikal in einer Endlosschleife
-   durch ihre Spalte. Der Inhalt ist doppelt gerendert; -50% ergibt einen
-   nahtlosen Loop. Dauer pro Spalte via --chip-dur (leicht versetzt). */
-@keyframes chipscroll {
-  to {
-    transform: translateY(-50%);
-  }
-}
-.animate-chipscroll {
-  animation: chipscroll var(--chip-dur, 22s) linear infinite;
-  will-change: transform;
-}
-.chip-window {
-  mask-image: linear-gradient(
-    180deg,
-    transparent 0%,
-    black 10%,
-    black 72%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    180deg,
-    transparent 0%,
-    black 10%,
-    black 72%,
-    transparent 100%
-  );
-}
-@media (prefers-reduced-motion: reduce) {
-  .animate-chipscroll {
-    animation: none;
-  }
-}
-
-/* ROI-Rechner: Range-Slider im Markenlook (Lime-Daumen auf feiner Spur) */
-.roi-range {
-  -webkit-appearance: none;
-  appearance: none;
-  height: 4px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--accent) 0%, rgba(164, 230, 58, 0.35) 100%);
-  outline-offset: 6px;
-  cursor: pointer;
-}
-.roi-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 999px;
-  background: var(--accent);
-  border: 3px solid var(--canvas);
-  box-shadow: 0 0 0 1px rgba(164, 230, 58, 0.5);
-}
-.roi-range::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 999px;
-  background: var(--accent);
-  border: 3px solid var(--canvas);
-  box-shadow: 0 0 0 1px rgba(164, 230, 58, 0.5);
-}
-
-/* Subtle texture — light dots on the dark sheet */
-.bg-paper {
-  background-image: radial-gradient(
-    circle at 1px 1px,
-    rgba(244, 246, 248, 0.06) 1px,
-    transparent 0
-  );
-  background-size: 24px 24px;
-}
-
-.card {
+.panel-2 {
   background: var(--surface-2);
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: var(--r-md);
+}
+.glass {
+  background: rgba(17, 18, 21, 0.74);
+  border: 1px solid var(--line-2);
+  backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
 }
 
-/* KI-Workforce: das Signal wandert Abteilung für Abteilung — pro Schritt
-   leuchtet EINE komplette Spalte auf (Verbindungslinie + Kopf + Vertikale +
-   alle Agenten-Karten dieser Abteilung), dann die nächste:
-   Vertrieb → Marketing → Finanzen → Betrieb → von vorn. Immer nur eine aktiv.
-   12-s-Zyklus in 4 gleiche Schritte à 3 s (STEP_SECONDS in AIWorkforce.tsx —
-   4 × STEP_SECONDS muss der Dauer hier entsprechen, sonst kippt die
-   Reihenfolge); jede Spalte erbt ihren Versatz über die CSS-Variable
-   --wf-delay. Alle Keyframes nutzen dasselbe Zeitfenster (aus bis 7 %,
-   an 12–20 %, aus ab 24 %), sodass sich die Fenster der vier Spalten
-   (je 25 %) sauber aneinanderreihen. `backwards` hält vor dem eigenen
-   Einsatz den 0%-Keyframe (aus), sonst blitzen wartende Spalten beim
-   ersten Durchlauf auf. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 40px;
+  padding-inline: 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14.5px;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  transition: background-color .18s, border-color .18s, color .18s, transform .2s var(--ease), box-shadow .2s;
+}
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--accent); color: var(--on-accent); box-shadow: 0 10px 30px -12px rgba(164,230,58,.55); }
+.btn-primary:hover { background: #b4ef55; }
+.btn-ghost { border: 1px solid var(--line-2); color: var(--fg); background: rgba(255,255,255,.02); }
+.btn-ghost:hover { border-color: rgba(241,244,246,.3); background: rgba(255,255,255,.05); }
+.btn-light { background: var(--fg); color: var(--on-accent); }
+.btn-light:hover { background: #fff; }
+.btn-sm { height: 36px; padding-inline: 16px; font-size: 14px; }
 
-/* Verbindungslinie: gepunktet, die Punkte fließen vom Koordinator zur
-   aktiven Abteilung (stroke-dashoffset wandert rückwärts = Fluss in
-   Pfadrichtung). Sichtbarkeit blendet weich mit dem Abteilungsfenster;
-   der Versatz von -5 entspricht genau einer Dash-Periode (0.8 + 4.2),
-   damit die Schleife nahtlos ist. Dash-Einheiten sind pathLength-normiert
-   (pathLength=100 im SVG). */
-@keyframes wf-beam {
-  0% {
-    opacity: 0;
-  }
-  4%,
-  20% {
-    opacity: 1;
-  }
-  24%,
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes wf-beam-flow {
-  to {
-    stroke-dashoffset: -5;
-  }
-}
-.wf-beam {
-  stroke-dasharray: 0.8 4.2;
-  animation: wf-beam 12s linear infinite backwards,
-    wf-beam-flow 1.1s linear infinite;
-  filter: drop-shadow(0 0 3px rgba(164, 230, 58, 0.7));
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 2rem;
+  padding-inline: 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  font-size: 0.8rem;
+  color: var(--fg);
+  white-space: nowrap;
 }
 
-/* Kopf-Karte der aktiven Abteilung: Lime-Ring + Glow. */
-@keyframes wf-head {
-  0%,
-  7%,
-  24%,
-  100% {
-    border-color: var(--line);
-    box-shadow: 0 0 0 1px rgba(164, 230, 58, 0), 0 0 0 0 rgba(164, 230, 58, 0);
-  }
-  12%,
-  20% {
-    border-color: rgba(164, 230, 58, 0.5);
-    box-shadow: 0 0 0 1px rgba(164, 230, 58, 0.5),
-      0 0 26px 2px rgba(164, 230, 58, 0.28);
-  }
-}
-.wf-head {
-  animation: wf-head 12s ease-in-out infinite backwards;
-  animation-delay: var(--wf-delay, 0s);
+.lead { font-size: 20px; font-weight: 450; line-height: 1.5; color: var(--muted); max-width: 620px; margin-inline: auto; }
+@media (max-width: 768px) { .lead { font-size: 17px; } }
+.head-gap { margin-top: 72px; }
+@media (max-width: 768px) { .head-gap { margin-top: 48px; } }
+.card-title { font-size: 24px; font-weight: 700; line-height: 1.15; letter-spacing: -0.025em; }
+.card-text { font-size: 15.5px; line-height: 1.5; color: var(--muted); }
+
+/* Quellen-Marker ① in Antworten */
+.src {
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  margin-inline: 2px;
+  border-radius: 999px;
+  border: 1px solid var(--line-2);
+  background: var(--surface-3);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  vertical-align: 0.12em;
 }
 
-/* Agenten-Karten der aktiven Abteilung: dezenter Lime-Rahmen. */
-@keyframes wf-agent {
-  0%,
-  7%,
-  24%,
-  100% {
-    border-color: var(--line);
-    box-shadow: 0 0 0 1px rgba(164, 230, 58, 0);
-  }
-  12%,
-  20% {
-    border-color: rgba(164, 230, 58, 0.4);
-    box-shadow: 0 0 0 1px rgba(164, 230, 58, 0.16);
-  }
-}
-.wf-agent {
-  border-color: var(--line);
-  animation: wf-agent 12s ease-in-out infinite backwards;
-  animation-delay: var(--wf-delay, 0s);
-}
-
-/* Status-Punkt: grau → Lime, solange die Abteilung aktiv ist. */
-@keyframes wf-dot {
-  0%,
-  7%,
-  24%,
-  100% {
-    background: rgba(244, 246, 248, 0.2);
-    box-shadow: 0 0 0 0 rgba(164, 230, 58, 0);
-  }
-  12%,
-  20% {
-    background: var(--accent);
-    box-shadow: 0 0 7px 0 rgba(164, 230, 58, 0.85);
-  }
-}
-.wf-dot {
-  background: rgba(244, 246, 248, 0.2);
-  animation: wf-dot 12s ease-in-out infinite backwards;
-  animation-delay: var(--wf-delay, 0s);
-}
-
-/* Vertikale, die Kopf und Agenten der aktiven Spalte verbindet. */
-@keyframes wf-spine {
-  0%,
-  7%,
-  24%,
-  100% {
-    opacity: 0;
-  }
-  12%,
-  20% {
-    opacity: 1;
-  }
-}
-.wf-spine {
-  background: linear-gradient(
-    180deg,
-    rgba(164, 230, 58, 0.85),
-    rgba(164, 230, 58, 0.12)
-  );
+/* ---------- Scroll-Reveal ---------- */
+.rv {
   opacity: 0;
-  animation: wf-spine 12s ease-in-out infinite backwards;
-  animation-delay: var(--wf-delay, 0s);
+  transform: translateY(22px);
+  transition: opacity .5s var(--ease), transform .6s var(--ease);
+  transition-delay: var(--d, 0s);
+}
+.rv.in { opacity: 1; transform: none; }
+
+/* ---------- Bewegungen ---------- */
+@keyframes ping { 0% { transform: scale(1); opacity: .6; } 70%, 100% { transform: scale(2.8); opacity: 0; } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes tdot { 0%, 60%, 100% { opacity: .25; transform: none; } 30% { opacity: 1; transform: translateY(-2px); } }
+@keyframes wordIn { from { opacity: 0; filter: blur(3px); } to { opacity: 1; filter: none; } }
+@keyframes tIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes shim { 0% { background-position: 100% 0; } 100% { background-position: -150% 0; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes aura { 0%, 100% { opacity: .55; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes nudge { 50% { transform: translateY(2px); } }
+@keyframes heroIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.hero-in { animation: heroIn .8s var(--ease) both; }
+@keyframes pulse { 0% { opacity: .8; transform: scale(1); } 100% { opacity: 0; transform: scale(3); } }
+
+.live-dot { position: relative; width: 7px; height: 7px; border-radius: 999px; background: var(--c, var(--accent)); flex: none; }
+.live-dot::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: inherit; animation: ping 2.2s ease-out infinite; }
+
+.caret { display: inline-block; width: 1px; height: 1.05em; margin-left: 1px; background: var(--fg); vertical-align: -0.15em; animation: blink 1s steps(1) infinite; }
+
+.tdots { display: inline-flex; gap: 3px; }
+.tdots i { width: 4px; height: 4px; border-radius: 999px; background: currentColor; animation: tdot 1.1s ease-in-out infinite; }
+.tdots i:nth-child(2) { animation-delay: .15s; }
+.tdots i:nth-child(3) { animation-delay: .3s; }
+
+.shimmer {
+  background: linear-gradient(90deg, var(--muted-2) 0%, var(--muted-2) 40%, var(--fg) 50%, var(--muted-2) 60%, var(--muted-2) 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shim 1.6s linear infinite;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .wf-beam,
-  .wf-spine {
-    display: none;
-  }
-  .wf-head,
-  .wf-agent,
-  .wf-dot {
-    animation: none;
-  }
+.spinner { width: 12px; height: 12px; border-radius: 999px; border: 1.6px solid var(--line-2); border-top-color: var(--c, var(--accent)); animation: spin .8s linear infinite; flex: none; }
+
+.w { display: inline; opacity: 0; animation: wordIn .38s var(--ease) both; }
+.t-in { animation: tIn .42s var(--ease) both; }
+
+.marquee-track { display: flex; width: max-content; animation: marquee var(--dur, 120s) linear infinite; }
+.marquee-track.rev { animation-direction: reverse; }
+.edge-fade {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
 }
+
+.bar-grow { transform-origin: left center; transform: scaleX(0.06); transition: transform 1.1s var(--ease); transition-delay: var(--d, 0s); }
+.in .bar-grow, .bar-grow.in { transform: scaleX(1); }
+
+/* Gestrichelte Linie, die sich zeichnet */
+.draw { stroke-dasharray: var(--len, 400); stroke-dashoffset: var(--len, 400); transition: stroke-dashoffset 1.6s var(--ease); }
+.in .draw, .draw.in { stroke-dashoffset: 0; }
+
+.scroll-x { scrollbar-width: none; }
+.scroll-x::-webkit-scrollbar { display: none; }
+
+/* Badges in der Canvas-Szene (Position setzt das Script) */
+.scene-el { will-change: transform, opacity; }
+.sbadge {
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 10%, #0e1013);
+  box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--c) 70%, transparent), 0 0 14px -4px var(--c);
+  transition: box-shadow .4s ease, background-color .4s ease, scale .4s var(--ease);
+}
+.lit > .sbadge {
+  background: color-mix(in srgb, var(--c) 22%, #0e1013);
+  box-shadow: 0 0 0 1.5px var(--c), 0 0 26px 0 var(--c);
+  scale: 1.12;
+}
+.stool {
+  background: rgba(20, 22, 26, 0.92);
+  border: 1px solid var(--line-2);
+  transition: border-color .35s ease, box-shadow .35s ease, scale .35s var(--ease);
+}
+.lit > .stool {
+  border-color: var(--lit, var(--accent));
+  box-shadow: 0 0 0 1px var(--lit, var(--accent)), 0 0 22px -4px var(--lit, var(--accent));
+  scale: 1.1;
+}
+
+/* Pixel-Avatare */
+@keyframes pxBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.45px); } }
+@keyframes pxHop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.9px); } }
+@keyframes pxBlink { 0%, 92%, 100% { opacity: 1; } 94%, 97% { opacity: 0; } }
+@keyframes pxStepA { 0%, 49.9% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes pxStepB { 0%, 49.9% { opacity: 0; } 50%, 100% { opacity: 1; } }
+.px-av .px-body { animation: pxBob 2.6s ease-in-out infinite; }
+.px-av .px-eyes { animation: pxBlink 4.2s steps(1) infinite; }
+.px-av .px-leg-b { opacity: 0; }
+.px-working .px-body { animation: pxHop .42s ease-in-out infinite; }
+.px-working .px-leg-a { animation: pxStepA .42s steps(1) infinite; }
+.px-working .px-leg-b { animation: pxStepB .42s steps(1) infinite; }
+
+/* ---------- Reduzierte Bewegung ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .rv { opacity: 1; transform: none; }
+  .marquee-track { animation: none; }
+}
+
+/* Rechtsseiten (Impressum, Datenschutz) */
+.legal h2 { font-size: 1.25rem; font-weight: 600; margin-top: 3rem; color: var(--fg); letter-spacing: -0.01em; }
+.legal a { color: var(--accent); }
+.legal a:hover { text-decoration: underline; }
+.legal strong { color: var(--fg); }
+.legal ul { margin-block: .5rem; list-style: disc; padding-left: 1.25rem; }
+
+@tailwind utilities;

@@ -34,11 +34,11 @@ export function LogoMark({ className = "w-8 h-8", variant = "tile" }: Props) {
 }
 
 /** Full lockup: mark + wordmark. */
-export function LogoLockup({ className = "" }: { className?: string }) {
+export function LogoLockup({ className = "", small = false }: { className?: string; small?: boolean }) {
   return (
-    <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <LogoMark className="w-7 h-7" />
-      <span className="font-brand font-extrabold tracking-[-0.01em] text-xl text-accent">
+    <span className={`inline-flex items-center ${small ? "gap-2" : "gap-2.5"} ${className}`}>
+      <LogoMark className={small ? "h-6 w-6" : "w-7 h-7"} />
+      <span className={`font-brand font-extrabold tracking-[-0.01em] text-accent ${small ? "text-[18px]" : "text-xl"}`}>
         solvomind
       </span>
     </span>

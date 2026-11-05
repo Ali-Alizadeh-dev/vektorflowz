@@ -1,2 +1,7 @@
 node_modules
 .next/
+
+# Referenz-Screenshots fremder Websites (nur lokal)
+docs/referenz/
+
+.DS_Store
