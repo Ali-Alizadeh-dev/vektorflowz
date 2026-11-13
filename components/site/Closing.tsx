@@ -6,6 +6,7 @@ import type { Dict, Locale } from "@/lib/i18n";
 import { SITE } from "@/lib/site";
 import { openConsent, saveConsent, useConsent } from "@/lib/consent";
 import { LogoLockup } from "@/components/Logo";
+import { GUIDES_PATH } from "@/lib/guides";
 import BrainCanvas from "./BrainCanvas";
 import { SectionHead } from "./ui";
 
@@ -168,7 +169,7 @@ export function Contact({ t, c, locale }: { t: Dict["contact"]; c: Dict["consent
 export function Footer({ t, locale }: { t: Dict["footer"]; locale: Locale }) {
   const L = t.links;
   const cols = [
-    { h: t.product, items: [[L.how, "#ablauf"], [L.agents, "#agenten"], [L.integrations, "#integrationen"]] },
+    { h: t.product, items: [[L.how, "#ablauf"], [L.agents, "#agenten"], [L.integrations, "#integrationen"], [L.guide, GUIDES_PATH]] },
     { h: t.company, items: [[L.about, "#ueber-uns"], [L.faq, "#faq"], [L.contact, "#kontakt"]] },
     { h: t.legal, items: [[L.imprint, `/${locale}/impressum`], [L.privacy, `/${locale}/datenschutz`]] },
   ];

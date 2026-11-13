@@ -365,6 +365,7 @@ export const en: typeof de = {
     links: {
       how: "How it works", integrations: "Integrations", agents: "Agents",
       about: "About us", faq: "FAQ", contact: "Contact", imprint: "Legal notice", privacy: "Privacy",
+      guide: "Guides (German)",
     },
     rights: "All rights reserved.",
     made: "Made in Hamburg.",

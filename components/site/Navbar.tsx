@@ -5,8 +5,13 @@ import { Menu, X, Globe } from "lucide-react";
 import type { Dict, Locale } from "@/lib/i18n";
 import { LogoLockup } from "@/components/Logo";
 
-export default function Navbar({ t, locale }: { t: Dict["nav"]; locale: Locale }) {
+/**
+ * `base` setzt ein Präfix vor die Anker-Links (z. B. "/de" auf Unterseiten),
+ * damit „Plattform“ & Co. zurück auf die Startseite führen.
+ */
+export default function Navbar({ t, locale, base = "" }: { t: Dict["nav"]; locale: Locale; base?: string }) {
   const [open, setOpen] = useState(false);
+  const link = (h: string) => (h.startsWith("#") ? `${base}${h}` : h);
   const [scrolled, setScrolled] = useState(false);
   const other: Locale = locale === "de" ? "en" : "de";
 
@@ -39,7 +44,7 @@ export default function Navbar({ t, locale }: { t: Dict["nav"]; locale: Locale }
         <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center whitespace-nowrap text-[14px] font-medium text-fg/70 lg:flex">
           {t.links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="inline-flex h-9 items-center rounded-full px-3.5 transition-colors hover:bg-white/[0.05] hover:text-fg">
+              <a href={link(l.href)} className="inline-flex h-9 items-center rounded-full px-3.5 transition-colors hover:bg-white/[0.05] hover:text-fg">
                 {l.label}
               </a>
             </li>
@@ -56,7 +61,7 @@ export default function Navbar({ t, locale }: { t: Dict["nav"]; locale: Locale }
             <Globe size={14} strokeWidth={2} aria-hidden />
             {other.toUpperCase()}
           </a>
-          <a href="#kontakt" className="btn btn-light btn-sm hidden sm:inline-flex">
+          <a href={link("#kontakt")} className="btn btn-light btn-sm hidden sm:inline-flex">
             {t.cta}
           </a>
           <button
@@ -82,7 +87,7 @@ export default function Navbar({ t, locale }: { t: Dict["nav"]; locale: Locale }
         <ul className="p-3">
           {t.links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-[1.05rem] font-medium hover:bg-white/5">
+              <a href={link(l.href)} onClick={() => setOpen(false)} className="block rounded-xl px-4 py-3 text-[1.05rem] font-medium hover:bg-white/5">
                 {l.label}
               </a>
             </li>
@@ -96,7 +101,7 @@ export default function Navbar({ t, locale }: { t: Dict["nav"]; locale: Locale }
           </li>
         </ul>
         <div className="border-t border-line p-4">
-          <a href="#kontakt" onClick={() => setOpen(false)} className="btn btn-primary w-full">
+          <a href={link("#kontakt")} onClick={() => setOpen(false)} className="btn btn-primary w-full">
             {t.cta}
           </a>
         </div>

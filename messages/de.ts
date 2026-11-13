@@ -21,6 +21,7 @@ export const de = {
       { href: "#ablauf", label: "So funktioniert's" },
       { href: "#agenten", label: "Agenten" },
       { href: "#integrationen", label: "Integrationen" },
+      { href: "/de/guides", label: "Guides" },
     ],
     cta: "Erstgespräch buchen",
     menu: "Menü öffnen",
@@ -370,6 +371,7 @@ export const de = {
     links: {
       how: "So funktioniert's", integrations: "Integrationen", agents: "Agenten",
       about: "Über uns", faq: "FAQ", contact: "Kontakt", imprint: "Impressum", privacy: "Datenschutz",
+      guide: "Guides",
     },
     rights: "Alle Rechte vorbehalten.",
     made: "Gemacht in Hamburg.",
