@@ -4,7 +4,18 @@ import { useState } from "react";
 import { Check, ChevronDown, Copy } from "lucide-react";
 
 /** Prompt-Box mit Kopieren-Knopf, optional eingeklappt. */
-export default function CopyBlock({ label, text, collapsible = false }: { label: string; text: string; collapsible?: boolean }) {
+export default function CopyBlock({
+  label,
+  text,
+  collapsible = false,
+  moreLabel = "Ganzen Agenten anzeigen",
+}: {
+  label: string;
+  text: string;
+  collapsible?: boolean;
+  /** Beschriftung des Knopfs unter dem eingeklappten Text. */
+  moreLabel?: string;
+}) {
   const [open, setOpen] = useState(!collapsible);
   const [copied, setCopied] = useState(false);
 
@@ -53,7 +64,7 @@ export default function CopyBlock({ label, text, collapsible = false }: { label:
           <>
             <div aria-hidden className="pointer-events-none absolute inset-x-px bottom-px h-32 rounded-b-[18px] bg-gradient-to-b from-transparent to-[#0e0f12]" />
             <button type="button" onClick={() => setOpen(true)} className="btn btn-ghost btn-sm absolute bottom-4 left-1/2 -translate-x-1/2 !bg-surface">
-              Ganzen Agenten anzeigen <ChevronDown size={15} aria-hidden />
+              {moreLabel} <ChevronDown size={15} aria-hidden />
             </button>
           </>
         )}

@@ -16,6 +16,16 @@ export type GuideInfo = {
 
 export const GUIDES: GuideInfo[] = [
   {
+    slug: "ki-buchhaltung",
+    title: "KI-Buchhaltung",
+    description:
+      "Claude per Chrome-Erweiterung auf Ihre Buchhaltung in Lexware oder DATEV loslassen: Einrichtung, Beispiel-Prompt und klare Grenzen, wo der Mensch freigibt.",
+    category: "KI-Systeme",
+    tag: "Buchhaltung",
+    date: "16. November 2026",
+    readTime: "7 Min.",
+  },
+  {
     slug: "ki-prozess-audit",
     title: "KI-Prozess-Audit",
     description:
