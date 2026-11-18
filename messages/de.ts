@@ -42,9 +42,9 @@ export const de = {
   },
 
   hero: {
-    titleA: "Ein KI-Team für",
-    titleB: "Ihr ganzes Unternehmen.",
-    sub: `Mit ${PRODUCT} bündeln wir Ihr Firmenwissen, Ihre Tools und Ihre Teams an einem Ort. Jede Abteilung bekommt einen eigenen KI-Agenten, der seine Antworten mit Quellen belegt, DSGVO-konform arbeitet und zu Ihren Abläufen passt.`,
+    titleA: "Ihr Unternehmen arbeitet weiter.",
+    titleB: "Auch wenn Ihre Mitarbeiter Feierabend haben.",
+    sub: `${PRODUCT} gibt Ihrem Unternehmen ein eigenes KI-Gehirn: Firmenwissen, Tools und Abläufe an einem Ort. Jede Abteilung bekommt Agenten, die genau die Aufgaben übernehmen, die Sie sich wünschen. Und weil sich das System merkt, was getan wird, kennt es Ihr Unternehmen mit jeder Woche besser.`,
     cta: "Kostenloses Erstgespräch",
     cta2: "So funktioniert's",
     try: "Probieren:",
@@ -324,12 +324,11 @@ export const de = {
     eyebrow: "FAQ",
     title: "Häufige Fragen.",
     items: [
-      [`Was ist ${PRODUCT}?`, `${PRODUCT} macht das Wissen Ihres Unternehmens für alle abfragbar. Es greift auf Dokumente, E-Mails, Ablage, Buchhaltung und CRM zu und belegt jede Antwort mit einer Quelle. Dazu kommt ein Team aus KI-Agenten, einer pro Abteilung, das wiederkehrende Aufgaben erledigt.`],
-      ["Plattform oder individuelle Lösung: Was passt zu uns?", `Die ${PRODUCT}-Plattform passt, wenn Sie schnell starten wollen. Individuell bauen wir, wenn Sie eigene Agenten, besondere Anbindungen oder eine eigene Umgebung brauchen. Im Erstgespräch finden wir das gemeinsam heraus.`],
-      ["Wie lange dauert die Umsetzung?", "Kleinere Automatisierungen stehen oft nach wenigen Tagen, größere Lösungen brauchen einige Wochen. Nach dem Erstgespräch erhalten Sie einen realistischen Zeitplan."],
+      [`Was ist ${PRODUCT}?`, `${PRODUCT} ist das KI-Gehirn Ihres Unternehmens. Es bündelt Ihr Firmenwissen aus Dokumenten, E-Mails, Ablage, Buchhaltung und CRM an einem Ort und belegt jede Antwort mit einer Quelle. Darauf arbeitet ein Team aus KI-Agenten: Jede Abteilung bekommt eigene Agenten mit genau den Aufgaben, die Sie festlegen, vom Beantworten von Anfragen bis zum Vorbereiten von Angeboten. Das System merkt sich, was getan wird, und lernt Ihr Unternehmen dadurch mit der Zeit immer besser kennen.`],
+      ["Wie lange dauert die Umsetzung?", "Das hängt von der Größe des Projekts ab. Vereinbaren Sie einfach ein kostenloses Erstgespräch: Wir schauen uns Ihr Vorhaben an und sagen Ihnen danach, wie lange die Umsetzung realistisch dauert."],
       ["Funktioniert das mit unserer Software?", "In den meisten Fällen ja. Wir binden CRM, Kalender, Buchhaltung, Telefonanlagen und interne Datenbanken an. Fehlt eine Anbindung, bauen wir sie."],
       ["Brauchen wir technisches Vorwissen?", "Nein. Konzeption, Entwicklung und Einrichtung übernehmen wir. Sie kennen Ihre Abläufe, um den Rest kümmern wir uns."],
-      ["Wie sicher sind unsere Daten?", "Wir arbeiten DSGVO-konform, verarbeiten Daten in Europa und sorgen dafür, dass jeder Zugriff nachvollziehbar bleibt. Ihre Daten werden nie zum Training von KI-Modellen verwendet."],
+      ["Wie sicher sind unsere Daten?", "Sie entscheiden, wo Ihre Daten verarbeitet werden: Auf Wunsch setzen wir lokale KI-Modelle ein, die auf Ihren eigenen Servern laufen, oder europäische Cloud-Dienste. Wir arbeiten DSGVO-konform, jeder Zugriff bleibt nachvollziehbar, und Ihre Daten werden nie zum Training von KI-Modellen verwendet."],
       ["Was kostet das?", "Das Erstgespräch ist kostenlos. Danach erhalten Sie für jeden Schritt ein festes Angebot, ohne Abo und ohne versteckte Kosten."],
     ],
     more: "Noch Fragen?",

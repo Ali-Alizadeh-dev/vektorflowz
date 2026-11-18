@@ -36,9 +36,9 @@ export const en: typeof de = {
   },
 
   hero: {
-    titleA: "An AI team for",
-    titleB: "your entire company.",
-    sub: `With ${PRODUCT}, we bring your company knowledge, tools and teams together in one place. Every department gets its own AI agent that backs its answers with sources, works GDPR-compliant and fits the way you work.`,
+    titleA: "Your company keeps working.",
+    titleB: "Even after your team clocks out.",
+    sub: `${PRODUCT} gives your company its own AI brain: knowledge, tools and workflows in one place. Every department gets agents that take on exactly the jobs you want them to. And because the system remembers what gets done, it knows your company better every week.`,
     cta: "Free intro call",
     cta2: "How it works",
     try: "Try:",
@@ -318,12 +318,11 @@ export const en: typeof de = {
     eyebrow: "FAQ",
     title: "Questions, answered.",
     items: [
-      [`What is ${PRODUCT}?`, `${PRODUCT} makes everything your company knows searchable for everyone. It draws on documents, email, storage, accounting and CRM and backs every answer with a source. On top sits a team of AI agents, one per department, that handles repeat work.`],
-      ["Platform or custom build: which fits us?", `The ${PRODUCT} platform fits if you want to start quickly. We build custom when you need your own agents, special connectors or your own environment. We'll work it out together on the intro call.`],
-      ["How long does it take?", "Smaller automations are often live within days; larger solutions take a few weeks. After the intro call, you get a realistic timeline."],
+      [`What is ${PRODUCT}?`, `${PRODUCT} is your company's AI brain. It brings together what your company knows from documents, email, storage, accounting and CRM and backs every answer with a source. On top works a team of AI agents: every department gets its own agents with exactly the jobs you define, from answering inquiries to preparing quotes. The system remembers what gets done and gets to know your company better over time.`],
+      ["How long does it take?", "That depends on the size of the project. Book a free intro call: we look at what you have in mind and then tell you how long it will realistically take."],
       ["Does it work with our software?", "In most cases, yes. We connect CRM, calendars, accounting, phone systems and internal databases. If a connector is missing, we build it."],
       ["Do we need technical knowledge?", "No. We handle design, development and setup. You know how you work, we take care of the rest."],
-      ["How safe is our data?", "We work GDPR-compliant, process in Europe and keep every access traceable. Your data is never used for training."],
+      ["How safe is our data?", "You decide where your data is processed: on request we use local AI models running on your own servers, or European cloud services. We work GDPR-compliant, keep every access traceable, and your data is never used to train AI models."],
       ["What does it cost?", "The intro call is free. After that, you get a fixed proposal for each step, with no subscription and no hidden costs."],
     ],
     more: "More questions?",

@@ -11,5 +11,5 @@ export const SITE = {
   city: "Hamburg",
   /** Cal.com-Link: „benutzername/termin-slug“ */
   cal: "ali-alizadeh-tahbua/erstgespraech",
-  instagram: "https://www.instagram.com/solvomind/",
+  instagram: "https://www.instagram.com/jstali_ai/",
 };

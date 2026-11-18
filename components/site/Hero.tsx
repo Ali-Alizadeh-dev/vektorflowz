@@ -158,8 +158,8 @@ export default function Hero({ t, depts }: { t: Dict["hero"]; depts: Dict["depts
       </div>
 
       <div className="relative mx-auto w-[min(100%-32px,1180px)] text-center">
-        <h1 className="hero-in mx-auto text-[clamp(2.25rem,3.754vw,4.25rem)] font-bold leading-[1.05] tracking-[-0.045em]">
-          {t.titleA} <span className="text-accent">{t.titleB}</span>
+        <h1 className="hero-in mx-auto text-[clamp(2.1rem,3.2vw,3.6rem)] font-bold leading-[1.08] tracking-[-0.045em] [text-wrap:balance]">
+          {t.titleA} <br className="hidden sm:block" /><span className="text-accent">{t.titleB}</span>
         </h1>
         <p className="hero-in mx-auto mt-3 max-w-[640px] text-[17px] font-[450] leading-[1.5] text-muted [text-wrap:balance] md:text-[19px]" style={{ animationDelay: ".12s" }}>
           {t.sub}
