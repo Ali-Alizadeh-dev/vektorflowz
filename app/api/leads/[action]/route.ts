@@ -51,8 +51,27 @@ const MAIL_LINKS = ["bestaetigen", "abmelden"];
 
 export async function GET(req: Request, { params }: { params: Promise<{ action: string }> }) {
   const { action } = await params;
+  if (action === "freigabe") return checkUnlock(req);
   if (!MAIL_LINKS.includes(action)) return NextResponse.json({ error: "not found" }, { status: 404 });
   return mailLink(req, action);
+}
+
+/** Prüft einen Freischalt-Link (?freigabe=… aus der Mail), damit der Guide auf jedem Gerät frei ist. */
+async function checkUnlock(req: Request) {
+  const cfg = config();
+  const token = new URL(req.url).searchParams.get("t") ?? "";
+  if (!cfg || !token) return NextResponse.json({ ok: false });
+  try {
+    const r = await fetch(`${cfg.base}/freigabe?t=${encodeURIComponent(token.slice(0, 64))}`, {
+      headers: { Authorization: `Bearer ${cfg.secret}` },
+      cache: "no-store",
+      signal: AbortSignal.timeout(8_000),
+    });
+    const data = await r.json().catch(() => ({}));
+    return NextResponse.json({ ok: data.ok === true }, { headers: { "Cache-Control": "no-store" } });
+  } catch {
+    return NextResponse.json({ ok: false });
+  }
 }
 
 export async function POST(req: Request, { params }: { params: Promise<{ action: string }> }) {

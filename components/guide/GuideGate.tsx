@@ -32,20 +32,45 @@ export default function GuideGate({
   // ready: erst nach dem Lesen des localStorage Formular zeigen, sonst blitzt es bei Wiederkehrern kurz auf
   const [ready, setReady] = useState(false);
   const [locked, setLocked] = useState(true);
-  const [done, setDone] = useState<{ email: string; ref: string } | null>(null);
+  const [done, setDone] = useState<{ email: string; ref: string; confirmed: boolean } | null>(null);
 
-  useEffect(() => {
-    try {
-      if (localStorage.getItem(UNLOCK_KEY)) setLocked(false);
-    } catch {}
-    setReady(true);
-  }, []);
-
-  const unlock = (email: string, ref: string) => {
+  const remember = () => {
     try {
       localStorage.setItem(UNLOCK_KEY, new Date().toISOString());
     } catch {}
-    setDone({ email, ref });
+  };
+
+  useEffect(() => {
+    let known = false;
+    try {
+      known = Boolean(localStorage.getItem(UNLOCK_KEY));
+    } catch {}
+    if (known) {
+      setLocked(false);
+      setReady(true);
+      return;
+    }
+    // Link aus der Mail (?freigabe=…): schaltet auch auf einem anderen Gerät frei
+    const url = new URL(window.location.href);
+    const token = url.searchParams.get("freigabe");
+    if (!token) return setReady(true);
+    url.searchParams.delete("freigabe");
+    window.history.replaceState(null, "", url.pathname + url.search + url.hash);
+    fetch(`/api/leads/freigabe?t=${encodeURIComponent(token)}`)
+      .then((r) => r.json())
+      .then((d) => {
+        if (d.ok) {
+          remember();
+          setLocked(false);
+        }
+      })
+      .catch(() => {})
+      .finally(() => setReady(true));
+  }, []);
+
+  const unlock = (email: string, ref: string, confirmed: boolean) => {
+    remember();
+    setDone({ email, ref, confirmed });
     setLocked(false);
   };
 
@@ -64,7 +89,7 @@ export default function GuideGate({
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
-      {done && <ThankYou email={done.email} answerRef={done.ref} booking={booking} />}
+      {done && <ThankYou email={done.email} answerRef={done.ref} confirmed={done.confirmed} booking={booking} />}
 
       <div className="relative">
         <div
@@ -86,7 +111,7 @@ const INPUT =
   "h-11 w-full rounded-[10px] border border-line-2 bg-bg px-3.5 text-[15px] text-fg outline-none transition-colors placeholder:text-muted-2 focus:border-accent";
 const LABEL = "mb-1.5 block text-[13px] font-medium text-muted";
 
-function GateForm({ guide, onUnlock }: { guide: string; onUnlock: (email: string, ref: string) => void }) {
+function GateForm({ guide, onUnlock }: { guide: string; onUnlock: (email: string, ref: string, confirmed: boolean) => void }) {
   const id = useId();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -110,7 +135,7 @@ function GateForm({ guide, onUnlock }: { guide: string; onUnlock: (email: string
         }),
       });
       const data = await r.json().catch(() => ({}));
-      if (r.ok) return onUnlock(email, data.ref ?? "");
+      if (r.ok) return onUnlock(email, data.ref ?? "", data.confirmed === true);
       setError(
         data.error === "email"
           ? "Bitte prüfen Sie die E-Mail-Adresse."
@@ -140,6 +165,8 @@ function GateForm({ guide, onUnlock }: { guide: string; onUnlock: (email: string
         </h2>
         <p className="mt-2 text-[15px] leading-[1.6] text-muted">
           E-Mail eintragen, dann geht es sofort weiter. Einmal eingetragen, sind alle Guides auf dieser Seite frei.
+          <br />
+          <span className="text-[14px] text-muted-2">Schon eingetragen, z. B. am Rechner? Einfach dieselbe E-Mail noch einmal eingeben.</span>
         </p>
 
         <form onSubmit={submit} className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -194,7 +221,7 @@ function GateForm({ guide, onUnlock }: { guide: string; onUnlock: (email: string
   );
 }
 
-function ThankYou({ email, answerRef, booking }: { email: string; answerRef: string; booking: string }) {
+function ThankYou({ email, answerRef, confirmed, booking }: { email: string; answerRef: string; confirmed: boolean; booking: string }) {
   const id = useId();
   const [pick, setPick] = useState("");
   const [other, setOther] = useState("");
@@ -221,11 +248,13 @@ function ThankYou({ email, answerRef, booking }: { email: string; answerRef: str
       className="mb-2 mt-14 rounded-[18px] border border-[rgba(164,230,58,0.35)] bg-[linear-gradient(135deg,rgba(164,230,58,0.08),transparent_60%)] px-5 py-6 md:px-7"
     >
       <p className="flex items-center gap-2 text-[17px] font-semibold">
-        <Check size={18} className="text-accent" aria-hidden /> Freigeschaltet. Viel Spaß beim Lesen.
+        <Check size={18} className="text-accent" aria-hidden /> {confirmed ? "Willkommen zurück. Viel Spaß beim Lesen." : "Freigeschaltet. Viel Spaß beim Lesen."}
       </p>
-      <p className="mt-1.5 text-[14.5px] leading-[1.6] text-muted">
-        Bitte bestätigen Sie noch kurz die Mail, die gerade an <b className="text-fg">{email}</b> gegangen ist.
-      </p>
+      {!confirmed && (
+        <p className="mt-1.5 text-[14.5px] leading-[1.6] text-muted">
+          Bitte bestätigen Sie noch kurz die Mail, die gerade an <b className="text-fg">{email}</b> gegangen ist.
+        </p>
+      )}
 
       {state === "sent" ? (
         <p className="mt-5 text-[14.5px] text-muted">Danke, das hilft mir weiter.</p>

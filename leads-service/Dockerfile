@@ -3,7 +3,8 @@ WORKDIR /app
 ENV NODE_ENV=production
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev && npm cache clean --force
-COPY server.mjs ./
+COPY server.mjs mails.mjs ./
+COPY mails ./mails
 RUN mkdir -p /app/data && chown -R node:node /app/data
 USER node
 EXPOSE 8787

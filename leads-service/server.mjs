@@ -19,6 +19,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import nodemailer from "nodemailer";
+import { renderMail } from "./mails.mjs";
 
 // ---------------------------------------------------------------- Konfiguration
 
@@ -37,7 +38,8 @@ const SITE_URL = (env.SITE_URL || "https://solvomind.de").replace(/\/$/, "");
 const DATA_DIR = env.DATA_DIR || "./data";
 const MAIL_FROM = env.MAIL_FROM || "Ali Alizadeh <ali.alizadeh@solvomind.de>";
 const NOTIFY_TO = env.NOTIFY_TO || "ali.alizadeh@solvomind.de";
-const SENDER_FOOTER = env.SENDER_FOOTER || "Ali Alizadeh · solvomind · Waschingtonallee 35, 22111 Hamburg";
+/** Termin-Link für den Button „Termin buchen“ (Cal.com-Seite aus lib/site.ts der Website). */
+const BOOKING_URL = env.BOOKING_URL || "https://cal.com/ali-alizadeh-tahbua/erstgespraech";
 
 /** Unbestätigte Anmeldungen werden nach so vielen Tagen gelöscht. */
 const PENDING_DAYS = 30;
@@ -78,7 +80,19 @@ db.exec(`
     unsubscribed_at TEXT,
     last_mail_at    TEXT
   );
+  CREATE TABLE IF NOT EXISTS mail_log (
+    id       INTEGER PRIMARY KEY,
+    lead_id  INTEGER NOT NULL,
+    kind     TEXT NOT NULL,      -- bestaetigung | willkommen
+    subject  TEXT NOT NULL,
+    sent_at  TEXT NOT NULL
+  );
+  CREATE INDEX IF NOT EXISTS mail_log_lead ON mail_log (lead_id);
 `);
+// Spalte nachrüsten (ältere Datenbanken): Titel des zuletzt angeforderten Guides
+if (!db.prepare("PRAGMA table_info(leads)").all().some((c) => c.name === "guide_title")) {
+  db.exec("ALTER TABLE leads ADD COLUMN guide_title TEXT NOT NULL DEFAULT ''");
+}
 
 const now = () => new Date().toISOString();
 const newToken = () => crypto.randomBytes(24).toString("base64url");
@@ -89,11 +103,15 @@ const q = {
   byRef: db.prepare("SELECT * FROM leads WHERE ref = ?"),
   byId: db.prepare("SELECT * FROM leads WHERE id = ?"),
   insert: db.prepare(`
-    INSERT INTO leads (email, name, company, guides, token, ref, consent_text, consent_ip, consent_ua, created_at, consent_at)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`),
+    INSERT INTO leads (email, name, company, guides, guide_title, token, ref, consent_text, consent_ip, consent_ua, created_at, consent_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`),
   all: db.prepare("SELECT * FROM leads ORDER BY created_at DESC"),
-  cleanup: db.prepare("DELETE FROM leads WHERE status = 'pending' AND confirmed_at IS NULL AND created_at < ?"),
+  cleanup: db.prepare("DELETE FROM leads WHERE status = 'pending' AND confirmed_at IS NULL AND consent_at < ?"),
   remove: db.prepare("DELETE FROM leads WHERE id = ?"),
+  removeLog: db.prepare("DELETE FROM mail_log WHERE lead_id = ?"),
+  logMail: db.prepare("INSERT INTO mail_log (lead_id, kind, subject, sent_at) VALUES (?, ?, ?, ?)"),
+  logsFor: db.prepare("SELECT kind, sent_at FROM mail_log WHERE lead_id = ? ORDER BY sent_at"),
+  orphanLogs: db.prepare("DELETE FROM mail_log WHERE lead_id NOT IN (SELECT id FROM leads)"),
 };
 
 function update(id, fields) {
@@ -112,6 +130,7 @@ const addGuide = (list, slug) => {
 function cleanup() {
   const cutoff = new Date(Date.now() - PENDING_DAYS * 864e5).toISOString();
   const { changes } = q.cleanup.run(cutoff);
+  q.orphanLogs.run();
   if (changes) console.log(`[leads] ${changes} unbestätigte Anmeldung(en) gelöscht`);
 }
 /** Tägliche Sicherung nach DATA_DIR/backups, die letzten 14 Tage bleiben liegen. */
@@ -150,12 +169,12 @@ const transport = env.SMTP_HOST && env.SMTP_PASS
 
 if (!transport) console.warn("[leads] SMTP_HOST oder SMTP_PASS fehlt: Mails werden nur in der Konsole ausgegeben (Testmodus).");
 
-async function sendMail({ to, subject, text, replyTo }) {
+async function sendMail({ to, subject, text, html, replyTo }) {
   if (!transport) {
     console.log(`\n----- MAIL (Testmodus) -----\nAn: ${to}\nBetreff: ${subject}\n${replyTo ? `Reply-To: ${replyTo}\n` : ""}\n${text}\n----------------------------\n`);
     return;
   }
-  await transport.sendMail({ from: MAIL_FROM, to, subject, text, replyTo });
+  await transport.sendMail({ from: MAIL_FROM, to, subject, text, html, replyTo });
 }
 
 /** Schutz vor Missbrauch des Postfachs: höchstens so viele Bestätigungsmails pro Stunde insgesamt. */
@@ -166,32 +185,43 @@ function takeMailBudget() {
   return ++mailBudget.count <= mailBudget.max;
 }
 
+/**
+ * Link zum zuletzt angeforderten Guide. ?freigabe=… schaltet ihn auf jedem
+ * Gerät frei (z. B. am Handy, wenn die Anmeldung am Rechner war).
+ */
+function guideLink(lead) {
+  const slug = lead.guides.split(",").filter(Boolean).pop() || "";
+  return `${SITE_URL}/de/guides/${slug}?freigabe=${encodeURIComponent(lead.token)}`;
+}
+
+/** Platzhalter für die Mailtexte (siehe mails/LIESMICH.md). */
+function mailVars(lead, guideTitle) {
+  const slug = lead.guides.split(",").filter(Boolean).pop() || "";
+  return {
+    Vorname: lead.name,
+    "Guide-Titel": guideTitle || lead.guide_title || guideLabel(slug),
+    "Guide-Link": guideLink(lead),
+    "Bestätigungslink": `${LINK_BASE}/bestaetigen?t=${lead.token}`,
+    Abmeldelink: `${LINK_BASE}/abmelden?t=${lead.token}`,
+    Terminlink: BOOKING_URL,
+    Impressum: `${SITE_URL}/de/impressum`,
+    Datenschutz: `${SITE_URL}/de/datenschutz`,
+    Tage: String(PENDING_DAYS),
+  };
+}
+
+/** Schickt eine Mail aus mails/<kind>.md an einen Lead und vermerkt sie im Protokoll. */
+async function sendLeadMail(lead, kind, guideTitle) {
+  const mail = renderMail(kind, mailVars(lead, guideTitle));
+  await sendMail({ to: lead.email, ...mail });
+  const at = now();
+  q.logMail.run(lead.id, kind, mail.subject, at);
+  update(lead.id, { last_mail_at: at });
+}
+
 async function sendConfirmMail(lead, guide) {
   if (!takeMailBudget()) throw new Error("Stündliches Mail-Limit erreicht");
-  const hello = lead.name ? `Hallo ${lead.name},` : "Hallo,";
-  await sendMail({
-    to: lead.email,
-    subject: `Bitte bestätigen: Ihr Guide „${guide.title}“`,
-    text: `${hello}
-
-danke für Ihr Interesse am Guide „${guide.title}“. Er ist auf der Website bereits für Sie freigeschaltet:
-${guide.url}
-
-Bitte bestätigen Sie noch kurz Ihre E-Mail-Adresse:
-${LINK_BASE}/bestaetigen?t=${lead.token}
-
-Mit der Bestätigung erhalten Sie gelegentlich E-Mails von mir zu KI-Automatisierung in kleinen und mittleren Unternehmen: neue Guides, Praxisbeispiele und ab und zu eine persönliche Nachricht. Abmelden können Sie sich jederzeit.
-
-Falls Sie den Guide nicht angefordert haben, ignorieren Sie diese Mail einfach. Ihre Adresse wird dann nach ${PENDING_DAYS} Tagen gelöscht.
-
-Viele Grüße
-Ali Alizadeh
-
---
-${SENDER_FOOTER}
-${SITE_URL}`,
-  });
-  update(lead.id, { last_mail_at: now() });
+  await sendLeadMail(lead, "bestaetigung", guide.title);
 }
 
 function guideLabel(slug) {
@@ -289,7 +319,7 @@ async function handleSubscribe(body) {
   let lead = q.byEmail.get(email);
 
   if (!lead) {
-    q.insert.run(email, name, company, slug, newToken(), ref, consentText, ip, ua, at, at);
+    q.insert.run(email, name, company, slug, title, newToken(), ref, consentText, ip, ua, at, at);
     lead = q.byEmail.get(email);
     await sendConfirmMail(lead, guide);
     console.log(`[leads] neu: ${email} (${slug})`);
@@ -297,7 +327,7 @@ async function handleSubscribe(body) {
   }
 
   const { guides, isNew } = addGuide(lead.guides, slug);
-  const fields = { guides, ref, name: name || lead.name, company: company || lead.company };
+  const fields = { guides, guide_title: title, ref, name: name || lead.name, company: company || lead.company };
 
   if (lead.status === "confirmed") {
     update(lead.id, fields);
@@ -362,6 +392,7 @@ function page(title, inner, { wide = false } = {}) {
 }
 
 const back = `<a class="link" href="${SITE_URL}/de/guides">← Zu den Guides</a>`;
+const toGuide = (lead) => `<a class="btn" href="${esc(guideLink(lead))}">Zum Guide</a>`;
 
 function actionPage(kind, lead, token) {
   const isConfirm = kind === "bestaetigen";
@@ -370,7 +401,7 @@ function actionPage(kind, lead, token) {
       <p>Vielleicht wurde die Anmeldung schon gelöscht. Holen Sie sich den Guide einfach erneut, dann bekommen Sie einen neuen Link.</p>${back}</div>`);
   }
   if (isConfirm && lead.status === "confirmed") {
-    return page("Bereits bestätigt", `<div class="card"><h1>Schon erledigt.</h1><p>Ihre Adresse ist bestätigt. Danke!</p>${back}</div>`);
+    return page("Bereits bestätigt", `<div class="card"><h1>Schon erledigt.</h1><p>Ihre Adresse ist bestätigt. Danke!</p>${toGuide(lead)}</div>`);
   }
   if (!isConfirm && lead.status === "unsubscribed") {
     return page("Abgemeldet", `<div class="card"><h1>Sie sind abgemeldet.</h1><p>Sie bekommen keine weiteren E-Mails von mir.</p>${back}</div>`);
@@ -382,6 +413,8 @@ function actionPage(kind, lead, token) {
   return page(title, `<div class="card"><h1>${title}</h1><p>${text}</p>
     <form method="post" action="${LINK_BASE}/${kind}?t=${encodeURIComponent(token)}"><button class="btn" type="submit">${isConfirm ? "Jetzt bestätigen" : "Abmelden"}</button></form></div>`);
 }
+
+const MAIL_NAMES = { bestaetigung: "Bestätigung", willkommen: "Willkommen" };
 
 function adminPage() {
   const rows = q.all.all();
@@ -399,6 +432,7 @@ function adminPage() {
       <td>${esc(r.guides.split(",").map(guideLabel).join(", "))}</td>
       <td>${esc(r.answer) || "–"}</td>
       <td>${statusPill(r.status)}</td>
+      <td style="white-space:nowrap;font-size:13px">${q.logsFor.all(r.id).map((m) => `${esc(MAIL_NAMES[m.kind] || m.kind)} ${esc(fmtDate(m.sent_at))}`).join("<br>") || "–"}</td>
       <td style="white-space:nowrap">
         ${r.status === "confirmed" ? `<form method="post" action="/leads/abmelden" style="display:inline"><input type="hidden" name="id" value="${r.id}"><button class="small" title="Will keine Mails mehr">abmelden</button></form>` : ""}
         <form method="post" action="/leads/loeschen" style="display:inline" onsubmit="return confirm('${esc(r.email)} endgültig löschen?')"><input type="hidden" name="id" value="${r.id}"><button class="small">löschen</button></form>
@@ -410,8 +444,8 @@ function adminPage() {
     `<h1>Leads</h1>
      <p>${counts.confirmed} bestätigt · ${counts.pending} offen · ${counts.unsubscribed} abgemeldet &nbsp;·&nbsp; <a href="/leads.csv">CSV herunterladen</a></p>
      <p style="font-size:14px">Anschreiben dürfen Sie nur <b>bestätigte</b> Kontakte. Offene werden nach ${PENDING_DAYS} Tagen automatisch gelöscht.</p>
-     <div class="wrap"><table><thead><tr><th>Datum</th><th>Name</th><th>Firma</th><th>E-Mail</th><th>Guides</th><th>Vorhaben</th><th>Status</th><th></th></tr></thead>
-     <tbody>${body || `<tr><td colspan="8">Noch keine Leads.</td></tr>`}</tbody></table></div>`,
+     <div class="wrap"><table><thead><tr><th>Datum</th><th>Name</th><th>Firma</th><th>E-Mail</th><th>Guides</th><th>Vorhaben</th><th>Status</th><th>Mails</th><th></th></tr></thead>
+     <tbody>${body || `<tr><td colspan="9">Noch keine Leads.</td></tr>`}</tbody></table></div>`,
     { wide: true },
   );
 }
@@ -485,6 +519,13 @@ const server = http.createServer(async (req, res) => {
       return send(res, status, out);
     }
 
+    // --- Freischalt-Link aus der Mail prüfen (nur für die Website)
+    if (req.method === "GET" && p === "/freigabe") {
+      if (!apiAuthorized(req)) return send(res, 401, { error: "auth" });
+      const token = url.searchParams.get("t") || "";
+      return send(res, 200, { ok: Boolean(token && q.byToken.get(token)) });
+    }
+
     // --- Links aus der Mail
     if (p === "/bestaetigen" || p === "/abmelden") {
       const token = url.searchParams.get("t") || "";
@@ -496,8 +537,13 @@ const server = http.createServer(async (req, res) => {
         if (p === "/bestaetigen" && lead.status !== "confirmed") {
           update(lead.id, { status: "confirmed", confirmed_at: now(), confirm_ip: ip, unsubscribed_at: null });
           console.log(`[leads] bestätigt: ${lead.email}`);
+          try {
+            await sendLeadMail(q.byId.get(lead.id), "willkommen");
+          } catch (e) {
+            console.error("[leads] Willkommensmail fehlgeschlagen:", e.message);
+          }
           await notifyOwner(lead, "Neuer Lead");
-          return html(res, 200, page("Bestätigt", `<div class="card"><h1>Danke, das hat geklappt.</h1><p>Ihre Adresse ist bestätigt. Ihr Guide bleibt auf der Website freigeschaltet.</p>${back}</div>`));
+          return html(res, 200, page("Bestätigt", `<div class="card"><h1>Danke, das hat geklappt.</h1><p>Ihre Adresse ist bestätigt. Über den Knopf öffnen Sie Ihren Guide auf jedem Gerät, auch am Handy.</p>${toGuide(lead)}</div>`));
         }
         if (p === "/abmelden" && lead.status !== "unsubscribed") {
           update(lead.id, { status: "unsubscribed", unsubscribed_at: now() });
@@ -520,7 +566,10 @@ const server = http.createServer(async (req, res) => {
       if (req.method === "POST" && (p === "/leads/loeschen" || p === "/leads/abmelden")) {
         if (!sameOrigin(req)) return send(res, 403, "Falsche Herkunft", "text/plain; charset=utf-8");
         const id = Number(new URLSearchParams(await readBody(req)).get("id"));
-        if (p === "/leads/loeschen") q.remove.run(id);
+        if (p === "/leads/loeschen") {
+          q.removeLog.run(id);
+          q.remove.run(id);
+        }
         else update(id, { status: "unsubscribed", unsubscribed_at: now() });
         return redirect(res, "/leads");
       }
