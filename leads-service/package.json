@@ -1,0 +1,14 @@
+{
+  "name": "solvomind-leads",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Lead-Dienst für die Guides auf solvomind.de: speichert Anmeldungen, verschickt Double-Opt-in-Mails, benachrichtigt bei neuen Leads.",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server.mjs"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.16"
+  }
+}

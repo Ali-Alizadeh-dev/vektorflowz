@@ -1,0 +1,4 @@
+{$LEADS_DOMAIN} {
+	encode gzip
+	reverse_proxy leads:8787
+}

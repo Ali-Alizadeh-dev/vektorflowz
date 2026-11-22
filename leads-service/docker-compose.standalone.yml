@@ -1,0 +1,29 @@
+# Variante für einen VPS OHNE vorhandenen Webserver: bringt einen eigenen Caddy mit.
+# Start: docker compose -f docker-compose.standalone.yml up -d --build
+services:
+  leads:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATA_DIR: /app/data
+      PORT: "8787"
+    volumes:
+      - ./data:/app/data
+
+  caddy:
+    image: caddy:2.8-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      LEADS_DOMAIN: ${LEADS_DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+    depends_on:
+      - leads
+
+volumes:
+  caddy_data:

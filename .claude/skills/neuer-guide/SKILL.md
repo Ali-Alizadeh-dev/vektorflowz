@@ -48,6 +48,8 @@ In dieser Reihenfolge, so wie in den bestehenden Guides:
 10. Abschnitt „Und wenn es ganz allein laufen soll?“ – der Schritt vom manuellen Ablauf zum autonomen Agenten mit menschlicher Freigabe, der auch ohne offenen Rechner läuft. Ehrlich bleiben: mehr Leitplanken nötig, Protokoll, Freigabe, Datenhaltung, grobe Zeitangabe.
 11. CTA-Box unten (groß, zentriert, `btn btn-primary`, Texte aus `t.final.cta` / `t.final.foot`)
 
+**E-Mail-Sperre:** Alles nach dem ersten inhaltlichen Abschnitt (ab Punkt 6 „Voraussetzungen“ bis einschließlich Punkt 10) kommt in `<GuideGate guide="<slug>" title={GUIDE_META.title} description={GUIDE_META.description} url={`${SITE.url}${GUIDE_PATH}`} booking={BOOKING}>` aus `components/guide/GuideGate.tsx`. Frei lesbar bleiben Header, Teaser, CTA oben, „Was drin ist“ und der „Warum“-Abschnitt; die CTA-Box unten steht nach dem `</GuideGate>`. Der Slug muss in `lib/guides/index.ts` stehen, sonst lehnt `/api/leads/subscribe` die Anmeldung ab.
+
 Jeder Guide endet mit einer Einladung zum kostenlosen Erstgespräch – das ist der Zweck der Guides. Ziel sind drei CTAs: oben, Mitte, unten. Buchungs-Link ist immer `const BOOKING = "/de#kontakt"`.
 
 ## Schritt 5 – Schreibstil

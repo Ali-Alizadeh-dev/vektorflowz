@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/i18n";
 
 export const metadata = { title: "Datenschutzerklärung | solvomind" };
 
+
 export default async function DatenschutzPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   return (
@@ -101,7 +102,52 @@ export default async function DatenschutzPage({ params }: { params: Promise<{ lo
         Daten an uns übertragen.
       </p>
 
-      <h2>6. Terminbuchung über Cal.com</h2>
+      <h2>6. Guides und E-Mails</h2>
+      <p>
+        Unsere Guides schalten Sie frei, indem Sie Ihre E-Mail-Adresse und
+        optional Ihren Vornamen und Ihre Firma angeben. Damit willigen Sie
+        ein, dass wir Ihnen den Guide und gelegentlich E-Mails zu
+        KI-Automatisierung schicken, etwa neue Guides, Praxisbeispiele oder
+        eine persönliche Nachricht. Rechtsgrundlage ist Ihre Einwilligung
+        (Art. 6 Abs. 1 lit. a DSGVO, § 7 Abs. 2 Nr. 2 UWG).
+      </p>
+      <p>
+        <strong>Double-Opt-in:</strong> Nach der Anmeldung erhalten Sie eine
+        E-Mail mit einem Bestätigungslink. Weitere E-Mails schicken wir erst,
+        wenn Sie bestätigt haben. Bestätigen Sie nicht, löschen wir Ihre
+        Angaben automatisch nach 30 Tagen. Um Ihre Einwilligung nachweisen zu
+        können, speichern wir den Zeitpunkt von Anmeldung und Bestätigung,
+        Ihre IP-Adresse, den Browser-Typ und den Wortlaut der Einwilligung
+        (Art. 6 Abs. 1 lit. c und f DSGVO). Freiwillig können Sie nach der
+        Anmeldung angeben, was Sie als Erstes automatisieren möchten. Das
+        hilft uns, Ihnen passende Inhalte zu schicken.
+      </p>
+      <p>
+        Ihre Angaben werden von der Website (siehe Ziffer 3) an einen von
+        uns gemieteten Server der <strong>IONOS SE</strong> (Elgendorfer
+        Str. 57, 56410 Montabaur) in Deutschland weitergeleitet und dort
+        gespeichert. Die E-Mails versenden wir über unser E-Mail-Postfach,
+        ebenfalls bei der IONOS SE. Mit IONOS besteht ein Vertrag zur
+        Auftragsverarbeitung (Art. 28 DSGVO). Eine Weitergabe an
+        Newsletter-Dienste oder andere Dritte findet nicht statt.
+      </p>
+      <p>
+        In Ihrem Browser wird lokal (localStorage) vermerkt, dass Sie die
+        Guides freigeschaltet haben, damit Sie sich nicht erneut eintragen
+        müssen. Das ist für die von Ihnen gewünschte Freischaltung
+        erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Es wird kein Cookie gesetzt,
+        und der Vermerk wird nicht an uns übertragen.
+      </p>
+      <p>
+        Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft
+        widerrufen, zum Beispiel mit einer kurzen E-Mail an
+        ali.alizadeh@solvomind.de oder über den Abmeldelink in unseren
+        E-Mails. Danach schicken wir Ihnen keine E-Mails mehr. Ihre
+        Adresse und den Nachweis der früheren Einwilligung bewahren wir nur
+        so lange auf, wie das zum Nachweis erforderlich ist.
+      </p>
+
+      <h2>7. Terminbuchung über Cal.com</h2>
       <p>
         Für die Buchung eines kostenlosen Erstgesprächs binden wir im
         Kontaktbereich einen Kalender unseres Dienstleisters{" "}
@@ -142,11 +188,11 @@ export default async function DatenschutzPage({ params }: { params: Promise<{ lo
         Ziffer 5), ohne dass eine Verbindung zu Cal.com aufgebaut wird.
       </p>
 
-      <h2>7. Cookies und Tracking</h2>
+      <h2>8. Cookies und Tracking</h2>
       <p>
         Diese Website selbst verwendet keine Cookies zu Tracking- oder
         Marketing­zwecken und bindet keine externen Analyse-Dienste (z. B.
-        Google Analytics, Meta Pixel) ein. Der in Ziffer 6 beschriebene
+        Google Analytics, Meta Pixel) ein. Der in Ziffer 7 beschriebene
         Cal.com-Kalender kann eigene Cookies setzen, wird aber erst nach
         Ihrer Einwilligung geladen.
       </p>
@@ -160,7 +206,7 @@ export default async function DatenschutzPage({ params }: { params: Promise<{ lo
         Website-Daten in Ihrem Browser zurücksetzen.
       </p>
 
-      <h2>8. Schriftarten (Google Fonts, lokal eingebunden)</h2>
+      <h2>9. Schriftarten (Google Fonts, lokal eingebunden)</h2>
       <p>
         Diese Website nutzt zur einheitlichen Darstellung von Schriftarten
         sogenannte „Google Fonts", die durch Next.js automatisch lokal
@@ -168,7 +214,7 @@ export default async function DatenschutzPage({ params }: { params: Promise<{ lo
         Servern von Google statt.
       </p>
 
-      <h2>9. Ihre Rechte</h2>
+      <h2>10. Ihre Rechte</h2>
       <p>Sie haben jederzeit das Recht auf:</p>
       <ul className="list-disc pl-6 space-y-1">
         <li>Auskunft über die zu Ihrer Person gespeicherten Daten (Art. 15 DSGVO)</li>
@@ -187,7 +233,7 @@ export default async function DatenschutzPage({ params }: { params: Promise<{ lo
         .
       </p>
 
-      <h2>10. Beschwerderecht bei der Aufsichtsbehörde</h2>
+      <h2>11. Beschwerderecht bei der Aufsichtsbehörde</h2>
       <p>
         Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über
         die Verarbeitung Ihrer personenbezogenen Daten zu beschweren. Eine
@@ -202,7 +248,7 @@ export default async function DatenschutzPage({ params }: { params: Promise<{ lo
         .
       </p>
 
-      <h2>11. SSL-/TLS-Verschlüsselung</h2>
+      <h2>12. SSL-/TLS-Verschlüsselung</h2>
       <p>
         Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung
         vertraulicher Inhalte eine SSL-/TLS-Verschlüsselung. Eine verschlüsselte
@@ -210,7 +256,7 @@ export default async function DatenschutzPage({ params }: { params: Promise<{ lo
         Adresszeile Ihres Browsers.
       </p>
 
-      <h2>12. Aktualität und Änderung dieser Datenschutzerklärung</h2>
+      <h2>13. Aktualität und Änderung dieser Datenschutzerklärung</h2>
       <p>
         Diese Datenschutzerklärung ist aktuell gültig. Durch geänderte
         gesetzliche bzw. behördliche Vorgaben kann es notwendig werden, diese

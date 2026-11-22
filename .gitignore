@@ -5,3 +5,9 @@ node_modules
 docs/referenz/
 
 .DS_Store
+
+# Lokale Umgebungsvariablen (Geheimnisse)
+.env*.local
+.env
+.vercel
+.env*

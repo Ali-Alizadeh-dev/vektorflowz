@@ -1,0 +1,28 @@
+# Produktion auf dem IONOS-VPS (82.165.24.131), Ordner /opt/leads.
+#
+# Port 80/443 belegt dort schon der Caddy der Instagram-App
+# (/root/auto-dm/insta-autodm). Dieser Dienst hängt sich an dessen Netzwerk,
+# und der Caddy leitet leads.solvomind.de an leads:8787 weiter – siehe den
+# Block am Ende von /root/auto-dm/insta-autodm/Caddyfile.
+#
+# Kein eigener offener Port: von außen nur über Caddy (HTTPS) erreichbar.
+services:
+  leads:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATA_DIR: /app/data
+      PORT: "8787"
+    volumes:
+      - ./data:/app/data
+    logging:
+      options: { max-size: "10m", max-file: "3" }
+    networks:
+      proxy:
+        aliases: [leads]
+
+networks:
+  proxy:
+    external: true
+    name: ${PROXY_NETWORK:-insta-autodm_default}
