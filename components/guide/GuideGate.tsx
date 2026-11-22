@@ -165,8 +165,6 @@ function GateForm({ guide, onUnlock }: { guide: string; onUnlock: (email: string
         </h2>
         <p className="mt-2 text-[15px] leading-[1.6] text-muted">
           E-Mail eintragen, dann geht es sofort weiter. Einmal eingetragen, sind alle Guides auf dieser Seite frei.
-          <br />
-          <span className="text-[14px] text-muted-2">Schon eingetragen, z. B. am Rechner? Einfach dieselbe E-Mail noch einmal eingeben.</span>
         </p>
 
         <form onSubmit={submit} className="mt-5 grid gap-3 sm:grid-cols-2">
