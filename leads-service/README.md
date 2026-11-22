@@ -45,7 +45,12 @@ Danach neu deployen.
 
 ## Im Alltag
 
-- **Leadliste:** https://leads.82-165-24-131.sslip.io/leads (Passwort = `LEADS_ADMIN_PASSWORD`), dort auch CSV-Export, abmelden, löschen.
+- **Dashboard:** https://leads.82-165-24-131.sslip.io (Passwort = `LEADS_ADMIN_PASSWORD`, Benutzername egal)
+  - *Übersicht:* Kennzahlen, Anmeldungen pro Tag, Leads je Guide, Leadliste mit Suche und Filter
+  - *Lead anklicken:* Angaben, Verlauf (Anmeldung, Mails, Bestätigung …), Vertriebsstatus und Notiz, abmelden/löschen
+  - *Mail-Protokoll:* jede Mail, die der Dienst an Leads geschickt hat
+  - *CSV:* Export aller Leads
+- **Mailtexte ändern:** `mails/*.md`, Anleitung in `mails/LIESMICH.md`
 - **Neuer Lead:** Du bekommst eine Mail „Neuer Lead: Name (Firma)“. Einfach antworten, dann schreibst du ihm persönlich.
 - **Nur bestätigte Kontakte anschreiben.** Offene werden nach 30 Tagen automatisch gelöscht.
 - **Will jemand keine Mails mehr:** in der Leadliste auf „abmelden“ klicken.

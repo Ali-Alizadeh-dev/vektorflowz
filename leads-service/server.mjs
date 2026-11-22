@@ -20,6 +20,7 @@ import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import nodemailer from "nodemailer";
 import { renderMail } from "./mails.mjs";
+import { createDashboard, STAGES } from "./dashboard.mjs";
 
 // ---------------------------------------------------------------- Konfiguration
 
@@ -88,10 +89,24 @@ db.exec(`
     sent_at  TEXT NOT NULL
   );
   CREATE INDEX IF NOT EXISTS mail_log_lead ON mail_log (lead_id);
+  CREATE TABLE IF NOT EXISTS events (
+    id       INTEGER PRIMARY KEY,
+    lead_id  INTEGER NOT NULL,
+    kind     TEXT NOT NULL,      -- anmeldung | guide | erneut | bestaetigt | abgemeldet | antwort | vertrieb
+    guide    TEXT NOT NULL DEFAULT '',
+    detail   TEXT NOT NULL DEFAULT '',
+    at       TEXT NOT NULL
+  );
+  CREATE INDEX IF NOT EXISTS events_lead ON events (lead_id);
 `);
 // Spalte nachrüsten (ältere Datenbanken): Titel des zuletzt angeforderten Guides
-if (!db.prepare("PRAGMA table_info(leads)").all().some((c) => c.name === "guide_title")) {
-  db.exec("ALTER TABLE leads ADD COLUMN guide_title TEXT NOT NULL DEFAULT ''");
+const columns = db.prepare("PRAGMA table_info(leads)").all().map((c) => c.name);
+for (const [col, def] of [
+  ["guide_title", "TEXT NOT NULL DEFAULT ''"], // Titel des zuletzt angeforderten Guides
+  ["stage", "TEXT NOT NULL DEFAULT 'neu'"], // Vertriebsstatus (Dashboard)
+  ["notes", "TEXT NOT NULL DEFAULT ''"], // eigene Notiz (Dashboard)
+]) {
+  if (!columns.includes(col)) db.exec(`ALTER TABLE leads ADD COLUMN ${col} ${def}`);
 }
 
 const now = () => new Date().toISOString();
@@ -110,9 +125,13 @@ const q = {
   remove: db.prepare("DELETE FROM leads WHERE id = ?"),
   removeLog: db.prepare("DELETE FROM mail_log WHERE lead_id = ?"),
   logMail: db.prepare("INSERT INTO mail_log (lead_id, kind, subject, sent_at) VALUES (?, ?, ?, ?)"),
-  logsFor: db.prepare("SELECT kind, sent_at FROM mail_log WHERE lead_id = ? ORDER BY sent_at"),
   orphanLogs: db.prepare("DELETE FROM mail_log WHERE lead_id NOT IN (SELECT id FROM leads)"),
+  orphanEvents: db.prepare("DELETE FROM events WHERE lead_id NOT IN (SELECT id FROM leads)"),
+  logEvent: db.prepare("INSERT INTO events (lead_id, kind, guide, detail, at) VALUES (?, ?, ?, ?, ?)"),
 };
+
+/** Ereignis im Verlauf eines Leads festhalten (für das Dashboard). */
+const logEvent = (leadId, kind, { guide = "", detail = "" } = {}) => q.logEvent.run(leadId, kind, guide, detail, now());
 
 function update(id, fields) {
   const keys = Object.keys(fields);
@@ -131,6 +150,7 @@ function cleanup() {
   const cutoff = new Date(Date.now() - PENDING_DAYS * 864e5).toISOString();
   const { changes } = q.cleanup.run(cutoff);
   q.orphanLogs.run();
+  q.orphanEvents.run();
   if (changes) console.log(`[leads] ${changes} unbestätigte Anmeldung(en) gelöscht`);
 }
 /** Tägliche Sicherung nach DATA_DIR/backups, die letzten 14 Tage bleiben liegen. */
@@ -321,6 +341,7 @@ async function handleSubscribe(body) {
   if (!lead) {
     q.insert.run(email, name, company, slug, title, newToken(), ref, consentText, ip, ua, at, at);
     lead = q.byEmail.get(email);
+    logEvent(lead.id, "anmeldung", { guide: slug, detail: title });
     await sendConfirmMail(lead, guide);
     console.log(`[leads] neu: ${email} (${slug})`);
     return [200, { ok: true, ref }];
@@ -328,6 +349,7 @@ async function handleSubscribe(body) {
 
   const { guides, isNew } = addGuide(lead.guides, slug);
   const fields = { guides, guide_title: title, ref, name: name || lead.name, company: company || lead.company };
+  logEvent(lead.id, isNew ? "guide" : "erneut", { guide: slug, detail: title });
 
   if (lead.status === "confirmed") {
     update(lead.id, fields);
@@ -352,6 +374,7 @@ async function handleAnswer(body) {
   const lead = q.byRef.get(ref);
   if (!lead) return [404, { error: "ref" }];
   update(lead.id, { answer });
+  logEvent(lead.id, "antwort", { detail: answer });
   if (lead.status === "confirmed") await notifyOwner(lead, "Lead hat sein Vorhaben ergänzt");
   return [200, { ok: true }];
 }
@@ -414,44 +437,10 @@ function actionPage(kind, lead, token) {
     <form method="post" action="${LINK_BASE}/${kind}?t=${encodeURIComponent(token)}"><button class="btn" type="submit">${isConfirm ? "Jetzt bestätigen" : "Abmelden"}</button></form></div>`);
 }
 
-const MAIL_NAMES = { bestaetigung: "Bestätigung", willkommen: "Willkommen" };
-
-function adminPage() {
-  const rows = q.all.all();
-  const counts = { confirmed: 0, pending: 0, unsubscribed: 0 };
-  for (const r of rows) counts[r.status] = (counts[r.status] || 0) + 1;
-  const statusPill = (s) =>
-    s === "confirmed" ? `<span class="pill ok">bestätigt</span>` : s === "pending" ? `<span class="pill">offen</span>` : `<span class="pill">abgemeldet</span>`;
-  const body = rows
-    .map(
-      (r) => `<tr>
-      <td>${esc(fmtDate(r.created_at))}</td>
-      <td>${esc(r.name) || "–"}</td>
-      <td>${esc(r.company) || "–"}</td>
-      <td><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></td>
-      <td>${esc(r.guides.split(",").map(guideLabel).join(", "))}</td>
-      <td>${esc(r.answer) || "–"}</td>
-      <td>${statusPill(r.status)}</td>
-      <td style="white-space:nowrap;font-size:13px">${q.logsFor.all(r.id).map((m) => `${esc(MAIL_NAMES[m.kind] || m.kind)} ${esc(fmtDate(m.sent_at))}`).join("<br>") || "–"}</td>
-      <td style="white-space:nowrap">
-        ${r.status === "confirmed" ? `<form method="post" action="/leads/abmelden" style="display:inline"><input type="hidden" name="id" value="${r.id}"><button class="small" title="Will keine Mails mehr">abmelden</button></form>` : ""}
-        <form method="post" action="/leads/loeschen" style="display:inline" onsubmit="return confirm('${esc(r.email)} endgültig löschen?')"><input type="hidden" name="id" value="${r.id}"><button class="small">löschen</button></form>
-      </td></tr>`,
-    )
-    .join("");
-  return page(
-    "Leads",
-    `<h1>Leads</h1>
-     <p>${counts.confirmed} bestätigt · ${counts.pending} offen · ${counts.unsubscribed} abgemeldet &nbsp;·&nbsp; <a href="/leads.csv">CSV herunterladen</a></p>
-     <p style="font-size:14px">Anschreiben dürfen Sie nur <b>bestätigte</b> Kontakte. Offene werden nach ${PENDING_DAYS} Tagen automatisch gelöscht.</p>
-     <div class="wrap"><table><thead><tr><th>Datum</th><th>Name</th><th>Firma</th><th>E-Mail</th><th>Guides</th><th>Vorhaben</th><th>Status</th><th>Mails</th><th></th></tr></thead>
-     <tbody>${body || `<tr><td colspan="9">Noch keine Leads.</td></tr>`}</tbody></table></div>`,
-    { wide: true },
-  );
-}
+const dashboard = createDashboard(db, { pendingDays: PENDING_DAYS });
 
 function csv() {
-  const cols = ["created_at", "status", "name", "company", "email", "guides", "answer", "confirmed_at", "consent_at", "consent_ip", "consent_text"];
+  const cols = ["created_at", "status", "stage", "name", "company", "email", "guides", "answer", "notes", "confirmed_at", "consent_at", "consent_ip", "consent_text"];
   const cell = (v) => {
     let s = String(v ?? "");
     if (/^[=+\-@\t\r]/.test(s)) s = `'${s}`; // keine Formeln in Excel
@@ -536,6 +525,7 @@ const server = http.createServer(async (req, res) => {
         const ip = String(viaSite || req.headers["x-forwarded-for"] || req.socket.remoteAddress || "").split(",")[0].trim();
         if (p === "/bestaetigen" && lead.status !== "confirmed") {
           update(lead.id, { status: "confirmed", confirmed_at: now(), confirm_ip: ip, unsubscribed_at: null });
+          logEvent(lead.id, "bestaetigt");
           console.log(`[leads] bestätigt: ${lead.email}`);
           try {
             await sendLeadMail(q.byId.get(lead.id), "willkommen");
@@ -547,6 +537,7 @@ const server = http.createServer(async (req, res) => {
         }
         if (p === "/abmelden" && lead.status !== "unsubscribed") {
           update(lead.id, { status: "unsubscribed", unsubscribed_at: now() });
+          logEvent(lead.id, "abgemeldet", { detail: "über den Link in der Mail" });
           console.log(`[leads] abgemeldet: ${lead.email}`);
           return html(res, 200, page("Abgemeldet", `<div class="card"><h1>Sie sind abgemeldet.</h1><p>Sie bekommen keine weiteren E-Mails von mir.</p>${back}</div>`));
         }
@@ -554,23 +545,48 @@ const server = http.createServer(async (req, res) => {
       return html(res, lead ? 200 : 404, actionPage(p.slice(1), lead, token));
     }
 
-    // --- Leadliste
-    if (p === "/leads" || p === "/leads.csv" || p.startsWith("/leads/")) {
+    // --- Dashboard (Passwort)
+    if (p === "/" || p === "/leads" || p === "/leads.csv" || p.startsWith("/leads/")) {
       if (!adminAuthorized(req)) {
         return send(res, 401, "Anmeldung erforderlich", "text/plain; charset=utf-8", { "WWW-Authenticate": 'Basic realm="solvomind leads", charset="UTF-8"' });
       }
-      if (req.method === "GET" && p === "/leads") return html(res, 200, adminPage());
-      if (req.method === "GET" && p === "/leads.csv") {
-        return send(res, 200, csv(), "text/csv; charset=utf-8", { "Content-Disposition": `attachment; filename="leads-${now().slice(0, 10)}.csv"` });
-      }
-      if (req.method === "POST" && (p === "/leads/loeschen" || p === "/leads/abmelden")) {
-        if (!sameOrigin(req)) return send(res, 403, "Falsche Herkunft", "text/plain; charset=utf-8");
-        const id = Number(new URLSearchParams(await readBody(req)).get("id"));
-        if (p === "/leads/loeschen") {
-          q.removeLog.run(id);
-          q.remove.run(id);
+      if (p === "/") return redirect(res, "/leads");
+      if (req.method === "GET") {
+        if (p === "/leads") return html(res, 200, dashboard.overview());
+        if (p === "/leads/mails") return html(res, 200, dashboard.mailsPage());
+        if (p === "/leads.csv") {
+          return send(res, 200, csv(), "text/csv; charset=utf-8", { "Content-Disposition": `attachment; filename="leads-${now().slice(0, 10)}.csv"` });
         }
-        else update(id, { status: "unsubscribed", unsubscribed_at: now() });
+        const m = p.match(/^\/leads\/(\d+)$/);
+        const pageHtml = m && dashboard.leadPage(Number(m[1]));
+        if (pageHtml) return html(res, 200, pageHtml);
+      }
+      const action = p.match(/^\/leads\/(\d+)\/(speichern|abmelden|loeschen)$/);
+      if (req.method === "POST" && action) {
+        if (!sameOrigin(req)) return send(res, 403, "Falsche Herkunft", "text/plain; charset=utf-8");
+        const id = Number(action[1]);
+        const lead = q.byId.get(id);
+        if (!lead) return redirect(res, "/leads");
+        const form = new URLSearchParams(await readBody(req, 64_000));
+        if (action[2] === "speichern") {
+          const stage = form.get("stage") in STAGES ? form.get("stage") : lead.stage;
+          if (stage !== lead.stage) logEvent(id, "vertrieb", { detail: stage });
+          const notes = String(form.get("notes") ?? "")
+            .replace(/\r\n/g, "\n")
+            .replace(/[\u0000-\u0009\u000b-\u001f\u007f]/g, " ")
+            .trim()
+            .slice(0, 5000);
+          update(id, { stage, notes });
+          return redirect(res, `/leads/${id}`);
+        }
+        if (action[2] === "abmelden") {
+          update(id, { status: "unsubscribed", unsubscribed_at: now() });
+          logEvent(id, "abgemeldet", { detail: "von Ihnen im Dashboard markiert" });
+          return redirect(res, `/leads/${id}`);
+        }
+        q.removeLog.run(id);
+        db.prepare("DELETE FROM events WHERE lead_id = ?").run(id);
+        q.remove.run(id);
         return redirect(res, "/leads");
       }
     }
