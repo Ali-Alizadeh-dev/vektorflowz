@@ -16,6 +16,16 @@ export type GuideInfo = {
 
 export const GUIDES: GuideInfo[] = [
   {
+    slug: "ki-steuererklaerung",
+    title: "KI-Steuererklärung",
+    description:
+      "Die Einkommensteuererklärung mit Claude: Belege aus Postfach, Cloud und Ordner sammeln lassen, Rückfragen beantworten, Werte in Mein ELSTER eintragen. Abgeschickt wird erst nach Ihrer Prüfung.",
+    category: "KI-Systeme",
+    tag: "Steuern",
+    date: "22. November 2026",
+    readTime: "8 Min.",
+  },
+  {
     slug: "ki-buchhaltung",
     title: "KI-Buchhaltung",
     description:

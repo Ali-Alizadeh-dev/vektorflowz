@@ -116,7 +116,7 @@ export default async function ProzessAuditGuide({ params }: { params: Promise<{ 
               </li>
             </ol>
             <div className="mt-6">
-              <CopyBlock label="Der Audit-Agent" text={AUDIT_AGENT_PROMPT} collapsible />
+              <CopyBlock label="Der Audit-Agent" text={AUDIT_AGENT_PROMPT} />
             </div>
 
             {/* Material */}

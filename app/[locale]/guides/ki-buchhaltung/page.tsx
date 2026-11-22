@@ -162,7 +162,7 @@ export default async function KiBuchhaltungGuide({ params }: { params: Promise<{
             </p>
             <div className="mt-5 space-y-4">
               <CopyBlock label="Prompt 1 · Testlauf, verändert nichts" text={PROMPT_TEST} />
-              <CopyBlock label="Prompt 2 · Belege vorerfassen" text={PROMPT_BOOKING} collapsible moreLabel="Ganzen Prompt anzeigen" />
+              <CopyBlock label="Prompt 2 · Belege vorerfassen" text={PROMPT_BOOKING} />
             </div>
 
             {/* CTA Mitte */}
