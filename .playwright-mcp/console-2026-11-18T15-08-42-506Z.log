@@ -1,0 +1,2 @@
+[  337937ms] [ERROR] Service Worker registration failed: AbortError: Failed to register a ServiceWorker for scope ('https://app.cal.com/') with script ('https://app.cal.com/service-worker.js'): Timed out while trying to start the Service Worker. @ https://app.cal.com/_next/static/chunks/36c6ng09nlt70.js:4
+[ 1010147ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25631
