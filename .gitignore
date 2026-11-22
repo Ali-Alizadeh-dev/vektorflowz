@@ -11,3 +11,7 @@ docs/referenz/
 .env
 .vercel
 .env*
+
+# Automatisch erzeugt (TypeScript-Zwischenspeicher, Testbrowser-Protokolle)
+tsconfig.tsbuildinfo
+.playwright-mcp/
