@@ -2,7 +2,7 @@
  * Zentrale Angaben der Seite. Der Produktname steht NUR hier – wer ihn
  * ändern will, ändert diese eine Zeile.
  */
-export const PRODUCT = "Skillmind";
+export const PRODUCT = "SolveOS";
 
 export const SITE = {
   brand: "solvomind",
