@@ -11,7 +11,7 @@
  * Bei inhaltlichen Änderungen die Version am Anfang hochzählen.
  */
 export const CONSENT_TEXT =
-  "[v1] Mit dem Freischalten willigen Sie ein, dass Ali Alizadeh (solvomind) Ihnen den Guide und gelegentlich E-Mails zu KI-Automatisierung schickt. Sie bekommen vorher eine Bestätigungsmail und können sich jederzeit abmelden.";
+  "[v3] Ab und zu schicken wir Ihnen dazu Praxis-Tipps zu KI-Automatisierung. Abmeldung jederzeit mit einem Klick.";
 
 /** Sichtbarer Teil des Einwilligungstexts (ohne Versionskennung). */
 export const CONSENT_LABEL = CONSENT_TEXT.replace(/^\[v\d+\]\s*/, "");

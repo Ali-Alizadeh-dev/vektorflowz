@@ -109,7 +109,6 @@ export default function GuideGate({
 
 const INPUT =
   "h-11 w-full rounded-[10px] border border-line-2 bg-bg px-3.5 text-[15px] text-fg outline-none transition-colors placeholder:text-muted-2 focus:border-accent";
-const LABEL = "mb-1.5 block text-[13px] font-medium text-muted";
 
 function GateForm({ guide, onUnlock }: { guide: string; onUnlock: (email: string, ref: string, confirmed: boolean) => void }) {
   const id = useId();
@@ -129,8 +128,6 @@ function GateForm({ guide, onUnlock }: { guide: string; onUnlock: (email: string
         body: JSON.stringify({
           guide,
           email,
-          name: f.get("name"),
-          company: f.get("company"),
           website: f.get("website"),
         }),
       });
@@ -158,28 +155,18 @@ function GateForm({ guide, onUnlock }: { guide: string; onUnlock: (email: string
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_100%_at_0%_0%,rgba(164,230,58,0.10),transparent_60%)]" />
       <div className="relative">
         <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
-          <Lock size={12} aria-hidden /> Kostenlos freischalten
+          <Lock size={12} aria-hidden /> Kostenlos
         </span>
         <h2 id={`${id}-h`} className="mt-3 text-[22px] font-bold leading-tight tracking-[-0.025em]">
-          Den ganzen Guide lesen
+          Den ganzen Guide sofort lesen
         </h2>
         <p className="mt-2 text-[15px] leading-[1.6] text-muted">
-          E-Mail eintragen, dann geht es sofort weiter. Einmal eingetragen, sind alle Guides auf dieser Seite frei.
+          E-Mail eintragen und den kompletten Guide sofort lesen. Kein Spam, nur Inhalte, die Ihnen wirklich weiterhelfen.
         </p>
 
-        <form onSubmit={submit} className="mt-5 grid gap-3 sm:grid-cols-2">
-          <div>
-            <label htmlFor={`${id}-name`} className={LABEL}>Vorname</label>
-            <input id={`${id}-name`} name="name" autoComplete="given-name" maxLength={80} className={INPUT} />
-          </div>
-          <div>
-            <label htmlFor={`${id}-company`} className={LABEL}>
-              Firma <span className="text-muted-2">(optional)</span>
-            </label>
-            <input id={`${id}-company`} name="company" autoComplete="organization" maxLength={120} className={INPUT} />
-          </div>
-          <div className="sm:col-span-2">
-            <label htmlFor={`${id}-email`} className={LABEL}>E-Mail</label>
+        <form onSubmit={submit} className="mt-5">
+          <div className="flex flex-col gap-2.5 sm:flex-row">
+            <label htmlFor={`${id}-email`} className="sr-only">E-Mail</label>
             <input
               id={`${id}-email`}
               name="email"
@@ -190,6 +177,10 @@ function GateForm({ guide, onUnlock }: { guide: string; onUnlock: (email: string
               placeholder="name@firma.de"
               className={INPUT}
             />
+            <button type="submit" disabled={busy} className="btn btn-primary h-11 flex-none disabled:opacity-60">
+              {busy ? "Einen Moment …" : "Guide freischalten"}
+              {!busy && <ArrowRight size={16} aria-hidden />}
+            </button>
           </div>
           {/* Honeypot gegen Bots: für Menschen unsichtbar */}
           <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
@@ -198,15 +189,11 @@ function GateForm({ guide, onUnlock }: { guide: string; onUnlock: (email: string
             </label>
           </div>
 
-          <div className="sm:col-span-2">
-            <button type="submit" disabled={busy} className="btn btn-primary w-full disabled:opacity-60 sm:w-auto">
-              {busy ? "Einen Moment …" : "Guide freischalten"}
-              {!busy && <ArrowRight size={16} aria-hidden />}
-            </button>
+          <div>
             <p role="alert" aria-live="polite" className="mt-3 text-[14px] text-[#F5A524] empty:hidden">
               {error}
             </p>
-            <p className="mt-3 text-[12.5px] leading-[1.55] text-muted-2">
+            <p className="mt-3 text-[12px] leading-[1.55] text-muted-2">
               {CONSENT_LABEL}{" "}
               <a href="/de/datenschutz" className="underline underline-offset-2 hover:text-muted">
                 Datenschutz
