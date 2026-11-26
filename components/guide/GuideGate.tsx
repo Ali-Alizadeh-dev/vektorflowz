@@ -41,11 +41,13 @@ export default function GuideGate({
   };
 
   useEffect(() => {
+    // Lokal (npm run dev, localhost) nie sperren: zum Prüfen der Guides ohne Anmeldung
+    const local = ["localhost", "127.0.0.1", "::1", "[::1]"].includes(window.location.hostname);
     let known = false;
     try {
       known = Boolean(localStorage.getItem(UNLOCK_KEY));
     } catch {}
-    if (known) {
+    if (known || local) {
       setLocked(false);
       setReady(true);
       return;

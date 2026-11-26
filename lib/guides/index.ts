@@ -16,6 +16,26 @@ export type GuideInfo = {
 
 export const GUIDES: GuideInfo[] = [
   {
+    slug: "ki-nachtschicht",
+    title: "KI-Nachtschicht",
+    description:
+      "Mit der kostenlosen Mac-App Insomnia arbeitet Claude Code weiter, auch wenn der Laptop zugeklappt ist. Abends starten, morgens das Ergebnis lesen, mit klaren Grenzen bei Akku, Hitze und Rückfragen.",
+    category: "KI-Systeme",
+    tag: "Nachtschicht",
+    date: "25. November 2026",
+    readTime: "8 Min.",
+  },
+  {
+    slug: "ki-angebote",
+    title: "KI-Angebote",
+    description:
+      "Vexa zeichnet das Kundengespräch auf, Claude kennt Ihre Preise und Ihren Angebotsaufbau und legt nach dem Termin einen Entwurf in Ihren Ordner. Sie prüfen und senden.",
+    category: "KI-Systeme",
+    tag: "Angebote",
+    date: "25. November 2026",
+    readTime: "11 Min.",
+  },
+  {
     slug: "ki-steuererklaerung",
     title: "KI-Steuererklärung",
     description:

@@ -278,7 +278,7 @@ export default async function KiSteuererklaerungGuide({ params }: { params: Prom
             <p className={P}>
               Ein Agent ohne Zuschauer braucht festere Leitplanken: ein Protokoll über jeden Schritt, eine klare Grenze, ab der er stehen bleibt
               und fragt, einen Weg, ihn jederzeit anzuhalten, und eine saubere Antwort auf die Frage, wo Ihre Steuerdaten liegen. Das ist kein
-              Nachmittagsprojekt, aber auch kein Konzern-Thema. Für eine gut abgegrenzte Belegsammlung sind das in der Regel zwei bis vier Wochen.
+              Nachmittagsprojekt, aber auch kein Konzern-Thema. Wie lange die Umsetzung bei Ihnen dauert, lässt sich erst nach einem Gespräch sagen. Das hängt davon ab, welche Programme Sie nutzen, wo Ihre Daten liegen und wie viele Sonderfälle es gibt. Manche Abläufe stehen nach einer Woche, andere brauchen vier oder sechs Wochen.
             </p>
           </GuideGate>
 

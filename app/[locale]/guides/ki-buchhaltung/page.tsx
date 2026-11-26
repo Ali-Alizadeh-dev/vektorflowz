@@ -242,8 +242,7 @@ export default async function KiBuchhaltungGuide({ params }: { params: Promise<{
             <p className={P}>
               Der Unterschied ist nicht nur technisch. Ein Agent, der ohne Zuschauer arbeitet, braucht festere Leitplanken: Protokoll über jeden
               Schritt, eine klare Grenze, ab der er stehen bleibt und fragt, einen Weg, ihn jederzeit anzuhalten, und eine saubere Antwort auf die
-              Frage, wo die Daten liegen. Das ist kein Nachmittagsprojekt – aber es ist auch kein Konzern-Thema. Für einen gut abgegrenzten Ablauf
-              wie die Belegvorerfassung sind das in der Regel zwei bis vier Wochen.
+              Frage, wo die Daten liegen. Das ist kein Nachmittagsprojekt – aber es ist auch kein Konzern-Thema. Wie lange die Umsetzung bei Ihnen dauert, lässt sich erst nach einem Gespräch sagen. Das hängt davon ab, welche Programme Sie nutzen, wo Ihre Daten liegen und wie viele Sonderfälle es gibt. Manche Abläufe stehen nach einer Woche, andere brauchen vier oder sechs Wochen.
             </p>
           </GuideGate>
 
